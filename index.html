@@ -4,145 +4,427 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪</title>
+    <meta http-equiv="refresh" content="3; URL=telegram_bio.html">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #0288d1;
+            --secondary-color: #4fc3f7;
+            --accent-color: #e0f7fa;
+            --dark-color: #0f2027;
+            --text-color: #ffffff;
+            --text-secondary: #b3e5fc;
+            --bg-color: #17212b;
+            --tg-blue: #2aabee;
+            --neon-blue: #4fc3f7;
+            --neon-purple: #9c27b0;
+            --neon-cyan: #00bcd4;
+            --neon-pink: #ff4081;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: linear-gradient(125deg, #0a192f 0%, #0c1e3e 50%, #0a192f 100%);
+            overflow: hidden;
+        }
+        
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.4;
+            background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0a192f);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.05) 60%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2);
+            animation: rise 20s infinite ease-in;
+            opacity: 0.7;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0) scale(0.4);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateX(calc(var(--random-x, 0) * 100px)) scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                bottom: 120%;
+                transform: translateX(calc(var(--random-x, 0) * 200px)) scale(0.3);
+                opacity: 0;
+            }
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--neon-blue);
+            animation: particle-animation 20s ease infinite;
+        }
+        
+        @keyframes particle-animation {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(calc(var(--random-x, 0) * 200px));
+            }
+        }
+        
+        .loading {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(30, 42, 56, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(79, 195, 247, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease, float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .loading::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-cyan), var(--neon-pink), var(--neon-blue));
+            background-size: 400%;
+            border-radius: 21px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.4;
+            animation: glowing 20s linear infinite;
+        }
+        
+        @keyframes glowing {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(79, 195, 247, 0.2);
+            }
+            50% {
+                transform: translateY(-10px);
+                box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 195, 247, 0.3);
+            }
+        }
+        
+        .loading h1 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue);
+            animation: glow 2s infinite alternate;
+            letter-spacing: 1px;
+            transform: translateZ(20px);
+        }
+        
+        .loading p {
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            transform: translateZ(15px);
+            transition: all 0.3s ease;
+        }
+        
+        .spinner-container {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            transform: translateZ(10px);
+        }
+        
+        .spinner {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--neon-blue);
+            border-left-color: var(--neon-purple);
+            animation: spin 1.5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+        }
+        
+        .spinner::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--neon-cyan);
+            border-left-color: var(--neon-pink);
+            animation: spin 2s linear infinite reverse;
+        }
+        
+        .spinner-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(79, 195, 247, 0.2);
+            border-radius: 50%;
+            box-shadow: 0 0 15px 5px rgba(79, 195, 247, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 15px 2px var(--neon-blue);
+                opacity: 0.5;
+            }
+            50% {
+                box-shadow: 0 0 25px 5px var(--neon-blue);
+                opacity: 0.8;
+            }
+            100% {
+                box-shadow: 0 0 15px 2px var(--neon-blue);
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+                filter: blur(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-blue);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+            }
+        }
+        
+        .mouse-parallax {
+            transition: transform 0.2s ease-out;
+        }
+    </style>
 </head>
 <body>
     <div class="stars"></div>
-    <div class="twinkling"></div>
+    <div class="animated-bg"></div>
+    <div class="background-animation"></div>
     
-    <div class="background-animation">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
-
-    <div class="container">
-        <div class="profile-card">
-            <div class="card-decoration top-left"></div>
-            <div class="card-decoration top-right"></div>
-            <div class="card-decoration bottom-left"></div>
-            <div class="card-decoration bottom-right"></div>
-            
-            <div class="profile-header">
-                <div class="avatar-container">
-                    <div class="avatar">
-                        <img src="resources/icon.jpg" alt="Аватар" class="avatar-image">
-                        <div class="avatar-glow"></div>
-                    </div>
-                    <div class="avatar-ring"></div>
-                </div>
-                <h1 class="glowing-text">𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪</h1>
-                <p>Here you will find links to my social networks and projects</p>
-                <div class="divider">
-                    <span></span>
-                    <i class="fas fa-star"></i>
-                    <span></span>
-                </div>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://t.me/chatgpthvh" class="social-button" target="_blank" data-tooltip="Мой личный Telegram">
-                    <div class="button-glow"></div>
-                    <i class="fab fa-telegram"></i>
-                    <span>My Telegram</span>
-                </a>
-                
-                <a href="https://t.me/chatgptexposers" class="social-button" target="_blank" data-tooltip="Мой Telegram канал">
-                    <div class="button-glow"></div>
-                    <i class="fab fa-telegram"></i>
-                    <span>My Telegram channel</span>
-                </a>
-                
-                <a href="https://www.mediafire.com/file/v0m69ultetcm8jj/HackingPack.zip/file" class="social-button" target="_blank" data-tooltip="Мои проекты на GitHub">
-                    <div class="button-glow"></div>
-                    <i class="fas fa-fire"></i>
-                    <span>Hacking Pack</span>
-                </a>
-                
-                <a href="https://www.tiktok.com/@chatgptzpx" class="social-button" target="_blank" data-tooltip="Мои проекты на GitHub">
-                    <div class="button-glow"></div>
-                    <i class="fab fa-tiktok"></i>
-                    <span>Hacking Pack</span>
-                </a>
-                
-                <a href="https://www.youtube.com/@chatgptzpx" class="social-button" target="_blank" data-tooltip="Мой YouTube канал">
-                    <div class="button-glow"></div>
-                    <i class="fab fa-youtube"></i>
-                    <span>My YouTube</span>
-                </a>
-            </div>
-            
-            <div class="skills-section">
-                <h2 class="glowing-text">My skills</h2>
-                <div class="skills-container">
-                    <div class="skill">
-                        <div class="skill-icon-container">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <span>Programming</span>
-                        <div class="skill-level">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <div class="skill-icon-container">
-                            <i class="fas fa-paint-brush"></i>
-                        </div>
-                        <span>Design</span>
-                        <div class="skill-level">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill">
-                        <div class="skill-icon-container">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <span>Web development</span>
-                        <div class="skill-level">
-                            <div class="skill-progress" style="width: 95%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="quote-section">
-                <blockquote>
-                    <i class="fas fa-quote-left"></i>
-                    <p>Beauty is simplicity, and perfection is in the details</p>
-                    <i class="fas fa-quote-right"></i>
-                </blockquote>
-            </div>
+    <div class="loading mouse-parallax" data-depth="0.1">
+        <h1 class="glowing-text mouse-parallax" data-depth="0.2">𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪</h1>
+        <p class="mouse-parallax" data-depth="0.15">Перенаправление на био-профиль Телеграм...</p>
+        <div class="spinner-container mouse-parallax" data-depth="0.3">
+            <div class="spinner"></div>
+            <div class="spinner-inner"></div>
         </div>
     </div>
     
-    <footer>
-        <div class="footer-content">
-            <div class="footer-wave">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill="rgba(255, 255, 255, 0.05)" fill-opacity="1" d="M0,192L48,176C96,160,192,128,288,122.7C384,117,480,139,576,165.3C672,192,768,224,864,213.3C960,203,1056,149,1152,138.7C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-                </svg>
-            </div>
-            <p>&copy; <span id="year">2023</span>All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#" class="footer-link">About the site</a>
-                <a href="#" class="footer-link">Contacts</a>
-                <a href="#" class="footer-link">Privacy policy</a>
-            </div>
-            <div class="social-icons">
-                <a href="https://t.me/chatgpthvh" target="_blank"><i class="fab fa-telegram"></i></a>
-                <a href="https://discord.gg/zpx.xyz" target="_blank"><i class="fab fa-discord"></i></a>
-                <a href="https://www.mediafire.com/file/v0m69ultetcm8jj/HackingPack.zip/file" target="_blank"><i class="fas fa-fire"></i></a>
-                <a href="https://www.tiktok.com/@chatgptzpx" target="_blank"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.youtube.com/@chatgptzpx" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script>
+        const stars = document.querySelector('.stars');
+        
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            const size = Math.random() * 3 + 1;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.position = 'absolute';
+            star.style.left = `${left}%`;
+            star.style.top = `${top}%`;
+            star.style.backgroundColor = 'white';
+            star.style.borderRadius = '50%';
+            star.style.opacity = Math.random() * 0.7 + 0.3;
+            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate`;
+            
+            stars.appendChild(star);
+        }
+        
+        const backgroundAnimation = document.querySelector('.background-animation');
+        
+        for (let i = 0; i < 30; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            
+            const size = Math.random() * 80 + 20;
+            const left = Math.random() * 100;
+            const animationDuration = Math.random() * 25 + 10;
+            const animationDelay = Math.random() * 10;
+            const randomX = Math.random() * 2 - 1;
+            
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${left}%`;
+            bubble.style.animationDuration = `${animationDuration}s`;
+            bubble.style.animationDelay = `${animationDelay}s`;
+            bubble.style.setProperty('--random-x', randomX);
+            
+            backgroundAnimation.appendChild(bubble);
+        }
+        
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const animationDuration = Math.random() * 30 + 10;
+            const animationDelay = Math.random() * 10;
+            const randomX = Math.random() * 2 - 1;
+            
+            particle.style.left = `${left}%`;
+            particle.style.top = `${top}%`;
+            particle.style.animationDuration = `${animationDuration}s`;
+            particle.style.animationDelay = `${animationDelay}s`;
+            particle.style.setProperty('--random-x', randomX);
+            
+            backgroundAnimation.appendChild(particle);
+        }
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0% {
+                    opacity: 0.3;
+                    box-shadow: none;
+                }
+                50% {
+                    opacity: 0.8;
+                    box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+                }
+                100% {
+                    opacity: 0.3;
+                    box-shadow: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Добавление эффекта параллакса при наведении мыши
+        document.addEventListener('mousemove', function(e) {
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+            
+            const parallaxElements = document.querySelectorAll('.mouse-parallax');
+            
+            parallaxElements.forEach(el => {
+                const depth = el.getAttribute('data-depth') || 0.1;
+                const moveX = mouseX * 100 * depth;
+                const moveY = mouseY * 80 * depth;
+                
+                el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+            });
+        });
+    </script>
 </body>
 </html> 
