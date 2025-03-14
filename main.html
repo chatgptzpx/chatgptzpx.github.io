@@ -56,6 +56,17 @@
             overflow: hidden;
         }
         
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(2, 136, 209, 0.1), rgba(79, 195, 247, 0.1));
+        }
+        
         .animated-bg {
             position: fixed;
             top: 0;
@@ -63,10 +74,10 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            opacity: 0.4;
+            opacity: 0.2;
             background: linear-gradient(-45deg, #0f2027, #0288d1, #4fc3f7, #81d4fa);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            background-size: 200% 200%;
+            animation: gradient 20s ease infinite;
         }
         
         @keyframes gradient {
@@ -79,16 +90,6 @@
             100% {
                 background-position: 0% 50%;
             }
-        }
-        
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
         }
         
         .bubble {
@@ -332,10 +333,36 @@
         
         .skills {
             display: flex;
-            justify-content: center;
-            margin: 25px 0;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .skills-title {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .skills-title::before,
+        .skills-title::after {
+            content: '';
+            height: 2px;
+            width: 50px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+        
+        .skills-title span {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .skill-tag {
@@ -605,6 +632,64 @@
             }
         }
         
+        @media (max-width: 768px) {
+            .mouse-parallax {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .tg-container {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .profile-pic {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .skill-tag {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .bio-quote {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .tg-link {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .other-link {
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            .footer {
+                transform: none !important;
+                transition: none !important;
+            }
+
+            .tg-link:before,
+            .tg-link:after,
+            .other-link:before {
+                transition: none !important;
+            }
+            .tg-link:hover,
+            .other-link:hover,
+            .footer:hover {
+                transform: none !important;
+            }
+
+            .tg-link:active,
+            .other-link:active {
+                transform: none !important;
+            }
+        }
+        
         @media (max-width: 600px) {
             .profile-pic {
                 width: 90px;
@@ -682,6 +767,9 @@
         </div>
         
         <div class="bio-content">
+            <div class="skills-title">
+                <span>Скиллы</span>
+            </div>
             <div class="skills">
                 <div class="skill-tag mouse-parallax" data-depth="0.15">Программирование</div>
                 <div class="skill-tag mouse-parallax" data-depth="0.2">Дизайн</div>
@@ -774,47 +862,6 @@
             stars.appendChild(star);
         }
         
-        const backgroundAnimation = document.querySelector('.background-animation');
-        
-        for (let i = 0; i < 30; i++) {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            
-            const size = Math.random() * 80 + 20;
-            const left = Math.random() * 100;
-            const animationDuration = Math.random() * 25 + 10;
-            const animationDelay = Math.random() * 10;
-            const randomX = Math.random() * 2 - 1;
-            
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.left = `${left}%`;
-            bubble.style.animationDuration = `${animationDuration}s`;
-            bubble.style.animationDelay = `${animationDelay}s`;
-            bubble.style.setProperty('--random-x', randomX);
-            
-            backgroundAnimation.appendChild(bubble);
-        }
-        
-        for (let i = 0; i < 40; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            const left = Math.random() * 100;
-            const top = Math.random() * 100;
-            const animationDuration = Math.random() * 30 + 10;
-            const animationDelay = Math.random() * 10;
-            const randomX = Math.random() * 2 - 1;
-            
-            particle.style.left = `${left}%`;
-            particle.style.top = `${top}%`;
-            particle.style.animationDuration = `${animationDuration}s`;
-            particle.style.animationDelay = `${animationDelay}s`;
-            particle.style.setProperty('--random-x', randomX);
-            
-            backgroundAnimation.appendChild(particle);
-        }
-        
         const style = document.createElement('style');
         style.textContent = `
             @keyframes twinkle {
@@ -833,21 +880,6 @@
             }
         `;
         document.head.appendChild(style);
-        
-        document.addEventListener('mousemove', function(e) {
-            const mouseX = e.clientX / window.innerWidth - 0.5;
-            const mouseY = e.clientY / window.innerHeight - 0.5;
-            
-            const parallaxElements = document.querySelectorAll('.mouse-parallax');
-            
-            parallaxElements.forEach(el => {
-                const depth = el.getAttribute('data-depth') || 0.1;
-                const moveX = mouseX * 100 * depth;
-                const moveY = mouseY * 80 * depth;
-                
-                el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-            });
-        });
     </script>
 </body>
 </html> 
