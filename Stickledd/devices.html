@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STICKLEDD - Устройства</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">STICKLEDD</div>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="scripts.html">Скрипты</a></li>
+                <li><a href="tutorials.html">Туториалы</a></li>
+                <li><a href="devices.html">Устройства</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="devices" class="content-section">
+            <h2>Устройства</h2>
+            
+            <div class="device-list">
+                <div class="device-item" onclick="showDeviceDetails('m5stickplus2')">
+                    <div class="device-image">
+                        <img src="assets/stick.png" alt="M5StickPlus2">
+                    </div>
+                    <div class="device-info">
+                        <h3>M5StickPlus2</h3>
+                        <p>Компактное IoT устройство с ESP32-S3</p>
+                    </div>
+                </div>
+                
+                <div class="device-item" onclick="showDeviceDetails('tembed')">
+                    <div class="device-image">
+                        <img src="assets/embed.png" alt="T-Embed">
+                    </div>
+                    <div class="device-info">
+                        <h3>T-Embed</h3>
+                        <p>Встраиваемое устройство с круглым дисплеем</p>
+                    </div>
+                </div>
+                
+                <div class="device-item" onclick="showDeviceDetails('cardputer')">
+                    <div class="device-image">
+                        <img src="assets/puter.png" alt="Cardputer">
+                    </div>
+                    <div class="device-info">
+                        <h3>Cardputer</h3>
+                        <p>Портативный мини-компьютер размером с кредитную карту</p>
+                    </div>
+                </div>
+                
+                <div class="device-item" onclick="showDeviceDetails('flipperzero')">
+                    <div class="device-image">
+                        <img src="assets/flipper.png" alt="Flipper Zero">
+                    </div>
+                    <div class="device-info">
+                        <h3>Flipper Zero</h3>
+                        <p>Многофункциональное устройство для исследования цифровых систем</p>
+                    </div>
+                </div>
+            </div>
+            
+        
+            <div id="m5stickplus2" class="device-details">
+                <div class="device-details-header">
+                    <h3>M5StickPlus2</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('m5stickplus2')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <img src="assets/stikfront.png" alt="M5StickPlus2 вид сверху">
+                    <img src="assets/stikback.png" alt="M5StickPlus2 вид снизу">
+                </div>
+                
+                <div class="device-description">
+                    <p>M5StickPlus2 - это компактное IoT устройство с микроконтроллером ESP32-S3, цветным дисплеем и множеством встроенных сенсоров. Идеально подходит для разработки прототипов и DIY проектов.</p>
+                </div>
+                
+                <h4>Технические характеристики</h4>
+                <div class="specs-table-container">
+                    <table class="specs-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>ESP32-PICO-V3-02 (240 МГц dual core)</td>
+                        </tr>
+                        <tr>
+                            <td>PSRAM</td>
+                            <td>2 МБ</td>
+                        </tr>
+                        <tr>
+                            <td>Flash память</td>
+                            <td>8 МБ</td>
+                        </tr>
+                        <tr>
+                            <td>Дисплей</td>
+                            <td>1.14" IPS LCD (240×135), ST7789v2</td>
+                        </tr>
+                        <tr>
+                            <td>Сеть</td>
+                            <td>Wi-Fi 802.11 b/g/n, Bluetooth</td>
+                        </tr>
+                        <tr>
+                            <td>Датчики</td>
+                            <td>IMU (MPU6886), MIC (SPM1423), RTC (BM8563)</td>
+                        </tr>
+                        <tr>
+                            <td>Кнопки</td>
+                            <td>3 программируемые кнопки</td>
+                        </tr>
+                        <tr>
+                            <td>Светодиоды</td>
+                            <td>Зеленый (индикатор сна), красный (G19, общий с ИК-передатчиком)</td>
+                        </tr>
+                        <tr>
+                            <td>Питание</td>
+                            <td>Аккумулятор 200 мАч @ 3.7В</td>
+                        </tr>
+                        <tr>
+                            <td>Вход питания</td>
+                            <td>5В @ 500мА</td>
+                        </tr>
+                        <tr>
+                            <td>Интерфейсы</td>
+                            <td>TypeC x 1, GROVE (I2C+I/0+UART) x 1</td>
+                        </tr>
+                        <tr>
+                            <td>GPIO</td>
+                            <td>G0, G25/G36, G26, G32, G33</td>
+                        </tr>
+                        <tr>
+                            <td>Дополнительно</td>
+                            <td>Встроенный зуммер, 2.4G 3D антенна</td>
+                        </tr>
+                        <tr>
+                            <td>Рабочая температура</td>
+                            <td>0°C до 40°C</td>
+                        </tr>
+                        <tr>
+                            <td>Материал корпуса</td>
+                            <td>Пластик (PC)</td>
+                        </tr>
+                        <tr>
+                            <td>Размеры</td>
+                            <td>48 x 25 x 13 мм</td>
+                        </tr>
+                        <tr>
+                            <td>Вес</td>
+                            <td>17 г</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h4>Особенности</h4>
+                <ul class="device-features">
+                    <li>Микроконтроллер ESP32-PICO-V3-02</li>
+                    <li>1.14-дюймовый TFT-дисплей</li>
+                    <li>Встроенный микрофон SPM1423</li>
+                    <li>IMU датчик MPU6886</li>
+                    <li>Инфракрасный передатчик</li>
+                    <li>Интерфейс GROVE (I2C+I/0+UART)</li>
+                    <li>Встроенный зуммер</li>
+                    <li>Аккумулятор 200 мАч</li>
+                    <li>Поддерживаемые платформы разработки:
+                        <ul>
+                            <li>Arduino</li>
+                            <li>UIFlow</li>
+                            <li>ESP-IDF</li>
+                            <li>MicroPython</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <a href="https://shop.m5stack.com/products/m5stickc-plus2-esp32-mini-iot-development-kit" class="buy-btn">Купить M5StickPlus2</a>
+            </div>
+            
+            <div id="tembed" class="device-details">
+                <div class="device-details-header">
+                    <h3>T-Embed</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('tembed')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <img src="assets/Embedbackandfront.png" alt="T-Embed вид сверху и снизу" style="width: 50%;">
+                </div>
+                <div class="device-description">
+                    <p>T-Embed - это встраиваемое устройство с круглым дисплеем и контроллером ESP32-S3, оснащенное поворотным энкодером и кольцевой RGB подсветкой. Идеально подходит для проектов с круговым интерфейсом и аудио функциями.</p>
+                </div>
+                
+                <h4>Технические характеристики</h4>
+                <div class="specs-table-container">
+                    <table class="specs-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>ESP32-S3</td>
+                        </tr>
+                        <tr>
+                            <td>Сеть</td>
+                            <td>Wi-Fi IEEE 802.11 b/g/n, Bluetooth 5, Bluetooth mesh</td>
+                        </tr>
+                        <tr>
+                            <td>Дисплей</td>
+                            <td>1.9" IPS LCD (170×320), ST7789, яркость 350 кд/м²</td>
+                        </tr>
+                        <tr>
+                            <td>Управление</td>
+                            <td>Поворотный энкодер с кнопкой подтверждения (24 фиксации, 12 импульсов/360°)</td>
+                        </tr>
+                        <tr>
+                            <td>Аудио</td>
+                            <td>Микрофон x 2, динамик 8 Ом @ 1Вт</td>
+                        </tr>
+                        <tr>
+                            <td>Подсветка</td>
+                            <td>Кольцевая RGB подсветка x 7</td>
+                        </tr>
+                        <tr>
+                            <td>Интерфейсы</td>
+                            <td>GROVE x 1, GPIO 2.54 x 8 пин, слот для TF карты, Type-C USB</td>
+                        </tr>
+                        <tr>
+                            <td>Материал</td>
+                            <td>ABS</td>
+                        </tr>
+                        <tr>
+                            <td>Дополнительно</td>
+                            <td>Схема защиты заряда/разряда аккумулятора, батарейный интерфейс 1.25 мм</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>Особенности</h4>
+                <ul class="device-features">
+                    <li>Микроконтроллер ESP32-S3</li>
+                    <li>Wi-Fi IEEE 802.11 b/g/n; Bluetooth 5, Bluetooth mesh</li>
+                    <li>1.9-дюймовый IPS цветной TFT LCD дисплей</li>
+                    <li>Поворотный энкодер со встроенной кнопкой подтверждения</li>
+                    <li>2.54 x 8pin GPIO интерфейс</li>
+                    <li>Кольцевая RGB подсветка из 7 светодиодов</li>
+                    <li>Два микрофона для записи звука</li>
+                    <li>Интерфейс GROVE для расширения</li>
+                    <li>Слот для TF карты</li>
+                    <li>Поддерживаемые платформы разработки:
+                        <ul>
+                            <li>Arduino</li>
+                            <li>UIFlow</li>
+                            <li>ESP-IDF</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <a href="https://lilygo.cc/products/t-embed" class="buy-btn">Купить T-Embed</a>
+            </div>
+            
+            <div id="cardputer" class="device-details">
+                <div class="device-details-header">
+                    <h3>Cardputer</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('cardputer')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <img src="assets/cardback.png" alt="Cardputer вид сзади">
+                    <img src="assets/cardfront.png" alt="Cardputer вид спереди">
+                </div>
+                
+                <div class="device-description">
+                    <p>Cardputer - это портативный мини-компьютер размером с кредитную карту с полноценной клавиатурой, дисплеем и аккумуляторами двух типов. Идеален для портативных вычислений и IoT проектов.</p>
+                </div>
+                
+                <h4>Технические характеристики</h4>
+                <div class="specs-table-container">
+                    <table class="specs-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Процессор</td>
+                            <td>StampS3A (ESP32-S3 Xtensa LX7), 8МБ Flash, Wi-Fi, OTG, CDC</td>
+                        </tr>
+                        <tr>
+                            <td>Flash память</td>
+                            <td>8 МБ</td>
+                        </tr>
+                        <tr>
+                            <td>Хранилище</td>
+                            <td>SD карта</td>
+                        </tr>
+                        <tr>
+                            <td>Клавиатура</td>
+                            <td>56 клавиш (4 x 14)</td>
+                        </tr>
+                        <tr>
+                            <td>Кнопки</td>
+                            <td>1 кнопка сброса + 1 пользовательская кнопка</td>
+                        </tr>
+                        <tr>
+                            <td>Дисплей</td>
+                            <td>ST7789V2 @ 1.14", 240 x 135 пикселей</td>
+                        </tr>
+                        <tr>
+                            <td>Аудио</td>
+                            <td>Динамик 8Ω @ 1Вт (I2S @ NS4168), MEMS микрофон (SPM1423)</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>120 мАч + 1400 мАч (в основании)</td>
+                        </tr>
+                        <tr>
+                            <td>Инфракрасный порт</td>
+                            <td>На 0°: 410 см, на 90°: 66 см, на 45°: 170 см</td>
+                        </tr>
+                        <tr>
+                            <td>Ток в режиме сна</td>
+                            <td>DC-4.2В @ 0.15мкА</td>
+                        </tr>
+                        <tr>
+                            <td>Рабочий ток</td>
+                            <td>Режим ИК-передачи: DC-4.2В/148.07мА<br>Режим клавиш: DC-4.2В/138.93мА</td>
+                        </tr>
+                        <tr>
+                            <td>Интерфейсы</td>
+                            <td>Grove x 1</td>
+                        </tr>
+                        <tr>
+                            <td>Рабочая температура</td>
+                            <td>0-40°C</td>
+                        </tr>
+                        <tr>
+                            <td>Размеры</td>
+                            <td>84.0 x 54.0 x 19.7 мм</td>
+                        </tr>
+                        <tr>
+                            <td>Вес</td>
+                            <td>90.0 г</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h4>Особенности</h4>
+                <ul class="device-features">
+                    <li>Микроконтроллер StampS3A (ESP32-S3)</li>
+                    <li>Клавиатура с 56 клавишами (4 x 14)</li>
+                    <li>1.14-дюймовый TFT экран</li>
+                    <li>Динамик и цифровой MEMS микрофон SPM1423</li>
+                    <li>Инфракрасный излучатель для управления</li>
+                    <li>Интерфейс HY2.0-4P (Grove)</li>
+                    <li>Слот для Micro SD карты</li>
+                    <li>Встроенный аккумулятор 120 мАч и 1400 мАч в основании</li>
+                    <li>Основание с магнитами</li>
+                    <li>Совместимость с креплениями LEGO</li>
+                    <li>Поддерживаемые платформы разработки:
+                        <ul>
+                            <li>Arduino</li>
+                            <li>UIFlow 2.0</li>
+                            <li>ESP-IDF</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <a href="https://shop.m5stack.com/products/m5stack-cardputer-with-m5stamps3-v1-1" class="buy-btn">Купить Cardputer</a>
+            </div>
+            
+            <div id="flipperzero" class="device-details">
+                <div class="device-details-header">
+                    <h3>Flipper Zero</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('flipperzero')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <img src="assets/flipperup.png" alt="Flipper Zero вид сверху">
+                    <img src="assets/flipperside.png" alt="Flipper Zero вид со стороны">
+                </div>
+                
+                <div class="device-description">
+                    <p>Flipper Zero - многофункциональное портативное устройство для исследования и взаимодействия с различными цифровыми системами. Поддерживает RFID, NFC, инфракрасные сигналы, Bluetooth и многое другое, что делает его незаменимым инструментом для специалистов по кибербезопасности, энтузиастов и разработчиков.</p>
+                </div>
+                
+                <h4>Технические характеристики</h4>
+                
+                <div class="specs-table-container">
+                    <h5>Микроконтроллер</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Модель</td>
+                            <td>STM32WB55RG</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор приложений</td>
+                            <td>ARM Cortex-M4 32-bit 64 МГц</td>
+                        </tr>
+                        <tr>
+                            <td>Процессор радиомодуля</td>
+                            <td>ARM Cortex-M0+ 32-bit 32 МГц</td>
+                        </tr>
+                        <tr>
+                            <td>Радиоинтерфейсы</td>
+                            <td>Bluetooth LE 5.4, 802.15.4 и проприетарные</td>
+                        </tr>
+                        <tr>
+                            <td>Flash-память</td>
+                            <td>1024 КБ (общая между приложением и радио)</td>
+                        </tr>
+                        <tr>
+                            <td>SRAM</td>
+                            <td>256 КБ (общая между приложением и радио)</td>
+                        </tr>
+                    </table>
+
+                    <h5>Модуль Sub-1 GHz</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Трансивер</td>
+                            <td>CC1101</td>
+                        </tr>
+                        <tr>
+                            <td>Мощность передачи</td>
+                            <td>до -20 дБм</td>
+                        </tr>
+                        <tr>
+                            <td>Диапазоны частот (зависит от региона)</td>
+                            <td>315 МГц, 433 МГц, 868 МГц, 915 МГц</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>NFC</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Трансивер</td>
+                            <td>ST25R3916</td>
+                        </tr>
+                        <tr>
+                            <td>Частота</td>
+                            <td>13.56 МГц</td>
+                        </tr>
+                        <tr>
+                            <td>Поддерживаемые карты</td>
+                            <td>ISO-14443A/B, NXP MIFARE Classic®, Ultralight®, DESFire®, FeliCa™, HID iClass (Picopass), протоколы NFC Forum</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>RFID 125 кГц</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Частота</td>
+                            <td>125 кГц</td>
+                        </tr>
+                        <tr>
+                            <td>Модуляция</td>
+                            <td>AM, OOK</td>
+                        </tr>
+                        <tr>
+                            <td>Кодирование</td>
+                            <td>ASK, PSK</td>
+                        </tr>
+                        <tr>
+                            <td>Поддерживаемые карты</td>
+                            <td>EM-Micro EM4100, HID H10301, IDTECK Idteck, Motorola Indala 26, Kantech IoProx XSF, AWID, FECAVA FDX-A, ISO FDX-B, Generic HID Prox, Generic HID Ext, Farpointe Pyramid, Viking, Jablotron, Paradox, PAC Stanley, Keri, Gallagher, Honeywell Nexwatch, Electra, Securakey</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>GPIO</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Пины ввода/вывода</td>
+                            <td>13 пинов I/O доступны пользователю на внешних разъемах 2.54</td>
+                        </tr>
+                        <tr>
+                            <td>Уровень логики</td>
+                            <td>3.3 В CMOS</td>
+                        </tr>
+                        <tr>
+                            <td>Вход</td>
+                            <td>Толерантный к 5 В (см. AN4899)</td>
+                        </tr>
+                        <tr>
+                            <td>Выходной ток</td>
+                            <td>До 20 мА на цифровой пин</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>Инфракрасный порт</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Длина волны RX</td>
+                            <td>950 нм (±100 нм)</td>
+                        </tr>
+                        <tr>
+                            <td>Несущая RX</td>
+                            <td>38 кГц (+/-5%)</td>
+                        </tr>
+                        <tr>
+                            <td>Длина волны TX</td>
+                            <td>940 нм</td>
+                        </tr>
+                        <tr>
+                            <td>Несущая TX</td>
+                            <td>0-2 МГц</td>
+                        </tr>
+                        <tr>
+                            <td>Мощность TX</td>
+                            <td>300 мВт</td>
+                        </tr>
+                        <tr>
+                            <td>Поддерживаемые протоколы</td>
+                            <td>Семейство NEC, Kaseikyo, RCA, RC5, RC6, Samsung, SIRC</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>iButton 1-Wire</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Поддерживаемые протоколы</td>
+                            <td>Dallas DS199x, DS1971, CYFRAL, Metakom, TM2004, RW1990</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>Аккумулятор</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Тип</td>
+                            <td>Литий-полимерный (LiPo)</td>
+                        </tr>
+                        <tr>
+                            <td>Емкость</td>
+                            <td>2100 мАч</td>
+                        </tr>
+                        <tr>
+                            <td>Время автономной работы</td>
+                            <td>До 28 дней</td>
+                        </tr>
+                        <tr>
+                            <td>Рабочая температура</td>
+                            <td>0° - 40°C (32° - 104°F)</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>MicroSD карта</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Максимальная емкость</td>
+                            <td>До 256 ГБ</td>
+                        </tr>
+                        <tr>
+                            <td>Рекомендуемая емкость</td>
+                            <td>2-32 ГБ</td>
+                        </tr>
+                        <tr>
+                            <td>Тип интерфейса</td>
+                            <td>SPI</td>
+                        </tr>
+                        <tr>
+                            <td>Скорость чтения/записи</td>
+                            <td>До 5 Мбит/с</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>USB</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Тип разъема</td>
+                            <td>Type-C</td>
+                        </tr>
+                        <tr>
+                            <td>Стандарт</td>
+                            <td>USB 2.0</td>
+                        </tr>
+                        <tr>
+                            <td>Скорость передачи данных</td>
+                            <td>12 Мбит/с</td>
+                        </tr>
+                        <tr>
+                            <td>Максимальный ток зарядки</td>
+                            <td>1 А</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>Bluetooth LE 5.4</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Мощность передачи</td>
+                            <td>До 4 дБм</td>
+                        </tr>
+                        <tr>
+                            <td>Чувствительность приема</td>
+                            <td>-96 дБм</td>
+                        </tr>
+                        <tr>
+                            <td>Скорость передачи данных</td>
+                            <td>2 Мбит/с</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>Зуммер</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Частота</td>
+                            <td>100-2500 Гц</td>
+                        </tr>
+                        <tr>
+                            <td>Выходная громкость</td>
+                            <td>87 дБ</td>
+                        </tr>
+                        <tr>
+                            <td>Тип</td>
+                            <td>Монетный</td>
+                        </tr>
+                    </table>
+                    
+                    <h5>Мотор вибрации</h5>
+                    <table class="specs-table">
+                        <tr>
+                            <td>Сила</td>
+                            <td>30 Н</td>
+                        </tr>
+                        <tr>
+                            <td>Скорость</td>
+                            <td>13500 об/мин</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h4>Особенности</h4>
+                <ul class="device-features">
+                    <li>Универсальный пульт дистанционного управления для ИК-устройств</li>
+                    <li>Считыватель и эмулятор RFID-карт и NFC-меток</li>
+                    <li>Сканирование и анализ цифровых сигналов на частотах Sub-1 GHz</li>
+                    <li>Взаимодействие с системами безопасности и контроля доступа</li>
+                    <li>Bluetooth-интерфейс для мобильных приложений</li>
+                    <li>Полный доступ к GPIO для собственных проектов</li>
+                    <li>Экосистема плагинов для расширения функциональности</li>
+                    <li>Встроенный режим Bad USB для автоматизации ввода</li>
+                    <li>Поддержка программирования на C/C++</li>
+                    <li>Открытый исходный код ОС прошивки</li>
+                </ul>
+                
+                <h4>Поддерживаемые скрипты</h4>
+                <div class="supported-scripts">
+                    <div class="script-badge">
+                        <span class="indicator compatible"></span>
+                        <span>RFID Emulator</span>
+                    </div>
+                    <div class="script-badge">
+                        <span class="indicator compatible"></span>
+                        <span>Garage Opener</span>
+                    </div>
+                    <div class="script-badge">
+                        <span class="indicator compatible"></span>
+                        <span>NFC Clone</span>
+                    </div>
+                    <div class="script-badge">
+                        <span class="indicator compatible"></span>
+                        <span>IR Universal Remote</span>
+                    </div>
+                </div>
+                
+                <a href="https://shop.flipperzero.one/" class="buy-btn">Купить Flipper Zero</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 STICKLEDD. Все права не защищены.</p>
+        <a href="https://t.me/Stickledd" class="telegram-link">
+            <i class="fab fa-telegram"></i> STICKLEDD
+        </a>
+    </footer>
+
+    <script>
+        function showDeviceDetails(id) {
+            const allDetails = document.querySelectorAll('.device-details');
+            allDetails.forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            const deviceDetails = document.getElementById(id);
+            deviceDetails.style.display = 'block';
+            
+            deviceDetails.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function closeDeviceDetails(id) {
+            const deviceDetails = document.getElementById(id);
+            deviceDetails.style.display = 'none';
+        }
+    </script>
+</body>
+</html> 
