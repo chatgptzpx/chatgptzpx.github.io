@@ -475,21 +475,59 @@ footer {
 
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        text-align: center;
+        padding: 0.5rem;
+        justify-content: space-between;
     }
-
+    
+    .logo {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+    
     nav ul {
-        margin-top: 1rem;
-        flex-direction: column;
+        margin: 0;
+        flex-direction: row;
+        justify-content: flex-end;
     }
-
+    
     nav ul li {
-        margin: 0.5rem 0;
+        margin: 0 0.5rem;
     }
-
+    
+    nav ul li a {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
     .hero h1 {
         font-size: 2rem;
+    }
+    
+    /* Адаптация для мобильной версии устройств */
+    .device-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .device-image {
+        height: 150px;
+    }
+    
+    .device-image img {
+        max-height: 140px;
+    }
+    
+    .device-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Адаптация детальной страницы устройств */
+    .device-details-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .close-details {
+        padding: 5px 10px;
+        font-size: 0.9rem;
     }
 }
 
@@ -888,30 +926,55 @@ h2:after {
 }
 
 .device-item {
-    background: var(--card-background);
-    border-radius: 10px;
+    position: relative;
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
+    border: 1px solid rgba(255, 140, 0, 0.2);
 }
 
 .device-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255, 140, 0, 0.3);
+    border-color: var(--primary-color);
+}
+
+.device-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.device-item:hover::before {
+    transform: scaleX(1);
 }
 
 .device-image {
+    position: relative;
     height: 200px;
     overflow: hidden;
-    border-bottom: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 20, 20, 0.7);
+    border-bottom: 1px solid rgba(255, 140, 0, 0.2);
 }
 
 .device-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    transition: transform 0.5s ease;
 }
 
 .device-item:hover .device-image img {
@@ -919,631 +982,487 @@ h2:after {
 }
 
 .device-info {
-    padding: 1.5rem;
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+    background: rgba(30, 30, 30, 0.9);
 }
 
 .device-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
     color: var(--primary-color);
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.device-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), transparent);
 }
 
 .device-info p {
+    color: #f1f1f1;
+    margin: 0;
     font-size: 0.9rem;
-    color: var(--text-color);
-    opacity: 0.8;
 }
 
+/* Улучшенные стили для детальной информации об устройстве */
 .device-details {
     display: none;
-    background: var(--card-background);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.4);
-    margin-top: 2rem;
-    animation: fadeIn 0.5s;
+    background: rgba(25, 25, 25, 0.95);
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+    position: relative;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .device-details-header {
+    background: linear-gradient(90deg, rgba(40, 40, 40, 0.95), rgba(60, 60, 60, 0.95));
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 140, 0, 0.4);
 }
 
 .device-details-header h3 {
-    font-size: 2rem;
-    color: var(--primary-color);
     margin: 0;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.close-details {
+    background: rgba(255, 140, 0, 0.2);
+    color: #fff;
+    border: 1px solid rgba(255, 140, 0, 0.5);
+    border-radius: 6px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.close-details:hover {
+    background: rgba(255, 140, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
 }
 
 .device-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(30, 30, 30, 0.7);
+    border-bottom: 1px solid rgba(255, 140, 0, 0.2);
 }
 
 .device-gallery img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    max-width: 45%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 140, 0, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Улучшенные стили для описаний устройств */
-.device-description {
-    margin-bottom: 1.8rem;
-    line-height: 1.7;
-    font-size: 1.05rem;
-    background: rgba(20, 20, 30, 0.4);
-    padding: 18px;
+.device-gallery img:hover {
+    transform: scale(1.02);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+
+.video-container {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 140, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
+}
+
+.device-description {
+    padding: 20px;
+    background: rgba(35, 35, 35, 0.7);
+    margin: 15px;
+    border-radius: 10px;
     border-left: 3px solid var(--primary-color);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
 .device-description:hover {
+    background: rgba(40, 40, 40, 0.8);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-3px);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(255, 140, 0, 0.1);
 }
 
-.device-description p {
-    margin-bottom: 0.8rem;
-}
-
-.device-description p:last-child {
-    margin-bottom: 0;
-}
-
-.device-description strong {
-    color: var(--primary-color);
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-/* Стили для заголовков секций устройств */
 .device-details h4 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin: 1.8rem 0 1rem;
+    margin: 25px 15px 15px;
     padding-bottom: 8px;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-weight: 600;
     position: relative;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
     display: inline-block;
+    letter-spacing: 1px;
 }
 
-.device-details h4:after {
+.device-details h4::after {
     content: '';
     position: absolute;
-    width: 70%;
-    height: 2px;
-    background: linear-gradient(to right, var(--primary-color), transparent);
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), transparent);
+    border-radius: 3px;
+}
+
+.device-features {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.device-features li {
+    position: relative;
+    padding: 12px 0 12px 30px;
+    border-bottom: 1px dashed rgba(255, 140, 0, 0.2);
+    color: #f1f1f1;
+}
+
+.device-features li:last-child {
+    border-bottom: none;
+}
+
+.device-features li::before {
+    content: '⚡';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.device-features ul {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.device-features ul li {
+    padding: 6px 0 6px 20px;
+    border-bottom: none;
+}
+
+.device-features ul li::before {
+    content: '•';
 }
 
 .specs-table-container {
-    overflow-x: auto;
-    margin-bottom: 2rem;
-}
-
-.specs-table-container h5 {
-    font-size: 1.1rem;
-    color: var(--primary-color);
-    margin: 1.5rem 0 0.5rem 0;
-    border-left: 3px solid var(--primary-color);
-    padding-left: 10px;
-}
-
-.specs-table-container h5:first-child {
-    margin-top: 0;
+    padding: 0 15px 15px;
 }
 
 .specs-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0.5rem 0 1.2rem;
-}
-
-.specs-table th,
-.specs-table td {
-    padding: 0.8rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .specs-table th {
-    background-color: rgba(0, 188, 212, 0.1);
+    background: rgba(255, 140, 0, 0.2);
     color: var(--primary-color);
-    font-weight: bold;
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 140, 0, 0.4);
+}
+
+.specs-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f1f1f1;
+}
+
+.specs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.specs-table tr {
+    background: rgba(40, 40, 40, 0.7);
+    transition: all 0.3s ease;
+}
+
+.specs-table tr:nth-child(odd) {
+    background: rgba(45, 45, 45, 0.7);
 }
 
 .specs-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.supported-scripts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-/* Стили для особенностей устройств */
-.device-features {
-    background-color: rgba(30, 30, 40, 0.7);
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin: 15px 0 20px 0;
-    list-style-type: none;
-}
-
-.device-features li {
-    position: relative;
-    padding: 5px 0 5px 22px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-}
-
-.device-features li::before {
-    content: "▶";
-    position: absolute;
-    left: 0;
-    color: var(--accent-color);
-    font-size: 0.8rem;
-}
-
-.device-features ul {
-    list-style-type: none;
-    margin-top: 8px;
-    padding-left: 15px;
-}
-
-.device-features ul li {
-    margin-bottom: 5px;
-    padding-left: 18px;
-}
-
-.device-features ul li::before {
-    content: "•";
-    font-size: 1rem;
-}
-
-/* Остальные стили */
-.script-badge {
-    display: inline-flex;
-    align-items: center;
-    background-color: #252530;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-}
-
-.script-badge .indicator {
-    margin-right: 0.8rem;
+    background: rgba(50, 50, 50, 0.9);
 }
 
 .buy-btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
-    background-color: var(--primary-color);
-    color: white;
+    margin: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.8), rgba(230, 80, 0, 0.8));
+    color: #fff;
+    border: none;
+    border-radius: 30px;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.buy-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s ease;
 }
 
 .buy-btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.5);
+    transform: translateY(-3px);
 }
 
-.scan-btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    transition: background-color 0.3s;
-    border: none;
-    cursor: pointer;
-}
-
-.scan-btn:hover {
-    background-color: #2980b9;
-}
-
-.device-info {
-    margin-top: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    padding: 12px;
-}
-
-.device-info p {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.device-info-details {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    line-height: 1.4;
-}
-
-.ports-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.port-item {
-    background-color: rgba(30, 30, 40, 0.7);
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.port-item:hover {
-    background-color: rgba(0, 188, 212, 0.2);
-    transform: translateX(5px);
-}
-
-.port-select {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Стили для просмотра кода скриптов */
-.code-preview {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    padding: 15px;
-    margin: 15px 0;
-    border-left: 3px solid var(--primary-color);
-    overflow-x: auto;
-}
-
-.code-preview pre {
-    margin: 0;
-    white-space: pre-wrap;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #e0e0e0;
-}
-
-.code-preview code {
-    display: block;
-}
-
-.device-features ul {
-    list-style-type: none;
-    margin-top: 8px;
-    padding-left: 15px;
-}
-
-.device-features ul li {
-    margin-bottom: 5px;
-    padding-left: 18px;
-}
-
-.device-features ul li::before {
-    content: "•";
-    font-size: 1rem;
-}
-
-.command-examples {
-    list-style-type: none;
-    padding: 0;
-    margin: 5px 0;
-}
-
-.command-examples li {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.command-examples code {
-    display: inline-block;
-    font-family: 'Consolas', 'Monaco', monospace;
-    background: rgba(0, 0, 0, 0.4);
-    color: #FF8C00;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 0.95rem;
-    border-left: 3px solid #FF8C00;
-    margin-right: 10px;
-    flex-grow: 1;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.command-desc {
-    color: #888;
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-left: 10px;
-}
-
-.command-examples li:hover code {
-    background: rgba(0, 0, 0, 0.6);
-    transform: translateX(5px);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 140, 0, 0.2);
-}
-
-.command-examples li:hover .command-desc {
-    color: #aaa;
+.buy-btn:hover::before {
+    left: 100%;
 }
 
 /* Стили для терминала */
 .terminal-container {
-    background-color: #1a1a1a;
-    border-radius: 8px;
+    margin: 15px;
+    background: #1a1a1a;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    margin: 20px 0;
-    font-family: 'Consolas', 'Monaco', monospace;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    font-family: 'Consolas', 'Courier New', monospace;
 }
 
 .terminal-header {
-    background-color: #333;
-    padding: 8px 12px;
+    background: #333;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #444;
 }
 
 .terminal-buttons {
     display: flex;
-    gap: 6px;
-    margin-right: 15px;
+    gap: 5px;
+    margin-right: 10px;
 }
 
 .terminal-btn {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    display: inline-block;
 }
 
 .terminal-close {
-    background-color: #ff5f56;
+    background: #ff5f57;
 }
 
 .terminal-minimize {
-    background-color: #ffbd2e;
+    background: #febc2e;
 }
 
 .terminal-maximize {
-    background-color: #27c93f;
+    background: #28c841;
 }
 
 .terminal-title {
-    color: #ddd;
-    font-size: 0.85rem;
-    flex-grow: 1;
-    text-align: center;
+    color: #f1f1f1;
+    font-size: 0.9rem;
 }
 
 .terminal-content {
     padding: 15px;
-    background-color: #1a1a1a;
-}
-
-.terminal-welcome {
-    color: #AAA;
-    margin-bottom: 15px;
+    color: #f1f1f1;
     font-size: 0.9rem;
+    max-height: 350px;
+    overflow-y: auto;
 }
 
 .terminal-line {
     display: block;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .terminal-prompt {
-    color: #FF8C00;
-    margin-bottom: 15px;
     display: flex;
     align-items: center;
+    margin-top: 10px;
+    color: #4cd964;
 }
 
 .terminal-cursor {
     display: inline-block;
     width: 8px;
     height: 16px;
-    background-color: #FF8C00;
-    margin-left: 4px;
+    background: #f1f1f1;
     animation: blink 1s infinite;
+    margin-left: 3px;
 }
 
 @keyframes blink {
-    0%, 49% {
-        opacity: 1;
-    }
-    50%, 100% {
-        opacity: 0;
-    }
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
 }
 
-/* Стили для списка версий */
-.device-versions ul {
-    list-style-type: none;
+.command-examples {
+    list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 15px 0;
-    justify-content: center;
+    margin: 10px 0 0;
 }
 
-.device-versions li {
-    background: rgba(255, 140, 0, 0.1);
-    border-left: 3px solid #FF8C00;
-    padding: 10px 15px;
+.command-examples li {
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.command-examples code {
+    color: #4cd964;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 6px;
     border-radius: 4px;
-    color: #e0e0e0;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-right: 10px;
+}
+
+.command-desc {
+    color: #999;
+    font-style: italic;
+}
+
+/* Стили для групп функций Marauder */
+.marauder-functions {
+    padding: 10px 15px;
+}
+
+.function-category {
+    margin-bottom: 20px;
+    background: rgba(40, 40, 40, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--primary-color);
     transition: all 0.3s ease;
-    cursor: pointer;
-    text-align: center;
-    min-width: 200px;
+}
+
+.function-category:hover {
+    background: rgba(45, 45, 45, 0.8);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.function-category h5 {
+    margin: 0 0 15px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
     position: relative;
-    overflow: hidden;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
-.device-versions li:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 140, 0, 0.2);
-    box-shadow: 0 8px 15px rgba(255, 140, 0, 0.3);
-}
-
-.device-versions li:after {
+.function-category h5::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(to right, transparent, #FF8C00, transparent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.device-versions li:hover:after {
-    transform: scaleX(1);
-}
-
-@media (max-width: 768px) {
-    .device-versions ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .device-versions li {
-        width: 90%;
-        max-width: 300px;
-    }
-}
-
-/* Эффекты для терминала */
-.terminal-container:hover .terminal-btn {
-    transform: scale(1.1);
-    transition: transform 0.2s;
-}
-
-/* Стили для функций Marauder */
-.marauder-functions {
-    margin: 20px 0;
-}
-
-.function-category {
-    background-color: rgba(30, 30, 40, 0.7);
-    border-radius: 8px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.function-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(255, 140, 0, 0.3);
-}
-
-.function-category h5 {
-    background-color: rgba(255, 140, 0, 0.2);
-    color: #FF8C00;
-    padding: 12px 15px;
-    margin: 0;
-    font-size: 1.1rem;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 1px;
-    border-left: 3px solid #FF8C00;
+    background: linear-gradient(to right, var(--primary-color), transparent);
 }
 
 .function-group {
-    padding: 15px;
+    padding-left: 10px;
 }
 
 .function-group p {
-    margin-bottom: 10px;
-    position: relative;
+    margin: 10px 0;
     padding-left: 20px;
-    line-height: 1.5;
+    position: relative;
+    color: #f1f1f1;
 }
 
-.function-group p:last-child {
-    margin-bottom: 0;
-}
-
-.function-group p strong {
-    color: #FF8C00;
+.function-group p::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
-.function-group p:before {
-    content: "▶";
-    position: absolute;
-    left: 0;
-    color: #FF8C00;
-    font-size: 0.8rem;
+.device-versions {
+    padding: 0 15px 15px;
 }
 
-/* Стили для иконок в заголовках */
-.device-details h4 i {
-    margin-right: 8px;
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    opacity: 0.9;
-}
-
-/* Стили для списков характеристик */
-.feature-list {
+.device-versions ul {
     list-style: none;
     padding: 0;
-    margin: 15px 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.feature-list li {
-    position: relative;
-    padding: 8px 0 8px 25px;
-    border-bottom: 1px dashed rgba(255, 140, 0, 0.2);
-    margin-bottom: 8px;
+.device-versions li {
+    background: rgba(40, 40, 40, 0.7);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #f1f1f1;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-.feature-list li:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+.device-versions li:hover {
+    background: rgba(255, 140, 0, 0.2);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
-.feature-list li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-/* Стили для индикатора батареи */
+/* Стили для индикатора заряда аккумулятора */
 .battery-indicator {
     position: relative;
 }
@@ -1591,4 +1510,196 @@ h2:after {
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+/* Стили для иконок в заголовках */
+.device-details h4 i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.9;
+}
+
+/* Стили для списков характеристик */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.feature-list li {
+    position: relative;
+    padding: 8px 0 8px 25px;
+    border-bottom: 1px dashed rgba(255, 140, 0, 0.2);
+    margin-bottom: 8px;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.feature-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Улучшенные стили для поддерживаемых скриптов */
+.supported-scripts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 15px 15px;
+}
+
+.script-badge {
+    display: flex;
+    align-items: center;
+    background: rgba(40, 40, 40, 0.7);
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.script-badge:hover {
+    background: rgba(50, 50, 50, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.compatible {
+    background: #4caf50;
+    box-shadow: 0 0 5px #4caf50;
+}
+
+.incompatible {
+    background: #f44336;
+    box-shadow: 0 0 5px #f44336;
+}
+
+@media (max-width: 768px) {
+    .device-gallery img {
+        max-width: 100%;
+    }
+    
+    .specs-table {
+        font-size: 0.9rem;
+    }
+    
+    .device-details h4 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Мобильное меню-бургер */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Мобильные стили для меню */
+@media (max-width: 480px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--header-background);
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    /* Дополнительная адаптация для очень маленьких экранов */
+    .device-item {
+        width: 100%;
+    }
+    
+    .device-gallery img {
+        max-width: 100%;
+    }
+    
+    .specs-table th, .specs-table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+    
+    .device-details h4 {
+        font-size: 1.1rem;
+        margin: 20px 10px 10px;
+    }
+    
+    .terminal-container {
+        margin: 10px;
+    }
+    
+    .terminal-content {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+    
+    .function-category h5 {
+        font-size: 1rem;
+    }
+    
+    .buy-btn {
+        margin: 15px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 } 

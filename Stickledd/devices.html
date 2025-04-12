@@ -12,7 +12,12 @@
     <header>
         <nav>
             <div class="logo">STICKLEDD</div>
-            <ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
                 <li><a href="index.html">Главная</a></li>
                 <li><a href="scripts.html">Скрипты</a></li>
                 <li><a href="tutorials.html">Туториалы</a></li>
@@ -1179,6 +1184,32 @@
             const deviceDetails = document.getElementById(id);
             deviceDetails.style.display = 'none';
         }
+
+        // Мобильное меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+            
+            // Закрыть меню при клике на пункт меню
+            const menuItems = navMenu.querySelectorAll('a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Закрыть меню при клике вне его
+            document.addEventListener('click', function(event) {
+                if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html> 
