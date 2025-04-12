@@ -475,21 +475,59 @@ footer {
 
 @media (max-width: 768px) {
     nav {
-        flex-direction: column;
-        text-align: center;
+        padding: 0.5rem;
+        justify-content: space-between;
     }
-
+    
+    .logo {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+    
     nav ul {
-        margin-top: 1rem;
-        flex-direction: column;
+        margin: 0;
+        flex-direction: row;
+        justify-content: flex-end;
     }
-
+    
     nav ul li {
-        margin: 0.5rem 0;
+        margin: 0 0.5rem;
     }
-
+    
+    nav ul li a {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
+    }
+    
     .hero h1 {
         font-size: 2rem;
+    }
+    
+    /* Адаптация для мобильной версии устройств */
+    .device-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .device-image {
+        height: 150px;
+    }
+    
+    .device-image img {
+        max-height: 140px;
+    }
+    
+    .device-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Адаптация детальной страницы устройств */
+    .device-details-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .close-details {
+        padding: 5px 10px;
+        font-size: 0.9rem;
     }
 }
 
@@ -1561,5 +1599,107 @@ h2:after {
     
     .device-details h4 {
         font-size: 1.2rem;
+    }
+}
+
+/* Мобильное меню-бургер */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Мобильные стили для меню */
+@media (max-width: 480px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--header-background);
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    /* Дополнительная адаптация для очень маленьких экранов */
+    .device-item {
+        width: 100%;
+    }
+    
+    .device-gallery img {
+        max-width: 100%;
+    }
+    
+    .specs-table th, .specs-table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+    
+    .device-details h4 {
+        font-size: 1.1rem;
+        margin: 20px 10px 10px;
+    }
+    
+    .terminal-container {
+        margin: 10px;
+    }
+    
+    .terminal-content {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+    
+    .function-category h5 {
+        font-size: 1rem;
+    }
+    
+    .buy-btn {
+        margin: 15px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
 } 
