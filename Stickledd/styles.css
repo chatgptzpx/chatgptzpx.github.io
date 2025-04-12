@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #00BCD4;
-    --secondary-color: #008ba3;
+    --primary-color: #FF8C00;
+    --secondary-color: #E67300;
     --background-color: #0a0a0a;
     --card-background: #111111;
     --text-color: #e0e0e0;
@@ -74,13 +74,13 @@ nav ul li a:hover {
     text-align: center;
     padding: 5rem 2rem;
     min-height: calc(100vh - 12rem);
-    background: linear-gradient(rgba(0, 188, 212, 0.1), rgba(0, 139, 163, 0.2));
+    background: linear-gradient(rgba(255, 140, 0, 0.1), rgba(230, 115, 0, 0.2));
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.7);
     font-family: 'Orbitron', sans-serif;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -89,10 +89,10 @@ nav ul li a:hover {
 
 @keyframes glow {
     from {
-        text-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+        text-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
     }
     to {
-        text-shadow: 0 0 15px rgba(0, 188, 212, 0.8), 0 0 20px rgba(0, 188, 212, 0.5);
+        text-shadow: 0 0 15px rgba(255, 140, 0, 0.8), 0 0 20px rgba(255, 140, 0, 0.5);
     }
 }
 
@@ -132,8 +132,8 @@ nav ul li a:hover {
 
 .main-btn:hover {
     transform: translateY(-10px);
-    background-color: rgba(0, 188, 212, 0.15);
-    box-shadow: 0 8px 16px rgba(0, 188, 212, 0.3);
+    background-color: rgba(255, 140, 0, 0.15);
+    box-shadow: 0 8px 16px rgba(255, 140, 0, 0.3);
     border-color: var(--secondary-color);
 }
 
@@ -248,11 +248,9 @@ nav ul li a:hover {
     position: relative;
     width: 100%;
     padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-    margin-bottom: 1.5rem;
-    background-color: #000;
-    border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 1.5rem;
+    aspect-ratio: 16 / 9; /* Добавлено для поддержки 16:9 на мобильных устройствах */
 }
 
 .script-details .video-container iframe,
@@ -262,7 +260,7 @@ nav ul li a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border: none;
 }
 
 .compatibility {
@@ -833,15 +831,37 @@ h2:after {
     background-color: #000;
     border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-.video-container video {
+.video-container video,
+.video-container iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+/* Для устройств */
+.device-gallery .video-container {
+    width: 100%;
+    padding-bottom: 56.25%; /* Возвращаем соотношение 16:9 вместо квадратного */
+    margin: 0 auto 1.5rem;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.device-gallery .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
 }
 
 .download-script {
@@ -952,10 +972,59 @@ h2:after {
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* Улучшенные стили для описаний устройств */
 .device-description {
-    margin-bottom: 2rem;
-    line-height: 1.6;
-    font-size: 1.1rem;
+    margin-bottom: 1.8rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    background: rgba(20, 20, 30, 0.4);
+    padding: 18px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.device-description:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(255, 140, 0, 0.1);
+}
+
+.device-description p {
+    margin-bottom: 0.8rem;
+}
+
+.device-description p:last-child {
+    margin-bottom: 0;
+}
+
+.device-description strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Стили для заголовков секций устройств */
+.device-details h4 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin: 1.8rem 0 1rem;
+    padding-bottom: 8px;
+    position: relative;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.device-details h4:after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), transparent);
+    bottom: 0;
+    left: 0;
 }
 
 .specs-table-container {
@@ -1175,4 +1244,351 @@ h2:after {
 .device-features ul li::before {
     content: "•";
     font-size: 1rem;
+}
+
+.command-examples {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.command-examples li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.command-examples code {
+    display: inline-block;
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: rgba(0, 0, 0, 0.4);
+    color: #FF8C00;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    border-left: 3px solid #FF8C00;
+    margin-right: 10px;
+    flex-grow: 1;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.command-desc {
+    color: #888;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.command-examples li:hover code {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateX(5px);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 140, 0, 0.2);
+}
+
+.command-examples li:hover .command-desc {
+    color: #aaa;
+}
+
+/* Стили для терминала */
+.terminal-container {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.terminal-header {
+    background-color: #333;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+    margin-right: 15px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-close {
+    background-color: #ff5f56;
+}
+
+.terminal-minimize {
+    background-color: #ffbd2e;
+}
+
+.terminal-maximize {
+    background-color: #27c93f;
+}
+
+.terminal-title {
+    color: #ddd;
+    font-size: 0.85rem;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.terminal-content {
+    padding: 15px;
+    background-color: #1a1a1a;
+}
+
+.terminal-welcome {
+    color: #AAA;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.terminal-line {
+    display: block;
+    line-height: 1.4;
+}
+
+.terminal-prompt {
+    color: #FF8C00;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: #FF8C00;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Стили для списка версий */
+.device-versions ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.device-versions li {
+    background: rgba(255, 140, 0, 0.1);
+    border-left: 3px solid #FF8C00;
+    padding: 10px 15px;
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.device-versions li:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 140, 0, 0.2);
+    box-shadow: 0 8px 15px rgba(255, 140, 0, 0.3);
+}
+
+.device-versions li:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #FF8C00, transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.device-versions li:hover:after {
+    transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+    .device-versions ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .device-versions li {
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+/* Эффекты для терминала */
+.terminal-container:hover .terminal-btn {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+/* Стили для функций Marauder */
+.marauder-functions {
+    margin: 20px 0;
+}
+
+.function-category {
+    background-color: rgba(30, 30, 40, 0.7);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.function-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(255, 140, 0, 0.3);
+}
+
+.function-category h5 {
+    background-color: rgba(255, 140, 0, 0.2);
+    color: #FF8C00;
+    padding: 12px 15px;
+    margin: 0;
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    border-left: 3px solid #FF8C00;
+}
+
+.function-group {
+    padding: 15px;
+}
+
+.function-group p {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+.function-group p:last-child {
+    margin-bottom: 0;
+}
+
+.function-group p strong {
+    color: #FF8C00;
+    font-weight: bold;
+}
+
+.function-group p:before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #FF8C00;
+    font-size: 0.8rem;
+}
+
+/* Стили для иконок в заголовках */
+.device-details h4 i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    opacity: 0.9;
+}
+
+/* Стили для списков характеристик */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.feature-list li {
+    position: relative;
+    padding: 8px 0 8px 25px;
+    border-bottom: 1px dashed rgba(255, 140, 0, 0.2);
+    margin-bottom: 8px;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.feature-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Стили для индикатора батареи */
+.battery-indicator {
+    position: relative;
+}
+
+.battery-graphic {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.battery-icon {
+    width: 150px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    margin-right: 20px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+}
+
+.battery-icon:after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 0 3px 3px 0;
+}
+
+.battery-level {
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    bottom: 3px;
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    border-radius: 3px;
+    transition: width 1s ease;
+}
+
+.battery-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
 } 

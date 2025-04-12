@@ -65,6 +65,26 @@
                         <p>Многофункциональное устройство для исследования цифровых систем</p>
                     </div>
                 </div>
+                
+                <div class="device-item" onclick="showDeviceDetails('marauder')">
+                    <div class="device-image">
+                        <img src="assets/marauder.png" alt="ESP32 Marauder v7">
+                    </div>
+                    <div class="device-info">
+                        <h3>ESP32 Marauder v7</h3>
+                        <p>Портативный инструмент для тестирования WiFi и Bluetooth сетей</p>
+                    </div>
+                </div>
+
+                <div class="device-item" onclick="showDeviceDetails('usbkiller')">
+                    <div class="device-image">
+                        <img src="assets/usbkiller.png" alt="USB Killer V4">
+                    </div>
+                    <div class="device-info">
+                        <h3>USB Killer V4</h3>
+                        <p>Устройство для стресс-тестирования аппаратного обеспечения через USB</p>
+                    </div>
+                </div>
             </div>
             
         
@@ -669,6 +689,468 @@
                 </div>
                 
                 <a href="https://shop.flipperzero.one/" class="buy-btn">Купить Flipper Zero</a>
+            </div>
+            
+            <div id="marauder" class="device-details">
+                <div class="device-details-header">
+                    <h3>ESP32 Marauder v7</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('marauder')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/YpVu-UF6k10" title="ESP32 Marauder v7" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div class="device-description">
+                    <p>Marauder - это портативный инструмент для тестирования безопасности, созданный для анализа WiFi и Bluetooth сетей. Устройство оснащено набором инструментов для наступательного и защитного анализа, работающих на ESP32. Версия v7 объединяет все функции v6 и Mini в одном устройстве.</p>
+                </div>
+                
+                <h4>Версии Marauder</h4>
+                <div class="device-versions">
+                    <p>Существует несколько различных версий Marauder, каждая со своими возможностями:</p>
+                    <ul>
+                        <li>ESP32 Marauder v4</li>
+                        <li>ESP32 Marauder v6</li>
+                        <li>ESP32 Marauder Kit</li>
+                        <li>ESP32 Marauder v6.1</li>
+                        <li>ESP32 Marauder Mini</li>
+                        <li>ESP32 LDDB</li>
+                        <li>Flipper Zero WiFi Dev Board Pro</li>
+                        <li>ESP32 Marauder v7</li>
+                    </ul>
+                </div>
+                
+                <h4>Сравнение версий</h4>
+                <div class="specs-table-container">
+                    <table class="specs-table">
+                        <tr>
+                            <th>Функция</th>
+                            <th>v4 (OG)</th>
+                            <th>v6</th>
+                            <th>v6.1</th>
+                            <th>Kit</th>
+                            <th>Mini</th>
+                            <th>Flipper</th>
+                            <th>v7</th>
+                        </tr>
+                        <tr>
+                            <td>Дисплей</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Сенсорный ввод</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Тактильный переключатель</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>SD карта</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Аккумулятор</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅(с Flipper)</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>WiFi</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Bluetooth</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Командная строка</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Монитор пакетов</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Экранная клавиатура</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td>Джойстик-клавиатура</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Захват PMKID</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Деаутентификация</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Raw захват</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Выбор точек доступа</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Ручной ввод SSID</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅(только CLI)</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Обновление через SD</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Встроенный GPS</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Индикатор заряда</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅(с модификацией)</td>
+                            <td>✅(с модификацией)</td>
+                            <td>❌</td>
+                            <td>✅</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4><i class="fas fa-microchip"></i> ESP32 Marauder v7</h4>
+                <div class="device-description">
+                    <p>ESP32 Marauder v7 - это официальное устройство среднего размера с 5-позиционным тактильным переключателем. Оснащено встроенным GPS, управлением LiPo аккумулятором, индикатором заряда и внешними антеннами для 2.4GHz и GPS. Устройство имеет 2.4" ILI9341 экран и 5-позиционный тактильный переключатель для навигации по функциям с помощью джойстика. Marauder v7 полностью управляется через Serial с помощью интерфейса командной строки Marauder.</p>
+                </div>
+
+                <h4><i class="fas fa-battery-full"></i> Питание устройства</h4>
+                <div class="device-description">
+                    <p>Marauder v7 может получать питание из двух источников:</p>
+                    <ul class="feature-list">
+                        <li><strong>USB-питание:</strong> Должно быть 5В</li>
+                        <li><strong>LiPo аккумулятор:</strong> 3.7В 1S с 2-контактным JST-разъемом 2мм</li>
+                    </ul>
+                    <p>Подключите LiPo аккумулятор к встроенному разъему JST. Убедитесь, что полярность аккумулятора соответствует маркировке на плате Marauder v7. При подключенном USB-питании и/или аккумуляторе переключите выключатель питания на левой стороне корпуса в положение ВКЛ. После этого вы должны увидеть загрузочный экран Marauder.</p>
+                </div>
+
+                <h4><i class="fas fa-satellite-dish"></i> Внешние антенны</h4>
+                <div class="device-description">
+                    <p><strong>2.4GHz антенна:</strong> Входящую в комплект антенну 2.4GHz можно снять, чтобы открыть разъем SMA female. Этот разъем примет любую антенну 2.4GHz с разъемом SMA male. На корпусе под разъемом антенны есть маркировка для правильного размещения антенны.</p>
+                    <p><strong>GPS антенна:</strong> Входящую в комплект GPS-антенну можно снять, чтобы открыть разъем SMA female. Этот разъем примет любую GPS/GNSS антенну с разъемом SMA male. На корпусе под разъемом антенны есть маркировка для правильного размещения антенны.</p>
+                </div>
+
+                <h4><i class="fas fa-charging-station"></i> Индикатор заряда аккумулятора</h4>
+                <div class="device-description battery-indicator">
+                    <div class="battery-graphic">
+                        <div class="battery-icon">
+                            <div class="battery-level" style="width: 85%;"></div>
+                        </div>
+                        <div class="battery-value">85%</div>
+                    </div>
+                    <p>Состояние заряда аккумулятора отображается числовым значением в правом верхнем углу экрана на строке состояния.</p>
+                </div>
+
+                <h4>Ключевые особенности</h4>
+                <ul class="device-features">
+                    <li>Возможности ESP32 для работы с WiFi и Bluetooth</li>
+                    <li>Модифицированный esp-idf, обеспечивающий свободу передачи по 802.11</li>
+                    <li>Интегрированный GPS</li>
+                    <li>Два гнезда SMA (female) для подключения WiFi и GPS антенн</li>
+                    <li>Сохранение PCAP-файлов на SD-карту</li>
+                    <li>Встроенная схема зарядки LiPo аккумулятора</li>
+                    <li>Поддержка аккумуляторов 3.7V LiPo</li>
+                    <li>Отсек для аккумулятора в корпусе</li>
+                    <li>Индикатор заряда аккумулятора на экране</li>
+                    <li>2.4" TFT-экран (без сенсорного ввода)</li>
+                    <li>5-позиционный тактильный переключатель для навигации по меню</li>
+                    <li>Переключатель питания</li>
+                    <li>Готов к вардрайвингу сразу после распаковки</li>
+                    <li>Отсутствие сенсорного экрана позволяет использовать больше памяти для хранения данных WiFi/BLE</li>
+                    <li>3D-печатный корпус от AWOK Dynamics</li>
+                    <li>Открытый исходный код аппаратной части и прошивки</li>
+                    <li>Обновление прошивки через SD-карту или USB</li>
+                </ul>
+                
+                <h4>Комплектация</h4>
+                <ul class="device-features">
+                    <li>ESP32 Marauder v7</li>
+                    <li>2.4GHz SMA антенна</li>
+                    <li>GPS SMA антенна</li>
+                </ul>
+                
+                <h4>Основные функции</h4>
+                <div class="marauder-functions">
+                    <div class="function-category">
+                        <h5>WiFi</h5>
+                        <div class="function-group">
+                            <p><strong>WiFi анализаторы:</strong> PMKID-сканирование, анализатор каналов, мониторинг пакетов, вардрайвинг и другие</p>
+                            <p><strong>WiFi атаки:</strong> Beacon Spam, Evil Portal, Probe Request Flood, Deauth Flood и другие</p>
+                        </div>
+                    </div>
+                    
+                    <div class="function-category">
+                        <h5>Bluetooth</h5>
+                        <div class="function-group">
+                            <p><strong>Bluetooth анализаторы:</strong> Bluetooth сниффер, Airtag сниффер, обнаружение скиммеров карт</p>
+                            <p><strong>Bluetooth атаки:</strong> Sour Apple, Swiftpair Spam, Samsung BLE Spam и другие</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Командная строка</h4>
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn terminal-close"></span>
+                            <span class="terminal-btn terminal-minimize"></span>
+                            <span class="terminal-btn terminal-maximize"></span>
+                        </div>
+                        <div class="terminal-title">marauder@esp32:~</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-welcome">
+                            <span class="terminal-line">ESP32 Marauder v7.0</span>
+                            <span class="terminal-line">Для отображения всех команд введите 'help'</span>
+                            <span class="terminal-line">------------------------------------------</span>
+                        </div>
+                        <div class="terminal-prompt">marauder@esp32:~$ <span class="terminal-cursor">_</span></div>
+                        <ul class="command-examples">
+                            <li><code>attack -t beacon -l</code><span class="command-desc">// спам созданными SSID</span></li>
+                            <li><code>attack -t beacon -r</code><span class="command-desc">// спам случайными SSID</span></li>
+                            <li><code>attack -t deauth</code><span class="command-desc">// атака деаутентификации выбранных точек доступа</span></li>
+                            <li><code>sniffpmkid</code><span class="command-desc">// запуск сниффера PMKID</span></li>
+                            <li><code>wardrive</code><span class="command-desc">// запуск вардрайвинга</span></li>
+                            <li><code>scanap</code><span class="command-desc">// сканирование точек доступа WiFi</span></li>
+                            <li><code>scansta</code><span class="command-desc">// сканирование подключенных станций</span></li>
+                            <li><code>select -a</code><span class="command-desc">// выбор всех найденных точек доступа</span></li>
+                            <li><code>clearlist -a</code><span class="command-desc">// очистка списка точек доступа</span></li>
+                            <li><code>reboot</code><span class="command-desc">// перезагрузка устройства</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <a href="https://justcallmekokollc.com/products/esp32-marauder-v7" class="buy-btn">Купить ESP32 Marauder v7</a>
+            </div>
+
+            <div id="usbkiller" class="device-details">
+                <div class="device-details-header">
+                    <h3>USB Killer V4</h3>
+                    <button class="close-details" onclick="closeDeviceDetails('usbkiller')">Закрыть</button>
+                </div>
+                
+                <div class="device-gallery">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/I6bRoSK39io" title="USB Killer V4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div class="device-description">
+                    <p>USB Killer - это устройство, предназначенное для стресс-тестирования аппаратного обеспечения. Принцип работы основан на заборе энергии из USB-порта, её умножении и последующем разряде в линии данных, что обычно приводит к выведению из строя незащищенных устройств.</p>
+                </div>
+                
+                <h4><i class="fas fa-bolt"></i> Принцип работы</h4>
+                <div class="device-description">
+                    <p>Устройство при подключении накапливает электрический заряд от USB-порта, а затем мгновенно разряжает его обратно в порт, создавая высоковольтный импульс. Этот процесс повторяется несколько раз в секунду, вызывая повреждение электронных компонентов, подключенных к USB-контроллеру устройства.</p>
+                </div>
+
+                <h4><i class="fas fa-cubes"></i> Версии USB Killer V4</h4>
+                <div class="device-versions">
+                    <ul>
+                        <li>USB Killer V4 Pro - полный набор функций, включая дистанционное управление</li>
+                        <li>USB Killer V4 Basic - базовая версия с магнитным триггером</li>
+                        <li>USB Killer V4 Classic - классическая версия с режимом "plug & zap"</li>
+                    </ul>
+                </div>
+                
+                <h4><i class="fas fa-cogs"></i> Режимы атаки</h4>
+                <div class="marauder-functions">
+                    <div class="function-category">
+                        <h5>Режимы доставки</h5>
+                        <div class="function-group">
+                            <p><strong>Одиночный импульс:</strong> USB Killer V4 отправляет один импульс (5 разрядов)</p>
+                            <p><strong>Непрерывный импульс:</strong> USB Killer V4 отправляет непрерывные импульсы до остановки</p>
+                        </div>
+                    </div>
+                    
+                    <div class="function-category">
+                        <h5>Способы активации</h5>
+                        <div class="function-group">
+                            <p><strong>Дистанционная активация:</strong> Запуск атаки через пульт дистанционного управления на расстоянии до 100м от устройства</p>
+                            <p><strong>Активация через смартфон:</strong> Управление и запуск атак через приложение для Android и iOS</p>
+                            <p><strong>Атака по таймеру:</strong> Планирование даты и времени активации USB Killer. Устройство может оставаться в спящем режиме без питания более 200 дней</p>
+                            <p><strong>Магнитная активация:</strong> Активация USB Killer с помощью магнита (стильное и скрытное магнитное кольцо в комплекте)</p>
+                            <p><strong>Классический режим:</strong> Активация мгновенно при подключении к USB-порту</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4><i class="fas fa-info-circle"></i> Технические характеристики</h4>
+                <div class="specs-table-container">
+                    <table class="specs-table">
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Выходное напряжение V4</td>
+                            <td>-215В</td>
+                        </tr>
+                        <tr>
+                            <td>Частота импульсов в автономном режиме</td>
+                            <td>1 Гц</td>
+                        </tr>
+                        <tr>
+                            <td>Максимальная продолжительность в автономном режиме</td>
+                            <td>Не ограничена</td>
+                        </tr>
+                        <tr>
+                            <td>Частота импульсов в режиме питания от хоста</td>
+                            <td>8 Гц</td>
+                        </tr>
+                        <tr>
+                            <td>Максимальная продолжительность в режиме питания от хоста</td>
+                            <td>300 циклов</td>
+                        </tr>
+                        <tr>
+                            <td>Время зарядки аккумулятора</td>
+                            <td>2 часа</td>
+                        </tr>
+                        <tr>
+                            <td>Время в режиме ожидания / глубокого сна</td>
+                            <td>150-200 дней</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h4><i class="fas fa-shield-alt"></i> Применение</h4>
+                <div class="device-description">
+                    <p>USB Killer используется для проверки и тестирования защитных систем от перенапряжения в USB-портах. Профессионалы в области кибербезопасности, пентестеры и правоохранительные органы используют это устройство для:</p>
+                    <ul class="feature-list">
+                        <li>Тестирования систем защиты USB-портов</li>
+                        <li>Проверки отказоустойчивости критически важной инфраструктуры</li>
+                        <li>Оценки безопасности медицинского оборудования</li>
+                        <li>Проверки систем контроля доступа на устойчивость к атакам</li>
+                        <li>Демонстрации уязвимостей в рамках обучения по кибербезопасности</li>
+                    </ul>
+                </div>
+                
+                <h4><i class="fas fa-exclamation-triangle"></i> Предупреждение</h4>
+                <div class="device-description">
+                    <p>USB Killer - это профессиональный инструмент, предназначенный исключительно для законного тестирования и образовательных целей. Использование устройства для нанесения ущерба чужому имуществу является незаконным и может привести к уголовной ответственности.</p>
+                    <p>Для безопасного тестирования рекомендуется использовать защитный USB Shield, который блокирует высоковольтные разряды, обеспечивая защиту тестируемого оборудования.</p>
+                </div>
+                
+                <a href="https://usbkill.com/products/usbkill-v4?variant=32836117397586" class="buy-btn">Купить USB Killer V4</a>
             </div>
         </section>
     </main>
