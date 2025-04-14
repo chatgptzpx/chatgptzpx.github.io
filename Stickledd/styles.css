@@ -1702,4 +1702,106 @@ h2:after {
         padding: 10px 20px;
         font-size: 0.9rem;
     }
+}
+
+/* Стили для предварительного просмотра кода */
+.code-preview {
+    background: #1a1a1a;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.code-preview:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.2);
+}
+
+.code-preview pre {
+    margin: 0;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.code-preview code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    white-space: pre;
+    display: block;
+}
+
+/* Подсветка синтаксиса */
+.code-preview code .comment {
+    color: #6a9955;
+}
+
+.code-preview code .keyword {
+    color: #569cd6;
+}
+
+.code-preview code .string {
+    color: #ce9178;
+}
+
+.code-preview code .number {
+    color: #b5cea8;
+}
+
+.code-preview code .function {
+    color: #dcdcaa;
+}
+
+/* Анимация для кода */
+@keyframes codeHighlight {
+    0% { background-color: rgba(255, 140, 0, 0); }
+    50% { background-color: rgba(255, 140, 0, 0.1); }
+    100% { background-color: rgba(255, 140, 0, 0); }
+}
+
+.code-preview:hover code {
+    animation: codeHighlight 2s ease-in-out;
+}
+
+/* Кнопка копирования кода */
+.copy-code-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 140, 0, 0.2);
+    color: var(--primary-color);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.code-preview:hover .copy-code-btn {
+    opacity: 1;
+}
+
+.copy-code-btn:hover {
+    background: rgba(255, 140, 0, 0.4);
+}
+
+/* Адаптивные стили для кода */
+@media (max-width: 768px) {
+    .code-preview {
+        margin: 1rem 0;
+    }
+    
+    .code-preview pre {
+        padding: 1rem;
+    }
+    
+    .code-preview code {
+        font-size: 0.8rem;
+    }
 } 
