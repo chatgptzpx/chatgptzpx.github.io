@@ -569,6 +569,18 @@
             margin-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* Добавляем дополнительные стили для активного состояния деталей */
+        .active-details {
+            animation: pulse 1s;
+            box-shadow: 0 4px 20px rgba(255, 140, 0, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -670,7 +682,7 @@
             </div>
             
             <div class="ai-model-grid">
-                <div class="ai-model-card" onclick="toggleDetails('lechat')">
+                <div class="ai-model-card" id="lechat-card" onclick="toggleDetails('lechat')">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/mistral.png" alt="Mistral AI icon" class="model-icon">
@@ -688,7 +700,7 @@
                     </div>
                 </div>
 
-                <div class="ai-model-card" onclick="toggleDetails('llama4')" style="border-left: 4px solid #0066cc;">
+                <div class="ai-model-card" id="llama4-card" onclick="toggleDetails('llama4')" style="border-left: 4px solid #0066cc;">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/LLAMA.png" alt="Meta AI icon" class="model-icon">
@@ -705,7 +717,7 @@
                     </div>
                 </div>
                 
-                <div class="ai-model-card" onclick="toggleDetails('gemini20')">
+                <div class="ai-model-card" id="gemini20-card" onclick="toggleDetails('gemini20')">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
@@ -721,7 +733,7 @@
                     </div>
                 </div>
                 
-                <div class="ai-model-card" onclick="toggleDetails('gemini25flash')">
+                <div class="ai-model-card" id="gemini25flash-card" onclick="toggleDetails('gemini25flash')">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
@@ -738,7 +750,7 @@
                     </div>
                 </div>
                 
-                <div class="ai-model-card" onclick="toggleDetails('gemini25pro')" style="border-left: 4px solid gold;">
+                <div class="ai-model-card" id="gemini25pro-card" onclick="toggleDetails('gemini25pro')" style="border-left: 4px solid gold;">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
@@ -757,7 +769,7 @@
                     </div>
                 </div>
                 
-                <div class="ai-model-card" onclick="toggleDetails('chatgpt')" style="border-left: 4px solid #10a37f;">
+                <div class="ai-model-card" id="chatgpt-card" onclick="toggleDetails('chatgpt')" style="border-left: 4px solid #10a37f;">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/chatgpt.png" alt="ChatGPT icon" class="model-icon">
@@ -773,7 +785,7 @@
                     </div>
                 </div>
                 
-                <div class="ai-model-card" onclick="toggleDetails('deepseek')" style="border-left: 4px solid #4a6de5;">
+                <div class="ai-model-card" id="deepseek-card" onclick="toggleDetails('deepseek')" style="border-left: 4px solid #4a6de5;">
                     <div class="ai-model-header">
                         <div class="model-header-left">
                             <img src="assets/deepseek.png" alt="DeepSeek icon" class="model-icon">
@@ -791,6 +803,43 @@
                 </div>
             </div>
 
+            <!-- Детальное описание Le Chat -->
+            <div id="lechat" class="ai-model-details" style="border-left: 4px solid #7A69B3;">
+                <h3><img src="assets/mistral.png" alt="Mistral AI icon" class="model-icon"> Le Chat</h3>
+                <div class="ai-model-info">
+                    <div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                        <span style="background-color: gold; color: black; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">РЕКОМЕНДОВАНО</span>
+                        <span style="background-color: rgba(0, 191, 255, 0.2); color: rgb(0, 100, 255); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Самая быстрая</span>
+                        <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">1-е место в тесте</span>
+                    </div>
+                
+                    <p>Le Chat — это мощная языковая модель, разработанная компанией Mistral AI. Модель демонстрирует исключительную скорость работы и эффективность при решении различных задач программирования. В сравнительных тестах Le Chat показывает лучшие результаты по скорости и точности ответов. Модель отмечает, что не имеет личного опыта или самосознания, но предоставляет информацию о том, в каких задачах она может быть полезна.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <p>Возможности модели по языкам программирования (по информации от Le Chat):</p>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Помощь с широким спектром задач, включая анализ данных, машинное обучение, веб-разработку, автоматизацию и работу с различными библиотеками. Объяснение сложных концепций и помощь с отладкой кода.</li>
+                            <li>JavaScript: 8/10 — Помощь с разработкой веб-приложений, использованием фреймворков (React, Vue, Angular), манипуляцией DOM и асинхронным программированием.</li>
+                            <li>C++: 7/10 — Помощь с пониманием синтаксиса, основами ООП, использованием STL и решением алгоритмических задач. Объяснение принципов работы кода.</li>
+                            <li>Java: 7/10 — Помощь с разработкой приложений, использованием библиотек и фреймворков (например, Spring), пониманием многопоточности и работой с базами данных.</li>
+                            <li>C#: 6/10 — Помощь с разработкой приложений для Windows, использованием .NET, пониманием ООП и работой с базами данных.</li>
+                            <li>Ruby: 5/10 — Помощь с базовыми задачами, такими как веб-разработка с использованием Ruby on Rails, и объяснение основных концепций языка.</li>
+                            <li>Go: 4/10 — Помощь с базовыми задачами, такими как написание простых программ и объяснением синтаксиса.</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Le Chat отличается исключительной скоростью работы, точностью ответов и сбалансированностью навыков. Модель особенно эффективна при решении математических и оптимизационных задач, что подтверждается лидирующими позициями в сравнительных тестах. Даёт чёткие, структурированные ответы без лишней информации, что делает её отличным выбором для профессиональных разработчиков.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Модель отмечает, что не может выполнять задачи, требующие физического взаимодействия с оборудованием или специфические оптимизации под конкретные аппаратные платформы. Также имеются ограничения в оптимизации производительности и работе с низкоуровневыми задачами. Le Chat не имеет прямого доступа к интернету и базируется на данных, доступных на момент обучения.</p>
+                    
+                    <a href="https://chat.mistral.ai/" class="try-btn" style="background-color: #7A69B3;">Попробовать Le Chat</a>
+                    <button class="close-details" onclick="closeDetails('lechat')">Закрыть</button>
+                </div>
+            </div>
+            
             <!-- Детальное описание Llama-4 -->
             <div id="llama4" class="ai-model-details" style="border-left: 4px solid #0066cc;">
                 <h3><img src="assets/mistral.png" alt="Meta AI icon" class="model-icon"> Llama-4-Scout-17B-16E-Instruct</h3>
@@ -1021,22 +1070,85 @@
 
     <script>
         function toggleDetails(id) {
+            console.log("Функция toggleDetails вызвана с ID:", id);
             const detailsElement = document.getElementById(id);
+            
+            if (!detailsElement) {
+                console.error("Элемент с ID '" + id + "' не найден на странице!");
+                return;
+            }
             
             const allDetails = document.querySelectorAll('.ai-model-details');
             allDetails.forEach(element => {
                 element.style.display = 'none';
+                element.classList.remove('active-details');
             });
             
+            console.log("Устанавливаем display: block для элемента с ID:", id);
             detailsElement.style.display = 'block';
             
             detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Добавление класса для лучшей видимости
+            detailsElement.classList.add('active-details');
         }
         
         function closeDetails(id) {
             const detailsElement = document.getElementById(id);
-            detailsElement.style.display = 'none';
+            if (detailsElement) {
+                detailsElement.style.display = 'none';
+                detailsElement.classList.remove('active-details');
+            }
         }
+
+        // Добавляем обработчики событий при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Страница загружена, инициализация обработчиков событий");
+            
+            // Добавляем прямые обработчики кликов для всех карточек моделей
+            document.getElementById('lechat-card').addEventListener('click', function() {
+                toggleDetails('lechat');
+            });
+            
+            document.getElementById('llama4-card').addEventListener('click', function() {
+                toggleDetails('llama4');
+            });
+            
+            document.getElementById('gemini20-card').addEventListener('click', function() {
+                toggleDetails('gemini20');
+            });
+            
+            document.getElementById('gemini25flash-card').addEventListener('click', function() {
+                toggleDetails('gemini25flash');
+            });
+            
+            document.getElementById('gemini25pro-card').addEventListener('click', function() {
+                toggleDetails('gemini25pro');
+            });
+            
+            document.getElementById('chatgpt-card').addEventListener('click', function() {
+                toggleDetails('chatgpt');
+            });
+            
+            document.getElementById('deepseek-card').addEventListener('click', function() {
+                toggleDetails('deepseek');
+            });
+            
+            // Добавляем обработчики для кнопок закрытия
+            const closeButtons = document.querySelectorAll('.close-details');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    // Предотвращаем всплытие события
+                    event.stopPropagation();
+                    
+                    // Ищем ближайший родительский блок с описанием
+                    const detailBlock = this.closest('.ai-model-details');
+                    if (detailBlock && detailBlock.id) {
+                        closeDetails(detailBlock.id);
+                    }
+                });
+            });
+        });
 
         function toggleComparison() {
             const comparisonSection = document.getElementById('comparison-section');
