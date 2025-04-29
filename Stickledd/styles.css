@@ -179,7 +179,7 @@ nav ul li a:hover {
 .telegram-btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    background-color: var(--primary-color);
+    background-color: #569cd6;
     color: white;
     text-decoration: none;
     border-radius: 5px;

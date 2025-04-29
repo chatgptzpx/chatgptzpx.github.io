@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STICKLEDD - PC Simulator Конвертер</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .tools-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .file-processor {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .tool-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .tool-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .code-preview {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tool-btn {
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+        
+        .tool-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .tool-btn i {
+            margin-right: 10px;
+        }
+        
+        .file-input-container {
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        #file-input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .file-input-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            background: var(--card-background);
+            color: var(--primary-color);
+            border-radius: 16px;
+            box-shadow: 8px 8px 16px rgba(0,0,0,0.2), 
+                       -8px -8px 16px rgba(255,255,255,0.05);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 17px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            min-width: 240px;
+        }
+        
+        .file-input-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 140, 0, 0.2), 
+                transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .file-input-label:hover {
+            transform: translateY(-5px);
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-color), #ff9f00);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .file-input-label:hover::before {
+            left: 100%;
+        }
+        
+        .file-input-label:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+        
+        .file-input-label i {
+            margin-right: 12px;
+            font-size: 22px;
+            background: linear-gradient(45deg, var(--primary-color), #ff9f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover i {
+            -webkit-text-fill-color: white;
+            transform: scale(1.2) rotate(-10deg);
+        }
+        
+        #output-area {
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 20px auto;
+            background-color: #1a1a1a;
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 15px;
+            font-family: monospace;
+            resize: none;
+        }
+        
+        .output-title {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .save-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: #444;
+            transform: translateY(-2px);
+        }
+        
+        .back-btn i {
+            margin-right: 8px;
+        }
+        
+        #file-info {
+            margin-top: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 12px;
+            display: block;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            background-color: rgba(255, 140, 0, 0.05);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1), 
+                        inset -2px -2px 5px rgba(255,255,255,0.05);
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content;
+            min-width: 200px;
+        }
+        
+        #file-info.show {
+            opacity: 1;
+            max-height: 50px;
+            padding: 10px 20px;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">STICKLEDD</div>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="scripts.html">Скрипты</a></li>
+                <li><a href="tutorials.html">Туториалы</a></li>
+                <li><a href="devices.html">Устройства</a></li>
+                <li><a href="tools.html">Инструменты</a></li>
+                <li><a href="AI.html">ИИ Модели</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="pcsim-tool" class="content-section">
+            <h2>PC Simulator Save Decrypter</h2>
+            
+            <a href="tools.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Назад
+            </a>
+            
+            <div class="tools-container">
+                <div class="file-processor">
+                    <h3 class="tool-title">PC Save Decrypter</h3>
+                    <p class="tool-description">
+                        Здесь вы можете расшифровать сейвы из игры PC Simulator. Которые зашифровали в <a href="cryptor.html">'Cryptor'</a>, или получили в игре.
+                    </p>
+                    
+                    <div class="file-input-container">
+                        <input type="file" id="file-input" onchange="updateFileInfo()">
+                        <label for="file-input" class="file-input-label">
+                            <i class="fas fa-cloud-upload-alt"></i> Выберите сейв файл
+                        </label>
+                        <div id="file-info"></div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button onclick="decryptFile()" class="tool-btn">
+                            <i class="fas fa-lock-open"></i> DECRYPT
+                        </button>
+                    </div>
+                    
+                    <h3 class="output-title">Результат</h3>
+                    <textarea id="output-area" spellcheck="false" autocomplete="off"></textarea>                    
+                    <p style="margin-top: 10px; margin-bottom: 10px; color: #ff8c00; font-weight: bold; text-align: center;">
+                        ПОСЛЕ РАСШИФРОВКИ, СКАЧАЙТЕ, ИЛИ СКОПИРУЙТЕ ТЕКСТ, НАЖМИТЕ НА КНОПКУ СНИЗУ "ЗАШИФРОВАТЬ", И ВСТАВЯЙТЕ ТЕКСТ В ПОЛЕ ВВОДА (ИЛИ ВЫБЕРИТЕ ФАЙЛ) ПОСЛЕ ЭТОГО НАЖМИТЕ НА КНОПКУ ЗАШИФРОВАТЬ, И ЗАГРУЖАЙТЕ ФАЙЛ В ИГРУ
+                    </p>
+                    
+                    <div class="action-buttons">
+                        <button onclick="window.location.href='cryptor.html'" class="tool-btn" style="background-color: #ff8c00;">
+                            <i class="fas fa-lock"></i> ЗАШИФРОВАТЬ
+                        </button>
+                        <button onclick="saveOutput()" class="tool-btn save-btn">
+                            <i class="fas fa-download"></i> Скачать сейв
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 20px; text-align: center;">
+                        <a href="https://t.me/Stickledd" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
+                            <i class="fas fa-question-circle"></i> Не получается? Пишите в ТГ! Поможем!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 chatgothvh. Сделно с любовью ❤.</p>
+        <a href="https://t.me/Stickledd" class="telegram-btn">
+            <i class="fab fa-telegram"></i> STICKLEDD
+        </a>
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="https://t.me/Stickledd" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
+                <i class="fas fa-question-circle"></i> Не получается? Пишите в ТГ! Поможем!
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const XOR_KEY = 0x81;
+        let currentFileName = '';
+        let processedOutput = '';
+        let outputType = '';
+
+        function updateFileInfo() {
+            const fileInput = document.getElementById('file-input');
+            const fileInfo = document.getElementById('file-info');
+            
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileInfo.textContent = `Выбран файл: ${file.name} (${formatFileSize(file.size)})`;
+                fileInfo.classList.add('show');
+            } else {
+                fileInfo.textContent = '';
+                fileInfo.classList.remove('show');
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' байт';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + ' КБ';
+            else return (bytes / 1048576).toFixed(2) + ' МБ';
+        }
+
+        function decryptFile() {
+            const fileInput = document.getElementById('file-input');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                currentFileName = file.name.replace('.pc', '.json');
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const content = event.target.result;
+                        
+                        let decrypted = '';
+                        for (let i = 0; i < content.length; i++) {
+                            decrypted += String.fromCharCode(content.charCodeAt(i) ^ XOR_KEY);
+                        }
+                        
+                        document.getElementById('output-area').value = decrypted;
+                        processedOutput = decrypted;
+                        outputType = 'json';
+                    } catch (error) {
+                        alert('Ошибка при расшифровке файла: ' + error.message);
+                    }
+                };
+                
+                reader.onerror = function() {
+                    alert('Ошибка при чтении файла');
+                };
+                
+                reader.readAsText(file);
+            } else {
+                alert("Пожалуйста, выберите файл.");
+            }
+        }
+
+        function encryptFile() {
+            const fileInput = document.getElementById('file-input');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                currentFileName = file.name.replace('.json', '.pc');
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const content = event.target.result;
+                        
+                        let encrypted = '';
+                        for (let i = 0; i < content.length; i++) {
+                            encrypted += String.fromCharCode(content.charCodeAt(i) ^ XOR_KEY);
+                        }
+                        
+                        document.getElementById('output-area').value = "Файл успешно зашифрован. Нажмите 'Сохранить результат' для скачивания.";
+                        processedOutput = encrypted;
+                        outputType = 'pc';
+                    } catch (error) {
+                        alert('Ошибка при шифровании файла: ' + error.message);
+                    }
+                };
+                
+                reader.onerror = function() {
+                    alert('Ошибка при чтении файла');
+                };
+                
+                reader.readAsText(file);
+            } else {
+                alert("Пожалуйста, выберите файл.");
+            }
+        }
+        
+        function saveOutput() {
+            if (!processedOutput) {
+                alert("Нечего сохранять. Сначала зашифруйте или расшифруйте файл.");
+                return;
+            }
+            
+            let blob;
+            if (outputType === 'json') {
+                blob = new Blob([processedOutput], { type: 'application/json' });
+            } else {
+                blob = new Blob([processedOutput], { type: 'application/octet-stream' });
+            }
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html> 
