@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STICKLEDD - ИИ Модели</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .ai-model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .content-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .ai-model-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ai-model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+        }
+        
+        .ai-model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .ai-model-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ai-model-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .model-type {
+            background-color: rgba(255, 140, 0, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .ai-model-preview {
+            position: relative;
+            z-index: 1;
+            margin-top: auto;
+        }
+        
+        .ai-model-preview p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        .model-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .model-header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .ai-model-details {
+            display: none;
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.4);
+            margin-top: 2rem;
+            animation: fadeIn 0.5s;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .ai-model-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .ai-model-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-model-info p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .model-features {
+            margin: 1.5rem 0;
+        }
+        
+        .model-features h4 {
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            border-bottom: 1px solid rgba(255, 140, 0, 0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+        
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        
+        .feature-list li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        
+        .model-comparison {
+            width: 100%;
+            margin: 2rem 0;
+            border-collapse: collapse;
+        }
+        
+        .model-comparison th {
+            background-color: rgba(255, 140, 0, 0.15);
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .model-comparison td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .model-comparison tr:hover {
+            background-color: rgba(255, 140, 0, 0.05);
+        }
+        
+        .try-btn {
+            display: inline-block;
+            padding: 0.7rem 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .try-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .close-details {
+            display: inline-block;
+            padding: 0.7rem 1.2rem;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .close-details:hover {
+            background-color: #444;
+        }
+        
+        @media (max-width: 768px) {
+            .ai-model-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .model-type {
+                margin-top: 0.5rem;
+            }
+            
+            .model-comparison {
+                font-size: 0.9rem;
+            }
+            
+            .model-comparison th, .model-comparison td {
+                padding: 0.6rem;
+            }
+            
+            .ai-model-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .ai-model-comparison-section {
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .comparison-toggle-button {
+            width: 90%;
+            max-width: 800px;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .comparison-toggle-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .comparison-toggle-button.active {
+            background-color: #3e8e41;
+        }
+
+        .comparison-toggle-button i {
+            transition: transform 0.3s;
+        }
+
+        .comparison-toggle-button.active i {
+            transform: rotate(180deg);
+        }
+
+        #comparison-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #comparison-section.visible {
+            opacity: 1;
+        }
+        
+        .comparison-example {
+            margin-top: 1rem;
+            color: var(--text-color);
+        }
+        
+        .math-formula {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            margin: 0 0.2em;
+        }
+        
+        .numerator, .denominator {
+            display: block;
+        }
+        
+        .numerator {
+            border-bottom: 1px solid;
+            padding: 0 0.2em;
+        }
+        
+        .denominator {
+            padding: 0 0.2em;
+        }
+        
+        .comparison-results {
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-results table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: var(--card-background);
+        }
+        
+        .comparison-results th {
+            background-color: rgba(255, 140, 0, 0.15);
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 0.8rem;
+        }
+        
+        .comparison-results td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+        }
+        
+        .comparison-results tr:hover {
+            background-color: rgba(255, 140, 0, 0.05);
+        }
+        
+        .comparison-results h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .comparison-btn {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            margin: 2rem 0;
+            background: var(--card-background);
+            color: var(--text-color);
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border-left: 4px solid var(--primary-color);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .comparison-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 140, 0, 0.2);
+        }
+        
+        .comparison-btn i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .comparison-button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        
+        .comparison-toggle-button {
+            width: 90%;
+            max-width: 800px;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comparison-toggle-button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .comparison-toggle-button i {
+            transition: transform 0.3s;
+        }
+        
+        .comparison-toggle-button.active i {
+            transform: rotate(180deg);
+        }
+        
+        #comparison-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        #comparison-section.visible {
+            display: block;
+            opacity: 1;
+            animation: fadeInUp 0.8s ease-in-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стили для кнопки сравнения */
+        .comparison-button {
+            width: 100%;
+            background-color: #4a6de5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-button:hover {
+            background-color: #3a5bd0;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .comparison-button.active {
+            background-color: #2c4ca6;
+        }
+
+        .comparison-button .fa-chevron-down {
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-button.active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Стили для секции сравнения */
+        .comparison-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.3s ease;
+            opacity: 0;
+            padding: 0;
+            margin: 0;
+            border-radius: 10px;
+            background-color: var(--card-background);
+        }
+
+        .comparison-section.visible {
+            max-height: 3000px;
+            opacity: 1;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .math-formula p {
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .math-formula strong {
+            color: var(--primary-color);
+        }
+
+        .ai-model-comparison-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Стили для кнопки Telegram */
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 5px;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .telegram-link:hover {
+            background-color: #0099e6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .telegram-link i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background-color: var(--card-background);
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Добавляем дополнительные стили для активного состояния деталей */
+        .active-details {
+            animation: pulse 1s;
+            box-shadow: 0 4px 20px rgba(255, 140, 0, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">STICKLEDD</div>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="scripts.html">Скрипты</a></li>
+                <li><a href="tutorials.html">Туториалы</a></li>
+                <li><a href="devices.html">Устройства</a></li>
+                <li><a href="tools.html">Инструменты</a></li>
+                <li><a href="AI.html">ИИ Модели</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="ai-models" class="content-section">
+            <h2>ИИ Модели</h2>
+            <p>Здесь вы найдете описания различных моделей искусственного интеллекта, и рекомендации по применению.</p>
+            
+            <div class="comparison-button-container">
+                <button id="comparison-toggle-button" class="comparison-toggle-button" onclick="toggleComparison()">
+                    Посмотреть сравнение моделей на практическом примере <i class="fa fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div id="comparison-section" class="ai-model-comparison-section">
+                <h2>Сравнение моделей на практическом примере</h2>
+                <div class="comparison-example">
+                    <h4>Задача: Оптимизация функции многомерной области с ограничениями</h4>
+                    <p>Нам дана функция f(x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>), которая представляет собой сложную многомерную нелинейную функцию, и необходимо найти её минимум при определённых ограничениях.</p>
+                    
+                    <div class="math-formula">
+                        <p><strong>Функция:</strong></p>
+                        <p>f(x<sub>1</sub>,x<sub>2</sub>)=x<sub>1</sub><sup>2</sup>+x<sub>2</sub><sup>2</sup>+sin(x<sub>1</sub>+x<sub>2</sub>)+
+                        <span class="fraction">
+                            <span class="numerator">x<sub>1</sub>x<sub>2</sub></span>
+                            <span class="denominator">x<sub>1</sub><sup>2</sup>+x<sub>2</sub><sup>2</sup></span>
+                        </span>
+                        </p>
+                        
+                        <p><strong>Ограничения:</strong></p>
+                        <p>g<sub>1</sub>(x<sub>1</sub>,x<sub>2</sub>)=x<sub>1</sub>+x<sub>2</sub>−3=0</p>
+                        <p>g<sub>2</sub>(x<sub>1</sub>,x<sub>2</sub>)=x<sub>1</sub><sup>2</sup>+x<sub>2</sub><sup>2</sup>−4≤0</p>
+                    </div>
+                    
+                    <div class="comparison-results">
+                        <h4>Результаты сравнения:</h4>
+                        <table class="model-comparison">
+                            <thead>
+                                <tr>
+                                    <th>Модель</th>
+                                    <th>Время выполнения (сек)</th>
+                                    <th>Комментарий</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. Le Chat (Mistral AI)</td>
+                                    <td>3.76</td>
+                                    <td>Самое быстрое решение</td>
+                                </tr>
+                                <tr>
+                                    <td>2. Llama-4-Scout-17B-16E-Instruct</td>
+                                    <td>4.22</td>
+                                    <td>Объяснил подход</td>
+                                </tr>
+                                <tr>
+                                    <td>3. Gemini 2.0 Flash</td>
+                                    <td>13.27</td>
+                                    <td>Объяснил подход, но с меньшей детализацией</td>
+                                </tr>
+                                <tr>
+                                    <td>4. Gemini 2.5 Flash</td>
+                                    <td>15.50-15.90</td>
+                                    <td>Подробно расписал пример и объяснил подход</td>
+                                </tr>
+                                <tr>
+                                    <td>5. ChatGPT</td>
+                                    <td>19.83</td>
+                                    <td>Запустил код для решения задачи</td>
+                                </tr>
+                                <tr>
+                                    <td>6. DeepSeek Chat</td>
+                                    <td>1.25.10</td>
+                                    <td>Не решил (расписал)</td>
+                                </tr>
+                                <tr>
+                                    <td>7. Gemini 2.5 Pro</td>
+                                    <td>-</td>
+                                    <td>Закончился лимит запросов</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="close-details" onclick="toggleComparison()">Закрыть</button>
+                </div>
+            </div>
+            
+            <div class="ai-model-grid">
+                <div class="ai-model-card" id="lechat-card" onclick="toggleDetails('lechat')">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/mistral.png" alt="Mistral AI icon" class="model-icon">
+                            <h3>Le Chat</h3>
+                        </div>
+                        <span class="model-type">Mistral AI</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background-color: gold; color: black; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">РЕКОМЕНДОВАНО</span>
+                            <span style="background-color: rgba(0, 191, 255, 0.2); color: rgb(0, 100, 255); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Самая быстрая</span>
+                            <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">1-е место в тесте</span>
+                        </div>
+                        <p>Эффективная языковая модель от Mistral AI с хорошими навыками программирования и балансом между различными задачами.</p>
+                    </div>
+                </div>
+
+                <div class="ai-model-card" id="llama4-card" onclick="toggleDetails('llama4')" style="border-left: 4px solid #0066cc;">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/LLAMA.png" alt="Meta AI icon" class="model-icon">
+                            <h3>Llama-4-Scout</h3>
+                        </div>
+                        <span class="model-type">Meta AI</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background-color: rgba(0, 102, 204, 0.2); color: rgb(0, 102, 204); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Быстрый отклик</span>
+                            <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">2-е место в тесте</span>
+                        </div>
+                        <p>Мощная открытая модель от Meta AI с отличным балансом между скоростью работы и качеством ответов.</p>
+                    </div>
+                </div>
+                
+                <div class="ai-model-card" id="gemini20-card" onclick="toggleDetails('gemini20')">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
+                            <h3>Gemini 2.0 Flash</h3>
+                        </div>
+                        <span class="model-type">Google</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: inline-block;">
+                            <span style="background-color: rgba(255, 140, 0, 0.2); color: rgb(255, 140, 0); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Отличное объяснение</span>
+                        </div>
+                        <p>Большая языковая модель от Google с высокой компетенцией в области понимания и генерации кода.</p>
+                    </div>
+                </div>
+                
+                <div class="ai-model-card" id="gemini25flash-card" onclick="toggleDetails('gemini25flash')">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
+                            <h3>Gemini 2.5 Flash</h3>
+                        </div>
+                        <span class="model-type">Google</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Лучшая для Python</span>
+                            <span style="background-color: rgba(100, 200, 100, 0.2); color: rgb(60, 160, 60); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Лучшая для повседневных задач</span>
+                        </div>
+                        <p>Экспериментальная модель с улучшенным пониманием программного кода и широкими возможностями.</p>
+                    </div>
+                </div>
+                
+                <div class="ai-model-card" id="gemini25pro-card" onclick="toggleDetails('gemini25pro')" style="border-left: 4px solid gold;">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/gemini.png" alt="Gemini icon" class="model-icon">
+                            <h3>Gemini 2.5 Pro</h3>
+                        </div>
+                        <span class="model-type">Google</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem;"> 
+                        </div>
+                        <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background-color: rgba(0, 150, 255, 0.2); color: rgb(0, 150, 255); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Лучшая для кодинга</span>
+                            <span style="background-color: rgba(147, 112, 219, 0.2); color: rgb(147, 112, 219); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Универсальный выбор</span>
+                        </div>
+                        <p>Продвинутая экспериментальная модель с глубоким пониманием кода и превосходными навыками программирования.</p>
+                    </div>
+                </div>
+                
+                <div class="ai-model-card" id="chatgpt-card" onclick="toggleDetails('chatgpt')" style="border-left: 4px solid #10a37f;">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/chatgpt.png" alt="ChatGPT icon" class="model-icon">
+                            <h3>ChatGPT</h3>
+                        </div>
+                        <span class="model-type">OpenAI</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            <span style="background-color: rgba(100, 100, 255, 0.2); color: rgb(100, 100, 255); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Лучшая для C++</span>
+                        </div>
+                        <p>Популярная языковая модель от OpenAI с высокими навыками программирования и способностью решать широкий спектр задач.</p>
+                    </div>
+                </div>
+                
+                <div class="ai-model-card" id="deepseek-card" onclick="toggleDetails('deepseek')" style="border-left: 4px solid #4a6de5;">
+                    <div class="ai-model-header">
+                        <div class="model-header-left">
+                            <img src="assets/deepseek.png" alt="DeepSeek icon" class="model-icon">
+                            <h3>DeepSeek Chat</h3>
+                        </div>
+                        <span class="model-type">DeepSeek AI</span>
+                    </div>
+                    <div class="ai-model-preview">
+                        <div style="margin-bottom: 10px; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+                            <span style="background-color: rgba(74, 109, 229, 0.2); color: rgb(74, 109, 229); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Хорошо документирует</span>
+                            <span style="background-color: rgba(169, 169, 169, 0.2); color: rgb(105, 105, 105); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">Детальные объяснения</span>
+                        </div>
+                        <p>Мощная модель на основе DeepSeek-V3 с хорошими навыками программирования и широким набором возможностей.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Детальное описание Le Chat -->
+            <div id="lechat" class="ai-model-details" style="border-left: 4px solid #7A69B3;">
+                <h3><img src="assets/mistral.png" alt="Mistral AI icon" class="model-icon"> Le Chat</h3>
+                <div class="ai-model-info">
+                    <div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                        <span style="background-color: gold; color: black; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">РЕКОМЕНДОВАНО</span>
+                        <span style="background-color: rgba(0, 191, 255, 0.2); color: rgb(0, 100, 255); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Самая быстрая</span>
+                        <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">1-е место в тесте</span>
+                    </div>
+                
+                    <p>Le Chat — это мощная языковая модель, разработанная компанией Mistral AI. Модель демонстрирует исключительную скорость работы и эффективность при решении различных задач программирования. В сравнительных тестах Le Chat показывает лучшие результаты по скорости и точности ответов. Модель отмечает, что не имеет личного опыта или самосознания, но предоставляет информацию о том, в каких задачах она может быть полезна.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <p>Возможности модели по языкам программирования (по информации от Le Chat):</p>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Помощь с широким спектром задач, включая анализ данных, машинное обучение, веб-разработку, автоматизацию и работу с различными библиотеками. Объяснение сложных концепций и помощь с отладкой кода.</li>
+                            <li>JavaScript: 8/10 — Помощь с разработкой веб-приложений, использованием фреймворков (React, Vue, Angular), манипуляцией DOM и асинхронным программированием.</li>
+                            <li>C++: 7/10 — Помощь с пониманием синтаксиса, основами ООП, использованием STL и решением алгоритмических задач. Объяснение принципов работы кода.</li>
+                            <li>Java: 7/10 — Помощь с разработкой приложений, использованием библиотек и фреймворков (например, Spring), пониманием многопоточности и работой с базами данных.</li>
+                            <li>C#: 6/10 — Помощь с разработкой приложений для Windows, использованием .NET, пониманием ООП и работой с базами данных.</li>
+                            <li>Ruby: 5/10 — Помощь с базовыми задачами, такими как веб-разработка с использованием Ruby on Rails, и объяснение основных концепций языка.</li>
+                            <li>Go: 4/10 — Помощь с базовыми задачами, такими как написание простых программ и объяснением синтаксиса.</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Le Chat отличается исключительной скоростью работы, точностью ответов и сбалансированностью навыков. Модель особенно эффективна при решении математических и оптимизационных задач, что подтверждается лидирующими позициями в сравнительных тестах. Даёт чёткие, структурированные ответы без лишней информации, что делает её отличным выбором для профессиональных разработчиков.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Модель отмечает, что не может выполнять задачи, требующие физического взаимодействия с оборудованием или специфические оптимизации под конкретные аппаратные платформы. Также имеются ограничения в оптимизации производительности и работе с низкоуровневыми задачами. Le Chat не имеет прямого доступа к интернету и базируется на данных, доступных на момент обучения.</p>
+                    
+                    <a href="https://chat.mistral.ai/" class="try-btn" style="background-color: #7A69B3;">Попробовать Le Chat</a>
+                    <button class="close-details" onclick="closeDetails('lechat')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание Llama-4 -->
+            <div id="llama4" class="ai-model-details" style="border-left: 4px solid #0066cc;">
+                <h3><img src="assets/mistral.png" alt="Meta AI icon" class="model-icon"> Llama-4-Scout-17B-16E-Instruct</h3>
+                <div class="ai-model-info">
+                    <div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                        <span style="background-color: rgba(0, 102, 204, 0.2); color: rgb(0, 102, 204); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Быстрый отклик</span>
+                        <span style="background-color: rgba(255, 99, 71, 0.2); color: rgb(255, 99, 71); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">2-е место в тесте</span>
+                        <span style="background-color: rgba(50, 205, 50, 0.2); color: rgb(50, 150, 50); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Открытая модель</span>
+                    </div>
+                
+                    <p>Llama-4-Scout-17B-16E-Instruct — современная открытая языковая модель, разработанная компанией Meta AI. Модель основана на архитектуре Llama 4 и оптимизирована для инструкций. Отличается эффективным балансом между скоростью работы и качеством ответов, хорошо подходит для работы с кодом и объяснения сложных концепций.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <p>Модель оценивает свои навыки и знания в области программирования по шкале от 1 до 10, основываясь на тренировочных данных:</p>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — глубоко знаком с синтаксисом, может решать задачи на анализ данных, работать с библиотеками (NumPy, pandas, scikit-learn и др.), а также с веб-разработкой (Flask, Django). Имеет опыт работы с высоконагруженными системами и асинхронным кодом, но глубокая оптимизация может быть не сильной стороной.</li>
+                            <li>JavaScript: 8.5/10 — хорош в базовых и средних задачах, знает фреймворки (React, Vue, Angular), а также Node.js для серверной разработки. Понимает управление состоянием и асинхронные операции, но сложные микрооптимизации или низкоуровневые детали могут представлять некоторую сложность.</li>
+                            <li>C++: 7/10 — знает синтаксис, понимает основы ООП и STL. Может выполнять задачи средней сложности, но проблемы могут возникать с оптимизацией памяти, многопоточностью и низкоуровневыми задачами.</li>
+                            <li>Java: 8/10 — имеет хорошее представление о синтаксисе, ООП и основных библиотеках. Есть опыт работы с Spring и Hibernate, но глубокая настройка производительности или специфические enterprise-решения могут быть не сильной стороной.</li>
+                            <li>C#: 7.5/10 — знаком с синтаксисом, понимает основы ООП и работу с .NET фреймворками. Имеет опыт работы с WPF и ASP.NET, но низкоуровневая оптимизация и некоторые аспекты многопоточности могут быть сложными.</li>
+                            <li>SQL: 7/10 — генерация стандартных запросов, объединения, подзапросы, базовая оптимизация</li>
+                            <li>Rust: 6/10 — базовое понимание системы владения (ownership), основные конструкции языка</li>
+                            <li>Go: 6/10 — работа с горутинами и каналами, основные пакеты стандартной библиотеки</li>
+                            <li>HTML/CSS: 7/10 — уверенное знание семантической верстки, базовых принципов дизайна, флексбоксов и гридов</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Llama-4-Scout демонстрирует высокую скорость работы и эффективные ответы на широкий круг задач. Особенно хорошо справляется с объяснением алгоритмов и программных концепций. Навыки разносторонни и позволяют решать широкий спектр задач в области программирования. Как открытая модель, может быть развернута локально, что обеспечивает приватность данных и независимость от внешних сервисов.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Как и другие языковые модели, Llama-4 не имеет прямого доступа к интернету и может предоставлять устаревшую информацию. В некоторых узкоспециализированных областях может уступать более крупным моделям. Может генерировать "галлюцинации" при работе с неоднозначными запросами. Также могут возникать сложности с низкоуровневой оптимизацией, настройкой производительности высоконагруженных систем или специфическими аспектами enterprise-разработки.</p>
+                    
+                    <a href="https://llama.meta.com/" class="try-btn" style="background-color: #0066cc;">Узнать о Llama</a>
+                    <button class="close-details" onclick="closeDetails('llama4')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание Gemini 2.0 Flash -->
+            <div id="gemini20" class="ai-model-details">
+                <h3><img src="assets/gemini.png" alt="Gemini icon" class="model-icon"> Gemini 2.0 Flash</h3>
+                <div class="ai-model-info">
+                    <p>Большая языковая модель, разработанная Google, обладающая уникальным набором навыков в области программирования. Модель отличается высокой компетенцией в понимании и генерации кода на различных языках программирования.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Обширные знания синтаксиса Python и его экосистемы (Pandas, NumPy, TensorFlow, PyTorch, Flask, Django)</li>
+                            <li>JavaScript: 8/10 — Хорошее знание клиентского и серверного JavaScript (React, Vue, Angular, Node.js)</li>
+                            <li>Java: 7/10 — Хорошее понимание синтаксиса Java, ООП и основных библиотек</li>
+                            <li>C++: 6/10 — Базовое знание синтаксиса, управления памятью и STL</li>
+                            <li>C#: 7/10 — Понимание синтаксиса C# и платформы .NET</li>
+                            <li>SQL: 8/10 — Отличное понимание SQL и различных диалектов</li>
+                            <li>HTML/CSS: 9/10 — Глубокое понимание современных стандартов и подходов к верстке</li>
+                            <li>Go, Swift, Kotlin, PHP: 5-7/10 — Базовые знания синтаксиса</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Способность понимать, генерировать и объяснять код на различных языках, а также обширные знания о различных концепциях и библиотеках программирования.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Отсутствие практического опыта разработки и отладки сложных систем в реальном времени, а также глубокого понимания тонкостей производительности в специфических промышленных сценариях.</p>
+                    
+                    <a href="https://gemini.google.com/" class="try-btn">Попробовать Gemini</a>
+                    <button class="close-details" onclick="closeDetails('gemini20')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание Gemini 2.5 Flash -->
+            <div id="gemini25flash" class="ai-model-details">
+                <h3><img src="assets/gemini.png" alt="Gemini icon" class="model-icon"> Gemini 2.5 Flash (Experimental)</h3>
+                <div class="ai-model-info">
+                    <p>Большая языковая модель, обученная на огромном массиве текстовых данных, включая исходный код на множестве языков. Модель не пишет код в привычном смысле, не запускает его и не отлаживает в реальной среде, но предлагает высокий уровень понимания и генерации кода.</p>
+                    
+                    <div class="model-features">
+                        <h4>Основные возможности:</h4>
+                        <ul class="feature-list">
+                            <li>Понимание синтаксиса и семантики различных языков программирования</li>
+                            <li>Генерация кода на основе примеров и описаний</li>
+                            <li>Объяснение принципов работы языков, библиотек, алгоритмов и паттернов</li>
+                            <li>Поиск синтаксических и распространенных логических ошибок</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <ul class="feature-list">
+                            <li>Python: 8.5/10 — Отличное знание синтаксиса и популярных библиотек (NumPy, Pandas, Flask, Django)</li>
+                            <li>JavaScript: 8/10 — Хорошее понимание DOM, фронтенда и бэкенда (Node.js, React, Vue, Angular)</li>
+                            <li>C++: 6.5/10 — Знание синтаксиса, ООП и STL</li>
+                            <li>Java: 7/10 — Хорошее знакомство с синтаксисом, ООП и основными библиотеками</li>
+                            <li>SQL: 8.5/10 — Глубокое понимание различных диалектов и сложных запросов</li>
+                            <li>HTML/CSS: 9/10 — Превосходное знание возможностей разметки и стилей</li>
+                            <li>Go: 6/10 — Базовый синтаксис, концепции конкурентности (goroutines, channels)</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Отлично справляется с типичными задачами программирования, хорошо представленными в тренировочных данных. Может помочь объяснить концепции, предложить решения или написать фрагменты кода для широкого спектра задач.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Не имеет практического опыта разработки, не может заменить опытного разработчика, обладающего интуицией. Ограниченные возможности в отладке кода, оптимизации производительности и проектировании архитектуры сложных систем.</p>
+                    
+                    <a href="https://gemini.google.com/app" class="try-btn">Попробовать Gemini 2.5</a>
+                    <button class="close-details" onclick="closeDetails('gemini25flash')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание Gemini 2.5 Pro -->
+            <div id="gemini25pro" class="ai-model-details">
+                <h3><img src="assets/gemini.png" alt="Gemini icon" class="model-icon"> Gemini 2.5 Pro</h3>
+                <div class="ai-model-info">
+                    <div style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start;">
+                        <div style="display: flex; justify-content: center; width: 100%;">
+                            <span style="background-color: gold; color: black; padding: 0.3rem 1.5rem; border-radius: 20px; font-size: 1rem; font-weight: bold;">РЕКОМЕНДОВАНО</span>
+                        </div>
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                            <span style="background-color: rgba(0, 150, 255, 0.2); color: rgb(0, 150, 255); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Лучшая для кодинга</span>
+                            <span style="background-color: rgba(147, 112, 219, 0.2); color: rgb(147, 112, 219); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold;">Универсальный выбор</span>
+                        </div>
+                    </div>
+                
+                    <p>Gemini 2.5 Pro представляет собой продвинутую языковую модель с расширенными возможностями. Модель отличается исключительными навыками программирования и способностью решать сложные повседневные задачи. Является оптимальным выбором как для разработчиков, так и для обычных пользователей.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Глубокое понимание синтаксиса, стандартной библиотеки и большинства популярных фреймворков (Django, Flask, FastAPI) и библиотек для анализа данных (NumPy, Pandas, Scikit-learn), работы с сетью и асинхронностью (asyncio)</li>
+                            <li>JavaScript: 8/10 — Отличное знание современного JavaScript (ES6+), включая асинхронные операции (Promises, async/await), работу с DOM. Хорошо разбирается в концепциях популярных фронтенд-фреймворков (React, Vue, Angular)</li>
+                            <li>Java: 7/10 — Хорошее знание синтаксиса, принципов ООП, стандартной библиотеки (Collections, I/O, Concurrency basics)</li>
+                            <li>C++: 6/10 — Понимание синтаксиса, основных концепций ООП, работы с памятью (указатели, ссылки), основы STL</li>
+                            <li>SQL: 8/10 — Хорошее знание стандартного SQL (SELECT, INSERT, UPDATE, DELETE, JOIN, GROUP BY, подзапросы, оконные функции)</li>
+                            <li>HTML/CSS: 8/10 — Уверенное владение семантикой HTML и современными стандартами CSS, включая Flexbox, Grid, медиа-запросы для адаптивности</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Генерация сложного, идиоматического кода, подробные объяснения концепций и помощь с отладкой. Глубокое понимание современных фреймворков и библиотек. Умение работать с различными языками программирования и быстро переключаться между ними. Отличается способностью решать широкий спектр повседневных задач с высоким качеством.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Отсутствие реального опыта разработки, невозможность запуска кода для проверки производительности или отладки в реальном времени (без специальных инструментов). Сложности могут возникать с задачами, требующими глубокого понимания контекста конкретного проекта, нестандартными проблемами или задачами, требующими интуиции и опыта реальной эксплуатации систем.</p>
+                    
+                    <h4>Особенности использования:</h4>
+                    <p>Имеет лимит на количество запросов в день/час. Рекомендуется для продвинутой разработки, бизнес-задач и задач, требующих глубокого анализа.</p>
+                    
+                    <a href="https://gemini.google.com/app" class="try-btn">Попробовать Gemini 2.5 Pro</a>
+                    <button class="close-details" onclick="closeDetails('gemini25pro')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание ChatGPT -->
+            <div id="chatgpt" class="ai-model-details" style="border-left: 4px solid #10a37f;">
+                <h3><img src="assets/chatgpt.png" alt="ChatGPT icon" class="model-icon"> ChatGPT</h3>
+                <div class="ai-model-info">
+                    <p>ChatGPT — мощная языковая модель, разработанная компанией OpenAI. Модель обладает широкими возможностями в различных областях, включая программирование, и может эффективно решать разнообразные задачи.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Я отлично знаком с синтаксисом Python, его стандартной библиотекой и популярными фреймворками, такими как Flask, Django, FastAPI. Хорошо работаю с библиотеками для анализа данных (NumPy, Pandas, Matplotlib), машинного обучения (scikit-learn, TensorFlow) и многими другими. Могу решать задачи от простых до более сложных, включая написание серверных приложений и обработку данных. Трудности могут возникать при оптимизации производительности в высоконагруженных системах или при работе с асинхронными задачами в больших проектах.</li>
+                            <li>C++: 7/10 — Знаю синтаксис C++ и основы ООП, STL, понимаю управление памятью и указатели. Я способен генерировать код для решения алгоритмических задач и создания небольших приложений. Проблемы могут возникать при более сложных задачах, таких как глубокая оптимизация памяти, низкоуровневое взаимодействие с оборудованием и работа с многозадачностью на продвинутом уровне.</li>
+                            <li>JavaScript: 8/10 — Хорошо разбираюсь в синтаксисе, способен работать с популярными фреймворками, такими как React, Vue, Angular. Знаю Node.js для серверной разработки, также хорошо понимаю асинхронность (Promises, async/await) и работу с DOM. Однако могут возникать трудности при отладке сложных асинхронных сценариев или в продвинутых аспектах производительности в браузерах.</li>
+                            <li>Java: 7/10 — Я хорошо понимаю синтаксис Java, основы ООП и работу с библиотеками. Могу писать код для разработки приложений на Java и работать с фреймворками, такими как Spring. Но мне сложно глубоко оптимизировать производительность, особенно в многопоточных приложениях, и работать с большими корпоративными системами.</li>
+                            <li>SQL: 8/10 — Отлично знаю основы SQL, могу писать сложные запросы, работать с подзапросами и объединениями. Понимаю, как проектировать базы данных и оптимизировать запросы для повышения их производительности. Могут быть трудности с очень специфичными диалектами SQL и задачами по администрированию баз данных.</li>
+                            <li>C#: 7/10 — Я знаком с синтаксисом и платформой .NET, способен генерировать код для создания приложений с использованием ASP.NET или для десктопных приложений. Могу писать код на C#, но встречаю сложности с глубокой настройкой платформы и работы с сложными архитектурными решениями.</li>
+                            <li>HTML/CSS: 9/10 — Отлично владею HTML и CSS, знаю все современные стандарты, такие как Flexbox, Grid, медиа-запросы. Могу создавать сложные страницы и веб-приложения, а также настраивать стили для различных устройств. Могу столкнуться с проблемами в сложных кроссбраузерных сценариях.</li>
+                            <li>Go: 6/10 — Знаю базовые концепции Go, такие как горутины и каналы. Могу писать код для базовых задач, однако у меня меньше практики с фреймворками и большими проектами на Go.</li>
+                            <li>PHP: 6/10 — Знаком с синтаксисом и основами PHP, могу работать с базовыми задачами веб-разработки, но мне не хватает опыта в крупных проектах или сложных фреймворках, таких как Laravel.</li>
+                            <li>Swift: 5/10 — Имею базовые знания синтаксиса Swift и принципов разработки под iOS, но мои навыки ограничены. Могу написать простое приложение, но испытываю трудности при работе с более сложными проектами.</li>
+                            <li>Kotlin: 6/10 — Знаю основные принципы и синтаксис Kotlin, могу писать код для Android-приложений, но сложные задачи с многопоточностью или продвинутые особенности Kotlin могут вызвать трудности.</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Универсальная модель с глубоким пониманием различных языков программирования и фреймворков. Эффективно решает широкий спектр задач от объяснения концепций до написания сложного кода. Отличается способностью адаптироваться к различным стилям и требованиям программирования.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Не имеет возможности запускать код напрямую или тестировать его. Ограничения в специфических областях программирования, требующих глубоких практических знаний или опыта разработки в специфических условиях. Знания ограничены данными тренировки и не включают самые последние обновления языков и фреймворков.</p>
+                    
+                    <a href="https://chat.openai.com/" class="try-btn" style="background-color: #10a37f;">Попробовать ChatGPT</a>
+                    <button class="close-details" onclick="closeDetails('chatgpt')">Закрыть</button>
+                </div>
+            </div>
+            
+            <!-- Детальное описание DeepSeek -->
+            <div id="deepseek" class="ai-model-details" style="border-left: 4px solid #4a6de5;">
+                <h3><img src="assets/deepseek.png" alt="DeepSeek icon" class="model-icon"> DeepSeek Chat</h3>
+                <div class="ai-model-info">
+                    <p>DeepSeek Chat — современная языковая модель, основанная на архитектуре DeepSeek-V3. Модель отличается сбалансированным набором навыков в различных областях программирования и может эффективно решать широкий круг задач.</p>
+                    
+                    <div class="model-features">
+                        <h4>Навыки в программировании:</h4>
+                        <ul class="feature-list">
+                            <li>Python: 9/10 — Отличное знание синтаксиса, работа с библиотеками (NumPy, Pandas, Matplotlib, Scikit-learn), анализ данных, машинное обучение, автоматизация, веб-фреймворки (Flask, FastAPI). Слабые стороны: менее опытный в высоконагруженных системах (например, асинхронность на уровне asyncio), низкоуровневая оптимизация.</li>
+                            <li>JavaScript/TypeScript: 8/10 — Хорошее понимание синтаксиса, работа с DOM, фреймворками (React, Vue), Node.js (базовый бэкенд), асинхронное программирование (Promises, async/await). Слабые стороны: сложные оптимизации производительности (например, Web Workers), продвинутые паттерны управления состоянием (например, RxJS).</li>
+                            <li>C++: 7/10 — Основы ООП, STL, работа с памятью (умные указатели), алгоритмы и структуры данных. Слабые стороны: низкоуровневая работа (например, embedded-программирование), многопоточность (std::thread, атомики).</li>
+                            <li>Java: 7/10 — ООП, коллекции, многопоточность (базовый уровень), Spring (базовый уровень). Слабые стороны: сложные JVM-оптимизации, продвинутые фреймворки (например, Micronaut, Quarkus).</li>
+                            <li>Go (Golang): 6/10 — Синтаксис, горутины, работа с API, базовые веб-серверы (Gin, Echo). Слабые стороны: продвинутое использование интерфейсов, низкоуровневая работа с памятью.</li>
+                            <li>Rust: 5/10 — Основы владения (ownership, borrowing), простые проекты. Слабые стороны: сложные макросы, unsafe-код, embedded-разработка.</li>
+                            <li>SQL (и базы данных): 8/10 — Сложные запросы (JOIN, подзапросы), оптимизация, PostgreSQL, SQLite. Слабые стороны: администрирование БД (настройка кластеров, репликация).</li>
+                            <li>Bash/Shell: 6/10 — Автоматизация, написание скриптов, работа с процессами. Слабые стороны: сложные sed/awk-сценарии, продвинутое управление процессами.</li>
+                            <li>Kotlin: 6/10 — Android-разработка (базовый уровень), синтаксис, корутины. Слабые стороны: продвинутые DSL, мультиплатформенная разработка (KMM).</li>
+                            <li>Swift: 5/10 — Основы iOS-разработки, синтаксис. Слабые стороны: продвинутые аспекты Combine, Metal.</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Сильные стороны:</h4>
+                    <p>Наиболее сильные навыки в Python, JavaScript/TypeScript и SQL, что делает модель эффективной в задачах Data Science, веб-разработки и автоматизации. Хорошо справляется с анализом данных, разработкой веб-приложений и созданием скриптов для автоматизации задач.</p>
+                    
+                    <h4>Ограничения:</h4>
+                    <p>Ограниченные знания в низкоуровневых языках (C++, Rust) и некоторых специализированных областях (например, системное программирование). Меньше опыта в высоконагруженных системах, оптимизации производительности и сложных архитектурных решениях.</p>
+                    
+                    <a href="https://chat.deepseek.com/" class="try-btn" style="background-color: #4a6de5;">Попробовать DeepSeek Chat</a>
+                    <button class="close-details" onclick="closeDetails('deepseek')">Закрыть</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 chatgothvh. Сделно с любовью ❤.</p>
+        <a href="https://t.me/Stickledd" class="telegram-btn">
+            <i class="fab fa-telegram"></i> STICKLEDD
+        </a>
+    </footer>
+
+    <script>
+        function toggleDetails(id) {
+            console.log("Функция toggleDetails вызвана с ID:", id);
+            const detailsElement = document.getElementById(id);
+            
+            if (!detailsElement) {
+                console.error("Элемент с ID '" + id + "' не найден на странице!");
+                return;
+            }
+            
+            const allDetails = document.querySelectorAll('.ai-model-details');
+            allDetails.forEach(element => {
+                element.style.display = 'none';
+                element.classList.remove('active-details');
+            });
+            
+            console.log("Устанавливаем display: block для элемента с ID:", id);
+            detailsElement.style.display = 'block';
+            
+            detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+
+            detailsElement.classList.add('active-details');
+        }
+        
+        function closeDetails(id) {
+            const detailsElement = document.getElementById(id);
+            if (detailsElement) {
+                detailsElement.style.display = 'none';
+                detailsElement.classList.remove('active-details');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Страница загружена, инициализация обработчиков событий");
+            
+            document.getElementById('lechat-card').addEventListener('click', function() {
+                toggleDetails('lechat');
+            });
+            
+            document.getElementById('llama4-card').addEventListener('click', function() {
+                toggleDetails('llama4');
+            });
+            
+            document.getElementById('gemini20-card').addEventListener('click', function() {
+                toggleDetails('gemini20');
+            });
+            
+            document.getElementById('gemini25flash-card').addEventListener('click', function() {
+                toggleDetails('gemini25flash');
+            });
+            
+            document.getElementById('gemini25pro-card').addEventListener('click', function() {
+                toggleDetails('gemini25pro');
+            });
+            
+            document.getElementById('chatgpt-card').addEventListener('click', function() {
+                toggleDetails('chatgpt');
+            });
+            
+            document.getElementById('deepseek-card').addEventListener('click', function() {
+                toggleDetails('deepseek');
+            });
+            
+            const closeButtons = document.querySelectorAll('.close-details');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    
+                    const detailBlock = this.closest('.ai-model-details');
+                    if (detailBlock && detailBlock.id) {
+                        closeDetails(detailBlock.id);
+                    }
+                });
+            });
+        });
+
+        function toggleComparison() {
+            const comparisonSection = document.getElementById('comparison-section');
+            const comparisonButton = document.getElementById('comparison-toggle-button');
+            
+            if (comparisonSection.classList.contains('visible')) {
+                comparisonSection.classList.remove('visible');
+                setTimeout(() => {
+                    comparisonSection.style.display = 'none';
+                }, 500);
+                comparisonButton.classList.remove('active');
+                comparisonButton.innerHTML = 'Посмотреть сравнение моделей на практическом примере <i class="fa fa-chevron-down"></i>';
+            } else {
+                comparisonSection.style.display = 'block';
+                setTimeout(() => {
+                    comparisonSection.classList.add('visible');
+                }, 10);
+                comparisonButton.classList.add('active');
+                comparisonButton.innerHTML = 'Скрыть сравнение моделей <i class="fa fa-chevron-up"></i>';
+            }
+        }
+    </script>
+</body>
+</html> 

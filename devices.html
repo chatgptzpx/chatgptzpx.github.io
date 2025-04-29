@@ -22,6 +22,8 @@
                 <li><a href="scripts.html">Скрипты</a></li>
                 <li><a href="tutorials.html">Туториалы</a></li>
                 <li><a href="devices.html">Устройства</a></li>
+                <li><a href="tools.html">Инструменты</a></li>
+                <li><a href="AI.html">ИИ Модели</a></li>
             </ul>
         </nav>
     </header>
@@ -1161,8 +1163,8 @@
     </main>
 
     <footer>
-        <p>© 2025 STICKLEDD. Все права не защищены.</p>
-        <a href="https://t.me/Stickledd" class="telegram-link">
+        <p>© 2025 chatgothvh. Сделно с любовью ❤.</p>
+        <a href="https://t.me/Stickledd" class="telegram-btn">
             <i class="fab fa-telegram"></i> STICKLEDD
         </a>
     </footer>
@@ -1185,7 +1187,6 @@
             deviceDetails.style.display = 'none';
         }
 
-        // Мобильное меню
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
             const navMenu = document.getElementById('nav-menu');
@@ -1195,7 +1196,6 @@
                 menuToggle.classList.toggle('active');
             });
             
-            // Закрыть меню при клике на пункт меню
             const menuItems = navMenu.querySelectorAll('a');
             menuItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -1203,7 +1203,6 @@
                 });
             });
             
-            // Закрыть меню при клике вне его
             document.addEventListener('click', function(event) {
                 if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
                     navMenu.classList.remove('active');
