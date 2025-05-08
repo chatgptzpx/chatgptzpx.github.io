@@ -102,6 +102,7 @@ nav ul li a:hover {
     max-width: 600px;
 }
 
+/* Стили для главных кнопок */
 .main-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -153,6 +154,7 @@ nav ul li a:hover {
     font-family: 'Orbitron', sans-serif;
 }
 
+/* Адаптивные стили для кнопок */
 @media (max-width: 768px) {
     .main-buttons {
         flex-direction: column;
@@ -177,7 +179,7 @@ nav ul li a:hover {
 .telegram-btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    background-color: #569cd6;
+    background-color: var(--primary-color);
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -187,8 +189,6 @@ nav ul li a:hover {
 
 .telegram-btn:hover {
     background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .content-section {
@@ -247,10 +247,10 @@ nav ul li a:hover {
 .script-details .video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* 16:9 */
     overflow: hidden;
     margin-bottom: 1.5rem;
-    aspect-ratio: 16 / 9; 
+    aspect-ratio: 16 / 9; /* Добавлено для поддержки 16:9 на мобильных устройствах */
 }
 
 .script-details .video-container iframe,
@@ -460,36 +460,17 @@ button.download-btn:hover {
 }
 
 footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem;
-    background-color: var(--card-background);
-    margin-top: 3rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--header-background);
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2rem;
 }
 
 .telegram-link {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--primary-color);
-    color: white;
+    display: inline-block;
+    color: var(--primary-color);
     text-decoration: none;
-    padding: 0.7rem 1.2rem;
-    border-radius: 5px;
-    margin-left: 1rem;
-    transition: all 0.3s ease;
-}
-
-.telegram-link:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.telegram-link i {
-    margin-right: 8px;
-    font-size: 1.2rem;
+    margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -522,6 +503,7 @@ footer {
         font-size: 2rem;
     }
     
+    /* Адаптация для мобильной версии устройств */
     .device-list {
         grid-template-columns: 1fr;
     }
@@ -538,6 +520,7 @@ footer {
         font-size: 1.3rem;
     }
     
+    /* Адаптация детальной страницы устройств */
     .device-details-header h3 {
         font-size: 1.4rem;
     }
@@ -548,6 +531,7 @@ footer {
     }
 }
 
+/* Стили для туториалов */
 .tutorial-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -612,6 +596,7 @@ footer {
     background-color: var(--secondary-color);
 }
 
+/* Стили для WebFlasher */
 .flasher-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -703,6 +688,7 @@ footer {
     }
 }
 
+/* Общие стили для всех страниц */
 main {
     padding-top: 70px;
 }
@@ -725,11 +711,13 @@ h2:after {
     left: 0;
 }
 
+/* Дополнительные тени для глубины интерфейса */
 .card, .script-card, .tutorial-card, .flasher-info, .flasher-instructions {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3), 
                0 10px 30px rgba(0,0,0,0.2);
 }
 
+/* Дополнительные эффекты для кнопок */
 .download-btn, .flash-btn, .telegram-btn, .tutorial-btn, .file-input {
     position: relative;
     overflow: hidden;
@@ -757,6 +745,7 @@ h2:after {
     transition: all 0.6s;
 }
 
+/* Дополнительные анимации для интерактивных элементов */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -767,6 +756,7 @@ h2:after {
     animation: pulse 0.3s;
 }
 
+/* Стили для модального окна */
 .modal {
     display: none;
     position: fixed;
@@ -892,11 +882,12 @@ h2:after {
     object-fit: cover;
 }
 
+/* Для устройств */
 .device-gallery .video-container {
     width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* Возвращаем соотношение 16:9 вместо квадратного */
     margin: 0 auto 1.5rem;
-    max-width: 800px;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 }
@@ -926,6 +917,7 @@ h2:after {
     background-color: var(--secondary-color);
 }
 
+/* Стили для страницы устройств */
 .device-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1022,6 +1014,7 @@ h2:after {
     font-size: 0.9rem;
 }
 
+/* Улучшенные стили для детальной информации об устройстве */
 .device-details {
     display: none;
     background: rgba(25, 25, 25, 0.95);
@@ -1101,7 +1094,7 @@ h2:after {
 .video-container {
     width: 100%;
     position: relative;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; /* 16:9 */
     height: 0;
     overflow: hidden;
     border-radius: 10px;
@@ -1278,6 +1271,7 @@ h2:after {
     left: 100%;
 }
 
+/* Стили для терминала */
 .terminal-container {
     margin: 15px;
     background: #1a1a1a;
@@ -1381,6 +1375,7 @@ h2:after {
     font-style: italic;
 }
 
+/* Стили для групп функций Marauder */
 .marauder-functions {
     padding: 10px 15px;
 }
@@ -1467,6 +1462,7 @@ h2:after {
     transform: translateY(-2px);
 }
 
+/* Стили для индикатора заряда аккумулятора */
 .battery-indicator {
     position: relative;
 }
@@ -1516,6 +1512,7 @@ h2:after {
     color: var(--primary-color);
 }
 
+/* Стили для иконок в заголовках */
 .device-details h4 i {
     margin-right: 8px;
     font-size: 1.2rem;
@@ -1523,6 +1520,7 @@ h2:after {
     opacity: 0.9;
 }
 
+/* Стили для списков характеристик */
 .feature-list {
     list-style: none;
     padding: 0;
@@ -1549,6 +1547,7 @@ h2:after {
     font-weight: bold;
 }
 
+/* Улучшенные стили для поддерживаемых скриптов */
 .supported-scripts {
     display: flex;
     flex-wrap: wrap;
@@ -1603,6 +1602,7 @@ h2:after {
     }
 }
 
+/* Мобильное меню-бургер */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -1633,6 +1633,7 @@ h2:after {
     transform: translateY(-9px) rotate(-45deg);
 }
 
+/* Мобильные стили для меню */
 @media (max-width: 480px) {
     .menu-toggle {
         display: flex;
@@ -1664,6 +1665,7 @@ h2:after {
         font-size: 1.5rem;
     }
     
+    /* Дополнительная адаптация для очень маленьких экранов */
     .device-item {
         width: 100%;
     }
@@ -1699,102 +1701,5 @@ h2:after {
         margin: 15px;
         padding: 10px 20px;
         font-size: 0.9rem;
-    }
-}
-
-.code-preview {
-    background: #1a1a1a;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 140, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.code-preview:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.2);
-}
-
-.code-preview pre {
-    margin: 0;
-    padding: 1.5rem;
-    overflow-x: auto;
-}
-
-.code-preview code {
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #e0e0e0;
-    white-space: pre;
-    display: block;
-}
-
-.code-preview code .comment {
-    color: #6a9955;
-}
-
-.code-preview code .keyword {
-    color: #569cd6;
-}
-
-.code-preview code .string {
-    color: #ce9178;
-}
-
-.code-preview code .number {
-    color: #b5cea8;
-}
-
-.code-preview code .function {
-    color: #dcdcaa;
-}
-
-@keyframes codeHighlight {
-    0% { background-color: rgba(255, 140, 0, 0); }
-    50% { background-color: rgba(255, 140, 0, 0.1); }
-    100% { background-color: rgba(255, 140, 0, 0); }
-}
-
-.code-preview:hover code {
-    animation: codeHighlight 2s ease-in-out;
-}
-
-.copy-code-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255, 140, 0, 0.2);
-    color: var(--primary-color);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.code-preview:hover .copy-code-btn {
-    opacity: 1;
-}
-
-.copy-code-btn:hover {
-    background: rgba(255, 140, 0, 0.4);
-}
-
-@media (max-width: 768px) {
-    .code-preview {
-        margin: 1rem 0;
-    }
-    
-    .code-preview pre {
-        padding: 1rem;
-    }
-    
-    .code-preview code {
-        font-size: 0.8rem;
     }
 } 

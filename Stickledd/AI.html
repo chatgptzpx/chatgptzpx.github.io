@@ -1090,7 +1090,7 @@
             
             detailsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
-            // Добавление класса для лучшей видимости
+
             detailsElement.classList.add('active-details');
         }
         
@@ -1102,11 +1102,9 @@
             }
         }
 
-        // Добавляем обработчики событий при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
             console.log("Страница загружена, инициализация обработчиков событий");
             
-            // Добавляем прямые обработчики кликов для всех карточек моделей
             document.getElementById('lechat-card').addEventListener('click', function() {
                 toggleDetails('lechat');
             });
@@ -1135,14 +1133,11 @@
                 toggleDetails('deepseek');
             });
             
-            // Добавляем обработчики для кнопок закрытия
             const closeButtons = document.querySelectorAll('.close-details');
             closeButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
-                    // Предотвращаем всплытие события
                     event.stopPropagation();
                     
-                    // Ищем ближайший родительский блок с описанием
                     const detailBlock = this.closest('.ai-model-details');
                     if (detailBlock && detailBlock.id) {
                         closeDetails(detailBlock.id);
