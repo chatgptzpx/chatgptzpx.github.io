@@ -1,116 +1,90 @@
-document.addEventListener('DOMContentLoaded', function() {
-    function showDiscordToast(e) {
-        e.preventDefault();
-        if (document.getElementById('discord-toast')) return;
-        const toast = document.createElement('div');
-        toast.id = 'discord-toast';
-        toast.textContent = 'zpx.xyz copied!';
-        toast.style.position = 'fixed';
-        toast.style.bottom = '20px'; /* Position at the bottom */
-        toast.style.left = '50%';
-        toast.style.transform = 'translateX(-50%) translateY(100%)'; /* Start off-screen below */
-        toast.style.background = 'linear-gradient(45deg, #5865F2, #23272A)';
-        toast.style.color = '#fff';
-        toast.style.padding = '15px 30px'; /* Slightly smaller padding for a more compact look */
-        toast.style.borderRadius = '30px'; /* Rounded corners */
-        toast.style.fontSize = '1.2rem'; /* Slightly smaller font */
-        toast.style.fontWeight = 'bold';
-        toast.style.boxShadow = '0 8px 20px rgba(88,101,242,0.4)'; /* Adjusted shadow */
-        toast.style.zIndex = '9999';
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out'; /* Smoother transition */
-        toast.style.textAlign = 'center';
-        toast.style.letterSpacing = '0.5px';
-        document.body.appendChild(toast);
-        console.log('Attempting to show Discord toast and copy text.');
-        setTimeout(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(-50%) translateY(-10px)';
-            console.log('Toast visible.');
-        }, 10);
+document.addEventListener('DOMContentLoaded', () => {
+    const cat = document.getElementById('interactive-cat');
+    const pressSound = new Audio('press.mp3');
+    const getOutSound = new Audio('getout.mp3');
 
-        try {
-            navigator.clipboard.writeText('zpx.xyz')
-                .then(() => {
-                    console.log('Text copied to clipboard: zpx.xyz');
-                })
-                .catch(err => {
-                    console.error('Failed to copy text to clipboard:', err);
-                    // Fallback for older browsers or if clipboard API is not available
-                    const textarea = document.createElement('textarea');
-                    textarea.value = 'zpx.xyz';
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    try {
-                        document.execCommand('copy');
-                        console.log('Text copied using document.execCommand("copy")');
-                    } catch (execErr) {
-                        console.error('Failed to copy text using document.execCommand("copy"):', execErr);
-                    }
-                    document.body.removeChild(textarea);
-                });
-        } catch (err) {
-            console.error('Error accessing clipboard API:', err);
+    let clickCount = 0;
+    let clickTimer = null;
+
+    cat.addEventListener('click', () => {
+        // Bounce animation
+        cat.classList.add('bounce');
+        setTimeout(() => {
+            cat.classList.remove('bounce');
+        }, 300);
+
+        // Play sound
+        pressSound.currentTime = 0;
+        pressSound.play();
+
+        // Handle clicks
+        clickCount++;
+        if (clickTimer) {
+            clearTimeout(clickTimer);
         }
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 500);
 
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(-50%) translateY(100%)';
-            console.log('Toast fading out.');
+        if (clickCount > 5) {
+            getOutSound.play();
+            cat.classList.add('explode');
+            const overlay = document.getElementById('fullscreen-overlay');
+            overlay.classList.remove('hidden');
             setTimeout(() => {
-                toast.remove();
-                console.log('Toast removed from DOM.');
-            }, 400);
-        }, 2000);
-    }
-
-    const project = document.querySelector('.project');
-    const date = document.getElementById('release-date');
-    const mysteryDate = document.getElementById('mystery-date');
-    let intervalId = null;
-    const symbols = ['?', '✦', '★', '•', '∗', '𓆩', '𓆪', '✧', '⍟', '✺'];
-
-    function getMysticDate() {
-        function randSym() { return symbols[Math.floor(Math.random() * symbols.length)]; }
-        return (
-            randSym() + randSym() + randSym() + '.' +
-            randSym() + randSym() + '.' +
-            randSym() + randSym()
-        );
-    }
-
-    if (project && date && mysteryDate) {
-        project.addEventListener('mouseenter', () => {
-            date.style.opacity = '1';
-            date.style.filter = 'blur(0)';
-            if (!intervalId) {
-                intervalId = setInterval(() => {
-                    mysteryDate.textContent = getMysticDate();
-                }, 200);
-            }
-        });
-        project.addEventListener('mouseleave', () => {
-            date.style.opacity = '0.5';
-            date.style.filter = 'blur(2px)';
-            mysteryDate.textContent = '??.??.??';
-            if (intervalId) {
-                clearInterval(intervalId);
-                intervalId = null;
-            }
-        });
-    }
-
-
-    document.querySelectorAll('.more-info-button').forEach(button => {
-        button.addEventListener('click', function(event) {
-            const deviceType = this.getAttribute('data-device-type');
-            showDeviceInfo(deviceType, event);
-        });
+                cat.style.display = 'none';
+                overlay.classList.add('hidden');
+            }, 1000);
+        }
     });
 
-    const discordLink = document.querySelector('.social-link.discord');
-    if (discordLink) {
-        discordLink.addEventListener('click', showDiscordToast);
+    const timerElement = document.getElementById('updated-timer');
+    const startTime = new Date(2025, 6, 19, 20, 19); // July is month 6 (0-indexed)
+
+    function updateTimer() {
+        const now = new Date();
+        const diff = now - startTime;
+
+        if (diff < 0) {
+            timerElement.textContent = "updated: not yet";
+            return;
+        }
+
+        let totalSeconds = Math.floor(diff / 1000);
+
+        const years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+        totalSeconds %= (365 * 24 * 60 * 60);
+
+        const days = Math.floor(totalSeconds / (24 * 60 * 60));
+        totalSeconds %= (24 * 60 * 60);
+
+        const hours = Math.floor(totalSeconds / (60 * 60));
+        totalSeconds %= (60 * 60);
+
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        let timeString = "updated: ";
+        if (years > 0) {
+            timeString += `${years}y `;
+        }
+        if (days > 0) {
+            timeString += `${days}d `;
+        }
+        if (hours > 0) {
+            timeString += `${hours}h `;
+        }
+        if (minutes > 0) {
+            timeString += `${minutes}m `;
+        }
+        timeString += `${seconds}s ago`;
+
+        if (diff < 1000) {
+            timeString = "updated: now";
+        }
+
+        timerElement.textContent = timeString;
     }
 
+    setInterval(updateTimer, 1000);
 });
