@@ -1,118 +1,118 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio</title>
-    <meta name="description" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 — links, socials, and creative work.">
-    <meta name="theme-color" content="#111827">
-    <meta name="keywords" content="digital artist, programmer, freelance, portfolio, creative work">
-    <meta name="author" content="ChatGPT HVH">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta property="og:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
-    <meta property="og:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="">
-    <meta property="twitter:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
-    <meta property="twitter:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS for utility-first styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
+                function copyToClipboard(text) {
+                    // Modern Clipboard API
+                    if (navigator.clipboard && window.isSecureContext) {
+                        return navigator.clipboard.writeText(text)
+                            .then(() => showToast())
+                            .catch(err => {
+                                console.error('Failed to copy text: ', err);
+                                showToast('Failed to copy');
+                            });
+                    }
 
 
-    <style>
-        /* CSS Custom Properties for better maintainability */
-        :root {
-            --bg-primary: #0f0f23;
-            --bg-secondary: #1a1a2e;
-            --bg-glass: rgba(31, 41, 55, 0.4);
-            --text-primary: #E5E7EB;
-            --text-secondary: #9CA3AF;
-            --text-muted: #6B7280;
-            --accent-primary: #a78bfa;
-            --accent-secondary: #818cf8;
-            --accent-tertiary: #f59e0b;
-            --border-glass: rgba(255, 255, 255, 0.1);
-            --shadow-glass: rgba(0, 0, 0, 0.37);
-            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            --gradient-secondary: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
-        }
+                    // Fallback for older browsers
+                    try {
+                        const tempInput = document.createElement('textarea');
+                        tempInput.value = text;
+                        tempInput.style.position = 'absolute';
+                        tempInput.style.left = '-9999px';
+                        tempInput.style.top = '0';
+                        tempInput.setAttribute('readonly', '');
+                        
+                        document.body.appendChild(tempInput);
+                        tempInput.select();
+                        tempInput.setSelectionRange(0, 99999);
+                        
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(tempInput);
+                        
+                        if (successful) {
+                            showToast();
+                        } else {
+                            showToast('Failed to copy');
+                        }
+                    } catch (err) {
+                        console.error('Fallback copy failed: ', err);
+                        showToast('Copy not supported');
+                    }
+                }
 
 
-        /* Base styles with improved accessibility */
-        * {
-            box-sizing: border-box;
-        }
+                copyBtn.addEventListener('click', () => {
+                    const textToCopy = copyBtn.getAttribute('data-copy');
+                    if (textToCopy) {
+                        copyToClipboard(textToCopy);
+                    }
+                });
 
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            min-height: 100vh;
-        }
+                // Keyboard support
+                copyBtn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        copyBtn.click();
+                    }
+                });
+            }
 
 
-        /* Improved focus styles for accessibility */
-        *:focus {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
+            function initThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                if (!themeToggle) return;
 
 
-        /* Skip to main content for screen readers */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: var(--accent-primary);
-            color: var(--bg-primary);
-            padding: 8px;
-            text-decoration: none;
-            border-radius: 4px;
-            z-index: 100;
-            font-weight: 600;
-        }
+                themeToggle.addEventListener('click', () => {
+                    // Simple theme toggle effect
+                    document.body.style.filter = document.body.style.filter === 'invert(1) hue-rotate(180deg)' 
+                        ? '' 
+                        : 'invert(1) hue-rotate(180deg)';
+                    
+                    // Update button icon
+                    const icon = themeToggle.querySelector('svg');
+                    if (icon) {
+                        icon.style.transform = icon.style.transform === 'rotate(180deg)' 
+                            ? '' 
+                            : 'rotate(180deg)';
+                    }
+                });
+            }
 
 
-        .skip-link:focus {
-            top: 6px;
-        }
+            // Initialize fade-in animation for elements
+            function initFadeInAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
 
 
-        /* Enhanced animated background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-        }
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    if (!prefersReducedMotion) {
+                        observer.observe(el);
+                    } else {
+                        el.classList.add('fade-in');
+                    }
+                });
+            }
 
 
-        .animated-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFadeInAnimations);
+            } else {
+                initFadeInAnimations();
+            }
 
-            </html>
+
+        })();
+    </script>
+</body>
+</html>
