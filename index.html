@@ -3,34 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio</title>
+    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪</title>
     <meta name="description" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 — links, socials, and creative work.">
     <meta name="theme-color" content="#111827">
-    <meta name="keywords" content="digital artist, programmer, freelance, portfolio, creative work">
-    <meta name="author" content="ChatGPT HVH">
+    <meta name="keywords" content="digital artist, programmer, creative work">
+    <meta name="author" content="chatgpthvh">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
-    <meta property="og:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
-    <meta property="og:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
+    <meta property="og:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪">
+    <meta property="og:description" content="Digital Artist & Programmer - Links, socials, and creative work">
     
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="">
-    <meta property="twitter:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
-    <meta property="twitter:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
+    <meta property="twitter:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪">
+    <meta property="twitter:description" content="Digital Artist & Programmer - Links, socials, and creative work">
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS for utility-first styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        /* CSS Custom Properties for better maintainability */
         :root {
             --bg-primary: #0f0f23;
             --bg-secondary: #1a1a2e;
@@ -49,7 +44,6 @@
             --gradient-secondary: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
         }
 
-        /* Base styles with improved accessibility */
         * {
             box-sizing: border-box;
         }
@@ -65,13 +59,11 @@
             min-height: 100vh;
         }
 
-        /* Improved focus styles for accessibility */
         *:focus {
             outline: 2px solid var(--accent-primary);
             outline-offset: 2px;
         }
 
-        /* Skip to main content for screen readers */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -89,7 +81,6 @@
             top: 6px;
         }
 
-        /* Enhanced animated background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -118,7 +109,6 @@
             50% { transform: scale(1.1) rotate(180deg); }
         }
 
-        /* Animated Particle Background with better performance */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -130,7 +120,6 @@
             pointer-events: none;
         }
 
-        /* Enhanced Glassmorphism Card Effect */
         .glass-card {
             background: var(--bg-glass);
             backdrop-filter: blur(25px);
@@ -158,11 +147,7 @@
             transition: left 0.8s var(--transition-smooth);
         }
 
-        .glass-card:hover::before {
-            left: 100%;
-        }
 
-        /* Improved animations with reduced motion support */
         @media (prefers-reduced-motion: no-preference) {
             @keyframes fadeInUp {
                 from { 
@@ -202,18 +187,14 @@
                 animation: pulse 3s ease-in-out infinite;
             }
 
-            .glow-animation {
-                animation: glow 4s ease-in-out infinite;
-            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .fade-in, .float-animation, .pulse-animation, .glow-animation {
+            .fade-in, .float-animation, .pulse-animation {
                 animation: none;
             }
         }
 
-        /* Enhanced avatar with better loading states */
         .avatar-container {
             position: relative;
             width: 8rem;
@@ -227,33 +208,17 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent-primary);
-            box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
             transition: all 0.3s var(--transition-smooth);
         }
 
         .avatar:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(167, 139, 250, 0.5);
         }
 
         .avatar-ring {
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s var(--transition-smooth);
+            display: none;
         }
 
-        .avatar-container:hover .avatar-ring {
-            opacity: 1;
-        }
-
-        /* Status indicator */
         .status-indicator {
             position: absolute;
             bottom: 8px;
@@ -266,7 +231,6 @@
             box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
         }
 
-        /* Improved social links with better hover states */
         .social-link {
             display: inline-flex;
             align-items: center;
@@ -319,7 +283,6 @@
             transform: scale(1.1);
         }
 
-        /* Enhanced copy button with better feedback */
         .copy-button {
             position: relative;
             width: 100%;
@@ -360,7 +323,6 @@
             transform: translateY(0) scale(0.98);
         }
 
-        /* Improved toast notification */
         .toast {
             position: fixed;
             bottom: -100px;
@@ -384,7 +346,6 @@
             opacity: 1;
         }
 
-        /* New features */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -420,31 +381,8 @@
             letter-spacing: 0.05em;
         }
 
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
 
-        .theme-toggle:hover {
-            background: var(--gradient-primary);
-            transform: scale(1.1);
-        }
 
-        /* Responsive improvements */
         @media (max-width: 640px) {
             .glass-card {
                 margin: 1rem;
@@ -472,7 +410,6 @@
             }
         }
 
-        /* Loading state for images */
         .loading {
             background: linear-gradient(90deg, #374151, #4B5563, #374151);
             background-size: 200% 100%;
@@ -484,7 +421,6 @@
             100% { background-position: -200% 0; }
         }
 
-        /* Music visualizer effect */
         .music-bars {
             display: flex;
             align-items: end;
@@ -512,32 +448,18 @@
     </style>
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Animated background -->
-    <div class="animated-bg"></div>
 
-    <!-- Canvas for the animated particle background -->
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-    </button>
 
-    <!-- Main Content Container -->
+
     <main id="main-content" class="min-h-screen w-full flex items-center justify-center p-4 relative">
         <div class="w-full max-w-lg mx-auto">
-            <!-- Glass Card -->
             <article class="glass-card p-6 sm:p-8 fade-in float-animation" id="interactive-card" role="main">
-                
-                <!-- Profile Header -->
-                <header class="flex flex-col items-center text-center">
-                    <div class="avatar-container glow-animation">
+                                <header class="flex flex-col items-center text-center">
+                    <div class="avatar-container">
                         <div class="avatar-ring"></div>
                         <img 
                             src="ava.jpg" 
@@ -568,15 +490,13 @@
                     </div>
                 </header>
 
-                <!-- Social Links -->
                 <section class="mt-6 sm:mt-8" aria-labelledby="social-heading">
                     <h2 id="social-heading" class="text-sm font-semibold text-center text-gray-400 uppercase tracking-wider mb-4">
                         Social Links
                     </h2>
                     <nav class="flex items-center justify-center gap-4" role="navigation" aria-label="Social media links">
-                        <!-- X.com / Twitter -->
                         <a 
-                            href="https://x.com/zpxxyz" 
+                            href="https://x.com/chatgptzpx" 
                             target="_blank" 
                             rel="noopener noreferrer" 
                             aria-label="Follow on X (formerly Twitter)"
@@ -587,7 +507,6 @@
                             </svg>
                         </a>
                         
-                        <!-- Telegram -->
                         <a 
                             href="https://t.me/chatgpthvh" 
                             target="_blank" 
@@ -600,7 +519,6 @@
                             </svg>
                         </a>
                         
-                        <!-- Steam -->
                         <a 
                             href="https://steamcommunity.com/id/SnoozyDemonX/" 
                             target="_blank" 
@@ -608,12 +526,30 @@
                             aria-label="View Steam profile"
                             class="social-link"
                         >
-                            <img src="icons/steam.svg" alt="Steam Icon" aria-hidden="true">
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100%" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+<path fill="none" opacity="1.000000" stroke="none" d=" M331.000000,501.000000   C220.666687,501.000000 110.833389,501.000000 1.000059,501.000000   C1.000039,334.333405 1.000039,167.666794 1.000020,1.000148   C167.666565,1.000099 334.333130,1.000099 500.999756,1.000049   C500.999847,167.666519 500.999847,334.333038 500.999939,500.999786   C444.500000,501.000000 388.000000,501.000000 331.000000,501.000000  M249.472321,453.532867   C281.378967,453.223053 311.773163,446.903015 340.601685,432.603424   C365.892914,420.058411 387.730774,403.299072 405.796570,381.860474   C426.244629,357.595001 440.371338,330.054382 447.805176,298.894531   C456.265961,263.430145 455.446655,228.309952 445.503357,193.570068   C436.228760,161.166443 419.310944,132.825790 395.556122,108.780815   C378.898865,91.920113 359.763916,78.576332 338.449219,68.064323   C313.928619,55.971233 287.892731,50.049126 260.941559,48.670380   C223.410553,46.750401 187.650452,54.496082 154.534195,72.562447   C132.380493,84.648262 112.932304,100.293205 96.582367,119.666649   C83.914803,134.676788 73.835388,151.168625 65.619560,169.059937   C56.580952,188.743011 52.324532,209.492798 49.333904,230.636673   C48.370918,237.445038 48.448399,244.400558 48.072872,250.891586   C58.565311,253.911148 68.294968,256.522217 77.906586,259.512695   C106.705490,268.472961 135.455704,277.589691 164.236969,286.606903   C165.616730,287.039185 167.427719,287.754120 168.501678,287.232819   C175.249588,283.957397 183.755707,284.058289 188.051849,275.975494   C190.820435,270.766663 194.932785,266.268127 198.475510,261.475372   C215.897018,237.907028 233.351410,214.362885 250.706573,190.745834   C251.817413,189.234192 252.517319,187.239075 252.855087,185.368927   C256.173401,166.996368 264.594696,151.286880 279.704285,140.416260   C305.059845,122.174049 333.903748,120.599625 360.180939,137.084518   C381.917023,150.720566 393.145264,171.338409 393.130615,197.525238   C393.111877,231.048553 368.972900,260.018646 335.936951,266.152618   C332.759674,266.742523 329.280670,267.466980 326.706482,269.239563   C315.810028,276.742859 305.185455,284.642365 294.493744,292.441284   C278.601440,304.033722 262.686981,315.596893 246.887741,327.315155   C241.653320,331.197571 237.002518,335.086182 235.107056,342.360199   C229.753510,362.904999 211.204651,375.803833 190.452423,375.935913   C174.074417,376.040100 161.327255,368.480286 151.431061,355.581970   C149.800354,353.456604 147.117935,351.513916 144.561081,350.825256   C128.727295,346.560577 112.804688,342.620850 96.882736,338.690033   C86.504456,336.127838 76.077377,333.763275 65.470444,331.262634   C90.001350,394.010742 159.143814,452.362213 249.472321,453.532867  M287.555298,232.942276   C292.243530,238.654160 298.432190,242.060181 305.323822,244.269974   C331.857300,252.777863 355.846802,241.682465 367.166870,220.666306   C377.283447,201.884430 374.054718,175.635788 357.469543,160.249924   C341.953339,145.855759 323.915863,142.900314 305.432434,149.253326   C287.064850,155.566544 275.022369,169.657578 272.742493,189.993332   C270.920990,206.240753 274.487457,220.952713 287.555298,232.942276  M203.895813,292.535370   C197.021820,290.361847 190.096191,289.114563 182.890488,291.334808   C184.556305,292.553497 186.332748,293.244415 188.105759,293.944000   C195.620392,296.909149 204.298386,298.375824 210.426437,303.129333   C227.774841,316.586365 225.845490,344.513641 207.852097,357.255554   C199.203766,363.379761 190.242691,362.808929 180.835922,359.937073   C175.302856,358.247894 169.693130,356.809692 163.217682,355.008179   C168.995529,364.382477 186.768570,371.017700 201.763580,366.031830   C215.325241,361.522522 228.480453,349.089844 228.903351,330.801025   C229.314789,313.007446 222.308395,302.007294 203.895813,292.535370  z"/>
+<path fill="currentColor" opacity="1.000000" stroke="none" d=" M248.986069,453.535767   C159.143814,452.362213 90.001350,394.010742 65.470444,331.262634   C76.077377,333.763275 86.504456,336.127838 96.882736,338.690033   C112.804688,342.620850 128.727295,346.560577 144.561081,350.825256   C147.117935,351.513916 149.800354,353.456604 151.431061,355.581970   C161.327255,368.480286 174.074417,376.040100 190.452423,375.935913   C211.204651,375.803833 229.753510,362.904999 235.107056,342.360199   C237.002518,335.086182 241.653320,331.197571 246.887741,327.315155   C262.686981,315.596893 278.601440,304.033722 294.493744,292.441284   C305.185455,284.642365 315.810028,276.742859 326.706482,269.239563   C329.280670,267.466980 332.759674,266.742523 335.936951,266.152618   C368.972900,260.018646 393.111877,231.048553 393.130615,197.525238   C393.145264,171.338409 381.917023,150.720566 360.180939,137.084518   C333.903748,120.599625 305.059845,122.174049 279.704285,140.416260   C264.594696,151.286880 256.173401,166.996368 252.855087,185.368927   C252.517319,187.239075 251.817413,189.234192 250.706573,190.745834   C233.351410,214.362885 215.897018,237.907028 198.475510,261.475372   C194.932785,266.268127 190.820435,270.766663 188.051849,275.975494   C183.755707,284.058289 175.249588,283.957397 168.501678,287.232819   C167.427719,287.754120 165.616730,287.039185 164.236969,286.606903   C135.455704,277.589691 106.705490,268.472961 77.906586,259.512695   C68.294968,256.522217 58.565311,253.911148 48.072872,250.891586   C48.448399,244.400558 48.370918,237.445038 49.333904,230.636673   C52.324532,209.492798 56.580952,188.743011 65.619560,169.059937   C73.835388,151.168625 83.914803,134.676788 96.582367,119.666649   C112.932304,100.293205 132.380493,84.648262 154.534195,72.562447   C187.650452,54.496082 223.410553,46.750401 260.941559,48.670380   C287.892731,50.049126 313.928619,55.971233 338.449219,68.064323   C359.763916,78.576332 378.898865,91.920113 395.556122,108.780815   C419.310944,132.825790 436.228760,161.166443 445.503357,193.570068   C455.446655,228.309952 456.265961,263.430145 447.805176,298.894531   C440.371338,330.054382 426.244629,357.595001 405.796570,381.860474   C387.730774,403.299072 365.892914,420.058411 340.601685,432.603424   C311.773163,446.903015 281.378967,453.223053 248.986069,453.535767  z"/>
+<path fill="none" opacity="1.000000" stroke="none" d=" M287.242188,232.758896   C274.487457,220.952713 270.920990,206.240753 272.742493,189.993332   C275.022369,169.657578 287.064850,155.566544 305.432434,149.253326   C323.915863,142.900314 341.953339,145.855759 357.469543,160.249924   C374.054718,175.635788 377.283447,201.884430 367.166870,220.666306   C355.846802,241.682465 331.857300,252.777863 305.323822,244.269974   C298.432190,242.060181 292.243530,238.654160 287.242188,232.758896  M351.677826,166.851974   C331.746185,147.733704 300.728485,152.487228 286.786194,175.473724   C276.241333,192.858932 280.355835,216.757324 296.638306,229.477448   C316.352600,244.878555 341.598938,240.255859 355.651398,222.148499   C368.746307,205.275040 367.189972,184.081955 351.677826,166.851974  z"/>
+<path fill="#E7E5E6" opacity="1.000000" stroke="none" d=" M204.246780,292.703796   C222.308395,302.007294 229.314789,313.007446 228.903351,330.801025   C228.480453,349.089844 215.325241,361.522522 201.763580,366.031830   C186.768570,371.017700 168.995529,364.382477 163.217682,355.008179   C169.693130,356.809692 175.302856,358.247894 180.835922,359.937073   C190.242691,362.808929 199.203766,363.379761 207.852097,357.255554   C225.845490,344.513641 227.774841,316.586365 210.426437,303.129333   C204.298386,298.375824 195.620392,296.909149 188.105759,293.944000   C186.332748,293.244415 184.556305,292.553497 182.890488,291.334808   C190.096191,289.114563 197.021820,290.361847 204.246780,292.703796  z"/>
+<path fill="none" opacity="1.000000" stroke="none"/>
+</svg>
+
+                        </a>
+                        <a 
+                            href="https://www.youtube.com/@chatgptzpx/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="View YouTube channel"
+                            class="social-link"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="28" height="28">
+                                <path d="M23.498 6.186a2.994 2.994 0 0 0-2.107-2.117C19.228 3.5 12 3.5 12 3.5s-7.228 0-9.391.569A2.994 2.994 0 0 0 .502 6.186C0 8.36 0 12 0 12s0 3.64.502 5.814a2.994 2.994 0 0 0 2.107 2.117C4.772 20.5 12 20.5 12 20.5s7.228 0 9.391-.569a2.994 2.994 0 0 0 2.107-2.117C24 15.64 24 12 24 12s0-3.64-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
                         </a>
                     </nav>
                 </section>
                 
-                <!-- Discord Section -->
                 <section class="mt-6 sm:mt-8 text-center" aria-labelledby="discord-heading">
                     <h2 id="discord-heading" class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
                         Discord
@@ -632,7 +568,6 @@
                     </button>
                 </section>
 
-                <!-- Footer / T.O.S. -->
                 <footer class="text-center mt-6 sm:mt-8 pt-6 border-t border-gray-200/10">
                     <p class="text-xs text-gray-500 mb-2">
                         <strong>Terms of Service:</strong> Do not copy, mirror, or re-upload my code or artwork without explicit permission.
@@ -644,22 +579,16 @@
         </div>
     </main>
     
-    <!-- Toast notification element -->
     <div id="toast" class="toast" role="alert" aria-live="polite">
         <span id="toast-message">Copied to clipboard!</span>
     </div>
 
     <script>
-        // SCRIPT FIX: All JavaScript is now wrapped in a DOMContentLoaded event listener.
-        // This ensures the HTML is fully parsed and ready before the script tries to
-        // find and manipulate elements, preventing common errors on live servers.
         document.addEventListener('DOMContentLoaded', () => {
             'use strict';
 
-            // Check for reduced motion preference
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            // Initialize all features
             if (!prefersReducedMotion) {
                 initParticleBackground();
             }
@@ -728,7 +657,7 @@
                 function initParticles() {
                     particles = [];
                     const numberOfParticles = Math.min(
-                        (canvas.height * canvas.width) / 8000,
+                        (canvas.height * canvas.width) / 16000,
                         120
                     );
 
@@ -880,23 +809,7 @@
                 });
             }
 
-            function initThemeToggle() {
-                const themeToggle = document.getElementById('theme-toggle');
-                if (!themeToggle) return;
 
-                themeToggle.addEventListener('click', () => {
-                    document.body.style.filter = document.body.style.filter === 'invert(1) hue-rotate(180deg)' 
-                        ? '' 
-                        : 'invert(1) hue-rotate(180deg)';
-                    
-                    const icon = themeToggle.querySelector('svg');
-                    if (icon) {
-                        icon.style.transform = icon.style.transform === 'rotate(180deg)' 
-                            ? '' 
-                            : 'rotate(180deg)';
-                    }
-                });
-            }
 
             function initFadeInAnimations() {
                 const fadeInElements = document.querySelectorAll('.fade-in');
