@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio</title>
     <meta name="description" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 — links, socials, and creative work.">
+    <meta name="theme-color" content="#111827">
+    <meta name="keywords" content="digital artist, programmer, freelance, portfolio, creative work">
+    <meta name="author" content="ChatGPT HVH">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
+    <meta property="og:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
+    <meta property="twitter:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
     
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,143 +31,88 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 
-
-
     <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark blue-gray background */
-            overflow: hidden; /* Hide scrollbars caused by canvas */
-            color: #E5E7EB; /* Light gray text */
+        /* CSS Custom Properties for better maintainability */
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-glass: rgba(31, 41, 55, 0.4);
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --accent-primary: #a78bfa;
+            --accent-secondary: #818cf8;
+            --accent-tertiary: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-glass: rgba(0, 0, 0, 0.37);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
         }
 
 
+        /* Base styles with improved accessibility */
+        * {
+            box-sizing: border-box;
+        }
 
 
-        /* --- Animated Particle Background --- */
-        #particle-canvas {
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+
+        /* Improved focus styles for accessibility */
+        *:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+
+        /* Skip to main content for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 100;
+            font-weight: 600;
+        }
+
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+
+        /* Enhanced animated background */
+        .animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.3; 
+            z-index: -2;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
         }
 
 
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
 
-
-        /* --- Enhanced Glassmorphism Card Effect --- */
-        .glass-card {
-            background: rgba(31, 41, 55, 0.4); 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px); /* For Safari */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: transform 0.4s ease-out; 
-            will-change: transform;
-        }
-
-
-
-
-        /* --- Custom Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-
-
-
-        /* --- Social Icon Hover Animation --- */
-        .social-link {
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-
-
-
-        .social-link:hover {
-            transform: translateY(-4px); 
-            color: #a78bfa; 
-        }
-
-
-
-
-        /* --- Enhanced Copy Button --- */
-        #copy-btn {
-            transition: all 0.2s ease;
-        }
-
-
-
-
-        #copy-btn:active {
-            transform: scale(0.96); /* Shrinks the button on click for feedback */
-            background-color: #6d28d9; /* Darker violet on click */
-        }
-
-
-
-
-        /* --- Toast Notification Styling --- */
-        #toast {
-            position: fixed;
-            bottom: -100px; /* Start off-screen */
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 24px;
-            background-color: #818cf8; 
-            color: #1F2937; 
-            border-radius: 9999px;
-            font-weight: 500;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 50;
-        }
-
-
-
-
-        #toast.show {
-            bottom: 30px;
-            opacity: 1;
-        }
-    </style>
-</head>
-<body class="antialiased">
-
-
-
-
-    <!-- Canvas for the animated particle background -->
-    <canvas id="particle-canvas"></canvas>
-
-
-
-
-    <!-- Main Content Container -->
-    <main class="min-h-screen w-full flex items-center justify-center p-4 relative">
-        <div class="w-full max-w-md mx-auto">
-            <!-- Glass Card -->
-            <section class="glass-card rounded-2xl p-8 fade-in" id="interactive-card">
-                
-                <!-- Profile Header -->
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-28 h-28 rounded-full overflow-hidden border-2 border-violet-400/50 shadow-lg mb-4">
-                        <img src="ava.jpg" alt="Avatar" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/112x112/1F2937/E5E7EB?text=AVA'; this.onerror=null;">
-                    </div>
-                    <h1 class="text-3xl font-bold text-white">
-                        <span class="text-violet-400">𓆩</span> ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ <span class="text-violet-400">𓆪</span>
-                    </h1>
-
-
-                </html>
+            </html>
