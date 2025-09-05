@@ -1,18 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio</title>
+    <meta name="description" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 — links, socials, and creative work.">
+    <meta name="theme-color" content="#111827">
+    <meta name="keywords" content="digital artist, programmer, freelance, portfolio, creative work">
+    <meta name="author" content="ChatGPT HVH">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
+    <meta property="og:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 • Portfolio">
+    <meta property="twitter:description" content="Freelance Digital Artist & Programmer - Links, socials, and creative work">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <style>
+        /* CSS Custom Properties for better maintainability */
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-glass: rgba(31, 41, 55, 0.4);
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --accent-primary: #a78bfa;
+            --accent-secondary: #818cf8;
+            --accent-tertiary: #f59e0b;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-glass: rgba(0, 0, 0, 0.37);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            --gradient-primary: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+        }
+
+        /* Base styles with improved accessibility */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        /* Improved focus styles for accessibility */
+        *:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        /* Skip to main content for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 100;
+            font-weight: 600;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Enhanced animated background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(129, 140, 248, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        /* Animated Particle Background with better performance */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Enhanced Glassmorphism Card Effect */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            box-shadow: 
+                0 8px 32px 0 var(--shadow-glass),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+                0 0 50px rgba(167, 139, 250, 0.1);
+            transition: all 0.4s var(--transition-smooth);
+            will-change: transform;
+            border-radius: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s var(--transition-smooth);
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* Improved animations with reduced motion support */
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes fadeInUp {
+                from { 
+                    opacity: 0; 
+                    transform: translateY(30px) scale(0.95); 
+                }
+                to { 
+                    opacity: 1; 
+                    transform: translateY(0) scale(1); 
+                }
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.8; }
+            }
+
+            @keyframes glow {
+                0%, 100% { box-shadow: 0 0 20px rgba(167, 139, 250, 0.3); }
+                50% { box-shadow: 0 0 30px rgba(167, 139, 250, 0.6); }
+            }
+
+            .fade-in {
+                animation: fadeInUp 0.8s var(--transition-smooth) forwards;
+            }
+
+            .float-animation {
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .pulse-animation {
+                animation: pulse 3s ease-in-out infinite;
+            }
+
+            .glow-animation {
+                animation: glow 4s ease-in-out infinite;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in, .float-animation, .pulse-animation, .glow-animation {
+                animation: none;
+            }
+        }
+
+        /* Enhanced avatar with better loading states */
+        .avatar-container {
+            position: relative;
+            width: 8rem;
+            height: 8rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-primary);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(167, 139, 250, 0.5);
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s var(--transition-smooth);
+        }
+
+        .avatar-container:hover .avatar-ring {
+            opacity: 1;
+        }
+
+        /* Status indicator */
+        .status-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border: 3px solid var(--bg-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Improved social links with better hover states */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s var(--transition-smooth);
+            z-index: -1;
+        }
+
+        .social-link:hover {
+            transform: translateY(-6px) scale(1.1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
+            border-color: var(--accent-primary);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link svg,
+        .social-link img {
+            width: 1.75rem;
+            height: 1.75rem;
+            transition: transform 0.3s var(--transition-smooth);
+        }
+
+        .social-link:hover svg,
+        .social-link:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Enhanced copy button with better feedback */
+        .copy-button {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(107, 114, 128, 0.3), rgba(75, 85, 99, 0.3));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-weight: 500;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .copy-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s var(--transition-smooth);
+        }
+
+        .copy-button:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+        }
+
+        .copy-button:hover::before {
+            left: 100%;
+        }
+
+        .copy-button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Improved toast notification */
+        .toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: all 0.5s var(--transition-bounce);
+            z-index: 50;
+            box-shadow: 0 10px 30px rgba(129, 140, 248, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .toast.show {
+            bottom: 2rem;
+            opacity: 1;
+        }
+
+        /* New features */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            background: var(--gradient-primary);
+            transform: scale(1.1);
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 640px) {
+            .glass-card {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .avatar-container {
+                width: 6rem;
+                height: 6rem;
+            }
+            
+            .social-link {
+                width: 3rem;
+                height: 3rem;
+            }
+            
+            .social-link svg,
+            .social-link img {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading state for images */
+        .loading {
+            background: linear-gradient(90deg, #374151, #4B5563, #374151);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Music visualizer effect */
+        .music-bars {
+            display: flex;
+            align-items: end;
+            gap: 2px;
+            height: 20px;
+            margin-left: 8px;
+        }
+
+        .music-bar {
+            width: 3px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+            animation: musicBounce 1s ease-in-out infinite;
+        }
+
+        .music-bar:nth-child(1) { animation-delay: 0s; height: 60%; }
+        .music-bar:nth-child(2) { animation-delay: 0.1s; height: 80%; }
+        .music-bar:nth-child(3) { animation-delay: 0.2s; height: 100%; }
+        .music-bar:nth-child(4) { animation-delay: 0.3s; height: 70%; }
+
+        @keyframes musicBounce {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Animated background -->
+    <div class="animated-bg"></div>
+
+    <!-- Canvas for the animated particle background -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+    </button>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="min-h-screen w-full flex items-center justify-center p-4 relative">
+        <div class="w-full max-w-lg mx-auto">
+            <!-- Glass Card -->
+            <article class="glass-card p-6 sm:p-8 fade-in float-animation" id="interactive-card" role="main">
+                
+                <!-- Profile Header -->
+                <header class="flex flex-col items-center text-center">
+                    <div class="avatar-container glow-animation">
+                        <div class="avatar-ring"></div>
+                        <img 
+                            src="ava.jpg" 
+                            alt="Profile picture of ChatGPT HVH" 
+                            class="avatar loading"
+                            loading="lazy"
+                            onerror="this.src='https://placehold.co/128x128/1F2937/E5E7EB?text=AVA'; this.classList.remove('loading'); this.onerror=null;"
+                            onload="this.classList.remove('loading')"
+                        >
+                        <div class="status-indicator pulse-animation" title="Online"></div>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">
+                        <span class="text-violet-400" aria-hidden="true">𓆩</span> 
+                        <span class="sr-only">ChatGPT HVH</span>
+                        <span aria-hidden="true">ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ</span> 
+                        <span class="text-violet-400" aria-hidden="true">𓆪</span>
+                    </h1>
+                    <p class="text-gray-300 text-sm sm:text-base mb-2">Freelance Digital Artist & Programmer</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-400">
+                        <span aria-label="strawberry emoji">🍓</span> 
+                        <span>Thank you for your support!</span>
+                        <div class="music-bars">
+                            <div class="music-bar"></div>
+                            <div class="music-bar"></div>
+                            <div class="music-bar"></div>
+                            <div class="music-bar"></div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Social Links -->
+                <section class="mt-6 sm:mt-8" aria-labelledby="social-heading">
+                    <h2 id="social-heading" class="text-sm font-semibold text-center text-gray-400 uppercase tracking-wider mb-4">
+                        Social Links
+                    </h2>
+                    <nav class="flex items-center justify-center gap-4" role="navigation" aria-label="Social media links">
+                        <!-- X.com / Twitter -->
+                        <a 
+                            href="https://x.com/zpxxyz" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="Follow on X (formerly Twitter)"
+                            class="social-link"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+                                <path d="M389.2 48h70.6L305.6 224.2L487 464H345L233.7 318.6L106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"/>
+                            </svg>
+                        </a>
+                        
+                        <!-- Telegram -->
+                        <a 
+                            href="https://t.me/chatgpthvh" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="Contact on Telegram"
+                            class="social-link"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                            </svg>
+                        </a>
+                        
+                        <!-- Steam -->
+                        <a 
+                            href="https://steamcommunity.com/id/SnoozyDemonX/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            aria-label="View Steam profile"
+                            class="social-link"
+                        >
+                            <img src="icons/steam.svg" alt="Steam Icon" aria-hidden="true">
+                        </a>
+                    </nav>
+                </section>
+                
+                <!-- Discord Section -->
+                <section class="mt-6 sm:mt-8 text-center" aria-labelledby="discord-heading">
+                    <h2 id="discord-heading" class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                        Discord
+                    </h2>
+                    <button 
+                        id="copy-btn" 
+                        class="copy-button flex items-center justify-center gap-3"
+                        data-copy="zpx.xyz"
+                        aria-label="Copy Discord username to clipboard"
+                        type="button"
+                    >
+                        <span>zpx.xyz</span>
+                        <svg class="w-5 h-5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </button>
+                </section>
+
+                <!-- Footer / T.O.S. -->
+                <footer class="text-center mt-6 sm:mt-8 pt-6 border-t border-gray-200/10">
+                    <p class="text-xs text-gray-500 mb-2">
+                        <strong>Terms of Service:</strong> Do not copy, mirror, or re-upload my code or artwork without explicit permission.
+                    </p>
+                    <p class="text-xs text-gray-600">Please be 14+ to visit my socials.</p>
+                </footer>
+
+            </article>
+        </div>
+    </main>
+    
+    <!-- Toast notification element -->
+    <div id="toast" class="toast" role="alert" aria-live="polite">
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <script>
+        // SCRIPT FIX: All JavaScript is now wrapped in a DOMContentLoaded event listener.
+        // This ensures the HTML is fully parsed and ready before the script tries to
+        // find and manipulate elements, preventing common errors on live servers.
+        document.addEventListener('DOMContentLoaded', () => {
+            'use strict';
+
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Initialize all features
+            if (!prefersReducedMotion) {
+                initParticleBackground();
+            }
+            initCardTiltEffect();
+            initCopyFunctionality();
+            initThemeToggle();
+            initFadeInAnimations();
+
+            function initParticleBackground() {
+                const canvas = document.getElementById('particle-canvas');
+                if (!canvas) return;
+
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                let animationId;
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+
+                class Particle {
+                    constructor(x, y, directionX, directionY, size, color) {
+                        this.x = x;
+                        this.y = y;
+                        this.directionX = directionX;
+                        this.directionY = directionY;
+                        this.size = size;
+                        this.color = color;
+                        this.life = Math.random() * 100;
+                    }
+
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                    }
+
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) {
+                            this.directionX = -this.directionX;
+                        }
+                        if (this.y > canvas.height || this.y < 0) {
+                            this.directionY = -this.directionY;
+                        }
+
+                        this.x += this.directionX;
+                        this.y += this.directionY;
+                        this.life += 0.5;
+                        if (this.life >= 100) {
+                            this.life = 0;
+                            this.size = (Math.random() * 2) + 0.5;
+                        }
+
+                        const pulse = Math.sin(this.life * 0.1) * 0.5 + 0.5;
+                        const currentSize = this.size * (0.5 + pulse * 0.5);
+
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2, false);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                    }
+                }
+
+                function initParticles() {
+                    particles = [];
+                    const numberOfParticles = Math.min(
+                        (canvas.height * canvas.width) / 8000,
+                        120
+                    );
+
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        const size = (Math.random() * 2) + 0.5;
+                        const x = Math.random() * (canvas.width - size * 4) + size * 2;
+                        const y = Math.random() * (canvas.height - size * 4) + size * 2;
+                        const directionX = (Math.random() * 0.6) - 0.3;
+                        const directionY = (Math.random() * 0.6) - 0.3;
+                        const colors = [
+                            'rgba(167, 139, 250, 0.6)',
+                            'rgba(129, 140, 248, 0.6)',
+                            'rgba(245, 158, 11, 0.4)'
+                        ];
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+
+                        particles.push(new Particle(x, y, directionX, directionY, size, color));
+                    }
+                }
+
+                function animateParticles() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                    }
+                    animationId = requestAnimationFrame(animateParticles);
+                }
+
+                let resizeTimeout;
+                function handleResize() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        resizeCanvas();
+                        initParticles();
+                    }, 250);
+                }
+
+                window.addEventListener('resize', handleResize);
+                
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        cancelAnimationFrame(animationId);
+                    } else {
+                        animateParticles();
+                    }
+                });
+
+                resizeCanvas();
+                initParticles();
+                animateParticles();
+            }
+
+            function initCardTiltEffect() {
+                const card = document.getElementById('interactive-card');
+                if (!card || prefersReducedMotion) return;
+
+                let isHovering = false;
+
+                function handleMouseMove(e) {
+                    if (!isHovering) return;
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8;
+                    const rotateY = ((x - centerX) / centerX) * 8;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                }
+
+                function handleMouseEnter() {
+                    isHovering = true;
+                }
+
+                function handleMouseLeave() {
+                    isHovering = false;
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                }
+
+                card.addEventListener('mousemove', handleMouseMove);
+                card.addEventListener('mouseenter', handleMouseEnter);
+                card.addEventListener('mouseleave', handleMouseLeave);
+            }
+
+            function initCopyFunctionality() {
+                const copyBtn = document.getElementById('copy-btn');
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toast-message');
+
+                if (!copyBtn || !toast) return;
+
+                function showToast(message = 'Copied to clipboard!') {
+                    toastMessage.textContent = message;
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
 
                 function copyToClipboard(text) {
-                    // Modern Clipboard API
                     if (navigator.clipboard && window.isSecureContext) {
-                        return navigator.clipboard.writeText(text)
+                        navigator.clipboard.writeText(text)
                             .then(() => showToast())
                             .catch(err => {
                                 console.error('Failed to copy text: ', err);
                                 showToast('Failed to copy');
                             });
+                        return;
                     }
 
-
-                    // Fallback for older browsers
                     try {
                         const tempInput = document.createElement('textarea');
                         tempInput.value = text;
@@ -39,7 +865,6 @@
                     }
                 }
 
-
                 copyBtn.addEventListener('click', () => {
                     const textToCopy = copyBtn.getAttribute('data-copy');
                     if (textToCopy) {
@@ -47,8 +872,6 @@
                     }
                 });
 
-
-                // Keyboard support
                 copyBtn.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -57,19 +880,15 @@
                 });
             }
 
-
             function initThemeToggle() {
                 const themeToggle = document.getElementById('theme-toggle');
                 if (!themeToggle) return;
 
-
                 themeToggle.addEventListener('click', () => {
-                    // Simple theme toggle effect
                     document.body.style.filter = document.body.style.filter === 'invert(1) hue-rotate(180deg)' 
                         ? '' 
                         : 'invert(1) hue-rotate(180deg)';
                     
-                    // Update button icon
                     const icon = themeToggle.querySelector('svg');
                     if (icon) {
                         icon.style.transform = icon.style.transform === 'rotate(180deg)' 
@@ -79,9 +898,13 @@
                 });
             }
 
-
-            // Initialize fade-in animation for elements
             function initFadeInAnimations() {
+                const fadeInElements = document.querySelectorAll('.fade-in');
+                if (prefersReducedMotion) {
+                    fadeInElements.forEach(el => el.style.opacity = 1);
+                    return;
+                }
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -93,26 +916,13 @@
                     threshold: 0.1
                 });
 
-
-                document.querySelectorAll('.fade-in').forEach(el => {
-                    if (!prefersReducedMotion) {
-                        observer.observe(el);
-                    } else {
-                        el.classList.add('fade-in');
-                    }
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
                 });
             }
-
-
-            // Initialize when DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initFadeInAnimations);
-            } else {
-                initFadeInAnimations();
-            }
-
-
-        })();
+        });
     </script>
 </body>
 </html>
+
+
