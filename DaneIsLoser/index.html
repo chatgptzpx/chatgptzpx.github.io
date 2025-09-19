@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mod List</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #modList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        #modList li {
+            background-color: #fafafa;
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-top: -1px; /* Prevent double borders */
+            font-size: 14px;
+        }
+        #modList li:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        #modList li:hover {
+            background-color: #f0f0f0;
+        }
+        #modCount {
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Minecraft Mod List</h1>
+    <input type="text" id="searchInput" onkeyup="searchMods()" placeholder="Search for mods...">
+    <ul id="modList">
+        <!-- Mod list will be dynamically inserted here by JavaScript -->
+    </ul>
+    <p id="modCount"></p>
+</div>
+
+<script>
+    // The full list of your mod files
+    const allMods = [
+        "AdvancementPlaques-1.21.1-neoforge-1.6.8.jar",
+        "a_good_place-1.21-1.2.6-neoforge.jar",
+        "appleskin-neoforge-mc1.21-3.0.7.jar",
+        "architectury-13.0.8-neoforge.jar",
+        "autoclicker-neoforge-21.1.1.jar",
+        "betterarcheology-neoforge-1.3.2.jar",
+        "betterf1-NeoForge-1.1-1.21.5.jar",
+        "BetterPingDisplay-1.21.1-1.1.jar",
+        "better_smithing_ui-neoforge-1.21+2.0.0.jar",
+        "BetterTab-neoforge-1.21.1-1.0.0+build.11.jar",
+        "biomeinfo-1.21.1-1.8.jar",
+        "bookshelf-neoforge-1.21.1-21.1.67.jar",
+        "BridgingMod-2.6.2+1.21.1.neoforge-release.jar",
+        "carryon-neoforge-1.21.1-2.2.2.11.jar",
+        "chat_heads-0.13.18-neoforge-1.21.jar",
+        "ChatImpressiveAnimation-neoforge-1.3.1+mc1.21.5.jar",
+        "chestsearchbar-neoforge-1.21-1.5.1.jar",
+        "clientsort-neoforge-2.0.0-beta.10+1.21.1.jar",
+        "cloth-config-15.0.140-neoforge.jar",
+        "Clumps-neoforge-1.21.1-19.0.0.1.jar",
+        "collective-1.21.1-8.3.jar",
+        "common-networking-neoforge-1.0.20-1.21.1.jar",
+        "connector-2.0.0-beta.8+1.21.1-full.jar",
+        "continuity-3.0.0+1.21.neoforge.jar",
+        "coroutil-neoforge-1.21.0-1.3.8.jar",
+        "create-1.21.1-6.0.6.jar",
+        "CreativeCore_NEOFORGE_v2.13.7_mc1.21.1.jar",
+        "darkmodeeverywhere-1.21-1.3.5.jar",
+        "durabilitytooltip-1.1.5-neoforge-mc1.21.jar",
+        "duradisplay-neoforge-1.21.1-2.0.0.jar",
+        "DynamicBrightness-neoforge-1.3.1.jar",
+        "dynamic-fps-3.9.5+minecraft-1.21.0-neoforge.jar",
+        "effecttimerplus-neoforge-2.2.7+1.21.jar",
+        "enchdesc-neoforge-1.21.1-21.1.7.jar",
+        "enhanced_attack_indicator-1.1.1+1.21-forge.jar",
+        "EnhancedVisuals_NEOFORGE_v1.8.21_mc1.21.1.jar",
+        "entityculling-neoforge-1.8.1-mc1.21.jar",
+        "entity_model_features_neoforge_1.21.1-2.4.1.jar",
+        "entity_texture_features_neoforge_1.21.1-6.2.9.jar",
+        "EquipmentCompare-1.21.1-neoforge-1.3.13.jar",
+        "explosiveenhancement-neoforge-1.21.1-1.1.2.jar",
+        "fallingleaves-1.21.1-2.5.1.jar",
+        "ferritecore-7.0.2-neoforge.jar",
+        "firstperson-neoforge-2.5.0-mc1.21.jar",
+        "flerovium-neoforge-1.21.1-1.0.9-all.jar",
+        "Forgematica-0.3.3-mc1.21.1.jar",
+        "forgified-fabric-api-0.115.6+2.1.1+1.21.1.jar",
+        "freecam-neoforge-1.3.0+mc1.21.jar",
+        "friendsandfoes-neoforge-4.0.7+mc1.21.1.jar",
+        "ftb-library-neoforge-2101.1.14.jar",
+        "fzzy_config-0.7.2+1.21+neoforge.jar",
+        "gravestone-neoforge-1.21.1-1.0.32.jar",
+        "healthindicatortxf-1.21.1-1.3.9-neoforge.jar",
+        "HeldItemTooltips-v21.1.0-1.21.1-NeoForge.jar",
+        "Highlighter-1.21-neoforge-1.1.11.jar",
+        "Iceberg-1.21.1-neoforge-1.3.2.jar",
+        "immersivearmorhud-neoforge-1.0.1-1.21.1.jar",
+        "ImmersiveUI-NEOFORGE-0.3.0.jar",
+        "iris-neoforge-1.8.12+mc1.21.1.jar",
+        "ItemBorders-1.21-neoforge-1.2.5.jar",
+        "ItemPhysicLite_NEOFORGE_v1.6.8_mc1.21.1.jar",
+        "Jade-1.21.1-NeoForge-15.10.2.jar",
+        "jamlib-neoforge-1.3.5+1.21.1.jar",
+        "jei-1.21.1-neoforge-19.21.2.313.jar",
+        "just-hammers-neoforge-21.1.0.jar",
+        "kotlinforforge-5.9.0-all.jar",
+        "Ksyxis-1.3.3.jar",
+        "LegendaryTooltips-1.21.1-neoforge-1.5.5.jar",
+        "lighty-neoforge-3.0.0-beta.8+1.21.1.jar",
+        "'Loot Beams Refork-neoforge-1.21.1-3.2.6.jar'",
+        "MaFgLib-0.3.6-mc1.21.1.jar",
+        "midnightlib-1.7.5-neoforge+1.21.1.jar.duplicate",
+        "minecraft-cursor-neoforge-3.9.2+1.21.1-nf.1.jar",
+        "modelfix-1.21-1.10.jar",
+        "modernnetworking-neoforge-1.2.0+1.21.1.jar",
+        "monsters_in_the_closet-1.0.3+1.21-forge.jar",
+        "MouseTweaks-neoforge-mc1.21-2.26.1.jar",
+        "'[Neoforge-1.21.1]Accurateblockplacement 1.0.0.jar'",
+        "'Nirvana Lib-neoforge-1.21.1-2.0.15.jar'",
+        "no_resource_pack_warnings_forge-1.21-1.0.0.jar",
+        "notenoughanimations-neoforge-1.10.1-mc1.21.jar",
+        "notenoughcrashes-neoforge-4.4.9+1.21.1.jar",
+        "OctoLib-NEOFORGE-0.5.0.1.jar",
+        "ok_zoomer-neo-10.0.0-beta.10.jar",
+        "PaperDoll-v21.1.0-1.21.1-NeoForge.jar",
+        "PickUpNotifier-v21.1.1-1.21.1-NeoForge.jar",
+        "player-animation-lib-forge-2.0.1+1.21.1.jar",
+        "'Pretty Rain-1.21.1-NeoForge-1.1.4.jar'",
+        "prickle-neoforge-1.21.1-21.1.8.jar",
+        "Prism-1.21.1-neoforge-1.0.11.jar",
+        "PuzzlesLib-v21.1.36-1.21.1-NeoForge.jar",
+        "reeses-sodium-options-neoforge-1.8.3+mc1.21.4.jar",
+        "resourcefulconfig-neoforge-1.21-3.0.11.jar",
+        "resourcefullib-neoforge-1.21-3.0.12.jar",
+        "RollingGate-neoforge-1.21.1-1.1.0+build.58.jar",
+        "saturn-mc1.21.1-0.1.5.jar",
+        "screenshot-to-clipboard-neoforge-1.0.10.jar",
+        "screenshot_viewer-1.3.4-neoforge-mc1.21.1.jar",
+        "seamless-2.3.2-neoforge-1.21.1.jar",
+        "seamless-loading-screen-2.2.1+1.21-neoforge.jar",
+        "seedcrackerX-2.15.0.jar",
+        "ShoulderSurfing-NeoForge-1.21.1-4.13.2.jar",
+        "shulkerboxtooltip-neoforge-5.1.6+1.21.1.jar",
+        "skinlayers3d-neoforge-1.8.2-mc1.21.skin",
+        "sodiumdynamiclights-neoforge-1.0.10-1.21.1.jar",
+        "sodium-extra-neoforge-0.6.0+mc1.21.1.jar",
+        "sodiumextras-neoforge-1.0.8-1.21.1.jar",
+        "sodium-neoforge-0.6.13+mc1.21.1.jar",
+        "sodiumoptionsapi-neoforge-1.0.10-1.21.1.jar",
+        "sodiumoptionsmodcompat-neoforge-1.0.0-1.21.1.jar",
+        "sodium-shadowy-path-blocks-neoforge-4.0.0.jar",
+        "sound-physics-remastered-neoforge-1.21.1-1.4.12.jar",
+        "supermartijn642configlib-1.1.8-neoforge-mc1.21.jar",
+        "tia-neoforge-1.21-1.2.1.jar",
+        "txnilib-neoforge-1.0.24-1.21.1.jar",
+        "undertale_death_screen-neoforge-1.2.0+1.20.6.jar",
+        "VencordInstaller.exe",
+        "visuality-forge-2.0.5.jar",
+        "voicechat-neoforge-1.21.1-2.5.34.jar",
+        "wakes-1.21.1-NeoForge-1.0.2.jar",
+        "watut-neoforge-1.21.0-1.2.7.jar",
+        "worldedit-mod-7.3.8.jar",
+        "worldedit-mod-7.3.8.jar.duplicate",
+        "XaeroPlus-2.27.6+neoforge-1.21.1-WM1.39.12-MM25.2.10.jar",
+        "XaerosWorldMap_1.39.12_NeoForge_1.21.jar",
+        "XaeroZoomout-NeoForge-1.21-2.0.0.jar",
+        "yet_another_config_lib_v3-3.7.1+1.21.1-neoforge.jar",
+        "YungsApi-1.21.1-NeoForge-5.1.5.jar",
+        "YungsMenuTweaks-1.21.1-NeoForge-2.1.2.jar"
+    ];
+
+    // List of keywords/suffixes to exclude (case-insensitive)
+    const excluded = ["wurst", "baritone", "minimap", ".disabled"];
+
+    // Filter the mods based on the exclusion list
+    const filteredMods = allMods.filter(mod => {
+        const lowerCaseMod = mod.toLowerCase();
+        return !excluded.some(ex => lowerCaseMod.includes(ex));
+    });
+
+    // Get the list element from the DOM
+    const modList = document.getElementById('modList');
+    const modCount = document.getElementById('modCount');
+
+    // Populate the list with the filtered mods
+    filteredMods.forEach(mod => {
+        const li = document.createElement('li');
+        li.textContent = mod;
+        modList.appendChild(li);
+    });
+
+    // Update the mod count display
+    modCount.textContent = `Showing ${filteredMods.length} mods.`;
+
+    // Function to handle the search/filter functionality
+    function searchMods() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const ul = document.getElementById("modList");
+        const li = ul.getElementsByTagName('li');
+        let count = 0;
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (let i = 0; i < li.length; i++) {
+            const txtValue = li[i].textContent || li[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                count++;
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+        // Update the count of visible mods
+        modCount.textContent = `Showing ${count} of ${filteredMods.length} mods.`;
+    }
+</script>
+
+</body>
+</html>
