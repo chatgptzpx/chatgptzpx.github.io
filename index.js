@@ -1,50 +1,136 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 const MartianLogin = () => {
-  return (
-    <div className="container">
-      <div className="left-panel">
-        <div className="stars">
-          <div className="star" style={{ top: '15%', left: '18%', width: '3px', height: '3px' }}></div>
-          <div className="star" style={{ top: '12%', left: '75%', width: '2px', height: '2px' }}></div>
-          <div className="star" style={{ top: '30%', left: '88%', width: '3px', height: '3px' }}></div>
-          <div className="star" style={{ top: '48%', left: '8%', width: '3px', height: '3px' }}></div>
-          <div className="star" style={{ top: '75%', left: '12%', width: '2px', height: '2px' }}></div>
-          <div className="star" style={{ top: '88%', left: '35%', width: '3px', height: '3px' }}></div>
-          <div className="star" style={{ top: '80%', left: '70%', width: '2px', height: '2px' }}></div>
-          <div className="star" style={{ top: '55%', left: '92%', width: '2px', height: '2px' }}></div>
-        </div>
-        <div className="streak" style={{ top: '22%', right: '20px' }}></div>
-        <div className="streak" style={{ top: '26%', right: '15px', width: '60px', opacity: 0.8 }}></div>
-        <div className="planet">
-          <div className="cloud-1"></div>
-          <div className="cloud-2"></div>
-        </div>
-        <h1 className="title">M A R T I A N</h1>
-      </div>
-      <div className="right-panel">
-        <form className="login-form" aria-label="Login form">
-          <div className="form-group">
-            <input type="text" id="username" name="username" placeholder=" " required />
-            <label htmlFor="username">Username</label>
-          </div>
-          <div className="form-group">
-            <input type="password" id="password" name="password" placeholder=" " required />
-            <label htmlFor="password">Password</label>
-          </div>
-          <div className="button-group">
-            <button type="submit">Sign In</button>
-            <button type="button">Sign Up</button>
-          </div>
-          <a href="#" className="forgot-password">Forgot Password?</a>
-        </form>
-        <div className="bottom-circle"></div>
-      </div>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "left-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stars"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '15%',
+      left: '18%',
+      width: '3px',
+      height: '3px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '12%',
+      left: '75%',
+      width: '2px',
+      height: '2px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '30%',
+      left: '88%',
+      width: '3px',
+      height: '3px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '48%',
+      left: '8%',
+      width: '3px',
+      height: '3px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '75%',
+      left: '12%',
+      width: '2px',
+      height: '2px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '88%',
+      left: '35%',
+      width: '3px',
+      height: '3px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '80%',
+      left: '70%',
+      width: '2px',
+      height: '2px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "star",
+    style: {
+      top: '55%',
+      left: '92%',
+      width: '2px',
+      height: '2px'
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "streak",
+    style: {
+      top: '22%',
+      right: '20px'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "streak",
+    style: {
+      top: '26%',
+      right: '15px',
+      width: '60px',
+      opacity: 0.8
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "planet"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cloud-1"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "cloud-2"
+  })), /*#__PURE__*/React.createElement("h1", {
+    className: "title"
+  }, "M A R T I A N")), /*#__PURE__*/React.createElement("div", {
+    className: "right-panel"
+  }, /*#__PURE__*/React.createElement("form", {
+    className: "login-form",
+    "aria-label": "Login form"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "username",
+    name: "username",
+    placeholder: " ",
+    required: true
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "username"
+  }, "Username")), /*#__PURE__*/React.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password",
+    placeholder: " ",
+    required: true
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "password"
+  }, "Password")), /*#__PURE__*/React.createElement("div", {
+    className: "button-group"
+  }, /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Sign In"), /*#__PURE__*/React.createElement("button", {
+    type: "button"
+  }, "Sign Up")), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "forgot-password"
+  }, "Forgot Password?")), /*#__PURE__*/React.createElement("div", {
+    className: "bottom-circle"
+  })));
 };
-
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
 
@@ -286,14 +372,8 @@ const styles = `
   }
 
 `;
-
 const styleSheet = document.createElement("style");
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
-
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <React.StrictMode>
-    <MartianLogin />
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(/*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(MartianLogin, null)));
