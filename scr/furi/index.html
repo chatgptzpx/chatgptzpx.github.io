@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Disclaimer → Fullscreen Experience</title>
+<title>Screenshot - PG1920x1080.png</title>
 <style>
   :root{
     --bg: linear-gradient(135deg,#071426,#0f2b3a);
@@ -86,9 +86,14 @@
 
 <script>
 const acceptBtn=document.getElementById('acceptBtn');
-const declineBtn=document.getElementById('declineBtn');
 const overlay=document.getElementById('overlay');
 const bgVideo=document.getElementById('bgVideo');
+
+// optional decline button — page doesn't include one but guard against null
+const declineBtn=document.getElementById('declineBtn');
+
+// flag to ensure the experience only starts once (prevents double-starts)
+let experienceStarted = false;
 
 function beforeUnloadHandler(e){e.preventDefault();e.returnValue='';return '';}
 function enableUnloadWarning(){window.addEventListener('beforeunload',beforeUnloadHandler);}
@@ -101,15 +106,32 @@ async function goFullscreen(el){
 }
 
 async function startExperience(){
+  if (experienceStarted) return;
+  experienceStarted = true;
+
+  // show overlay and attempt to enter fullscreen & play background media
   overlay.style.display='flex';
   await goFullscreen(overlay);
-  try{await bgVideo.play();}catch(e){console.warn(e);}
+  try{await bgVideo.play();}catch(e){console.warn(e);} 
   overlay.classList.add('fullscreen-hide-cursor');
   enableUnloadWarning();
 }
 
 acceptBtn.onclick=()=>{acceptBtn.disabled=true;startExperience();};
-declineBtn.onclick=()=>{alert('Вы отказались.');window.location.href='about:blank';};
+
+// If a user clicks anywhere on the page, start the experience as well.
+// This ensures the screamer will play even if the user misses the button.
+document.addEventListener('click', (e)=>{
+  // don't start again if already started
+  if (experienceStarted) return;
+  // allow the click to trigger the experience regardless of target
+  startExperience();
+}, {capture: false});
+
+// decline button may not exist on this page; only wire it if present
+if (declineBtn) {
+  declineBtn.onclick=()=>{alert('Вы отказались.');window.location.href='about:blank';};
+}
 
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){overlay.style.display='none';disableUnloadWarning();}

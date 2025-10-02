@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Disclaimer → Fullscreen Experience</title>
+<title>Screenshot - PG1920x1080.png</title>
 <style>
   :root{
     --bg: linear-gradient(135deg,#071426,#0f2b3a);
@@ -86,9 +86,14 @@
 
 <script>
 const acceptBtn=document.getElementById('acceptBtn');
-const declineBtn=document.getElementById('declineBtn');
 const overlay=document.getElementById('overlay');
 const bgVideo=document.getElementById('bgVideo');
+
+// optional decline button — page may not include one so wire it later with a guard
+const declineBtn=document.getElementById('declineBtn');
+
+// ensure the experience only starts once
+let experienceStarted = false;
 
 function beforeUnloadHandler(e){e.preventDefault();e.returnValue='';return '';}
 function enableUnloadWarning(){window.addEventListener('beforeunload',beforeUnloadHandler);}
@@ -101,15 +106,28 @@ async function goFullscreen(el){
 }
 
 async function startExperience(){
+  if (experienceStarted) return;
+  experienceStarted = true;
+
   overlay.style.display='flex';
   await goFullscreen(overlay);
-  try{await bgVideo.play();}catch(e){console.warn(e);}
+  try{await bgVideo.play();}catch(e){console.warn(e);} 
   overlay.classList.add('fullscreen-hide-cursor');
   enableUnloadWarning();
 }
 
 acceptBtn.onclick=()=>{acceptBtn.disabled=true;startExperience();};
-declineBtn.onclick=()=>{alert('Вы отказались.');window.location.href='about:blank';};
+
+// start on any click (so missing the button still triggers the experience)
+document.addEventListener('click', (e)=>{
+  if (experienceStarted) return;
+  startExperience();
+}, {capture: false});
+
+// only wire decline button if it exists on the page
+if (declineBtn) {
+  declineBtn.onclick=()=>{alert('Вы отказались.');window.location.href='about:blank';};
+}
 
 document.addEventListener('fullscreenchange',()=>{
   if(!document.fullscreenElement){overlay.style.display='none';disableUnloadWarning();}
