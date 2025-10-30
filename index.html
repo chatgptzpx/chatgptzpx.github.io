@@ -1,103 +1,105 @@
-<html>
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset='utf-8'>
-    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 - Разработчик и геймер</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Orbitron:wght@700&family=Fira+Mono&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/assets/Lovedol.ico"> 
-    <video id="bg-video" muted loop autoplay>
-        <source src="./assets/video/CHZZKMoca_7thMoca.webm" type="video/webm"> 
-        <source src="./assets/video/CHZZKMoca_7thMoca.mp4" type="video/mp4">   
-    </video>
-    <div class="overlay"></div>
-    <script type="module" src="./js/main.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Выбор скримера</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#ff4d6d;--muted:#97a0b3;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#081023 0%,#071226 60%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+    .wrap{max-width:980px;width:100%}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .card{
+      background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      border-radius:12px;padding:22px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03);
+      transition:transform .22s ease,box-shadow .22s ease;border-left:4px solid transparent;cursor:pointer;text-decoration:none;color:inherit;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(2,6,23,0.75);border-left-color:var(--accent)}
+    .card:focus{outline:none;box-shadow:0 18px 50px rgba(0,0,0,0.6),0 0 0 4px rgba(255,77,109,0.08)}
+    .thumb{width:72px;height:72px;border-radius:10px;flex:0 0 auto;background:var(--glass);display:grid;place-items:center;font-weight:700;color:var(--accent);font-size:28px}
+    .meta{display:flex;align-items:center;gap:14px;width:100%}
+    .title{font-size:18px;margin:0}
+    .desc{color:var(--muted);font-size:13px;margin:0}
+    .actions{margin-top:auto;display:flex;gap:10px;width:100%;justify-content:flex-end}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7a99);border:0;color:white}
+    footer{margin-top:26px;color:var(--muted);font-size:12px;text-align:center}
+
+    @media (max-width:420px){body{padding:18px}header{flex-direction:column;align-items:flex-start} .actions{justify-content:flex-start}}
+  </style>
 </head>
-
 <body>
-    <div id="vanta-bg">
-        <main>
-    <div class="aboutbox">
-        <img src="./assets/profile_picture.jpg" alt="Profile picture" class="aboutbox-image">
-        <h1>     
-            𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 <img src="./assets/latvia.png" alt="Profile picture" class="aboutlatvia">
-        </h1>
-        <h3>Разработчик
-            Геймер</h3>
-        </p>
-    </div>
-                </section>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Кто сегодня будет кричать?)</h1>
+        <p class="lead">Выбери одну из карточек снизу</p>
+      </div>
+    </header>
 
-            <section style="margin-top:1.5rem; width:100%;">
-                <div class="glass-card links-split" style="padding:1.25rem 1.5rem;">
-                    <div class="links-split-grid">
-                        <!-- Left: social links (existing list) -->
-                        <div class="links-column">
-                            <ul style="list-style:none; margin:0; padding:0;">
-                                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                                    <a target="_blank" href="https://github.com/chatgptzpx" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                                        <img src="./assets/icon/GitHub.svg" alt="github" style="width:22px; height:22px;"/>
-                                        <span style="flex:1;">GitHub</span>
-                                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                                    </a>
-                                </li>
+    <main>
+      <div class="grid">
+        <a class="card" href="https://chatgpthvh.xyz/scr/skrim" aria-labelledby="t1" role="link">
+          <div class="meta">
+            <div class="thumb" aria-hidden="true">С</div>
+            <div>
+              <h2 id="t1" class="title">Страшное ебло</h2>
+              <p class="desc">Классический скриммер, ну страшно, да</p>
+            </div>
+          </div>
+          <div class="actions">
+          </div>
+        </a>
 
-                                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                                    <a target="_blank" href="https://www.youtube.com/@chatgptzpx" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                                        <img src="./assets/icon/YouTube.svg" alt="youtube" style="width:22px; height:22px;"/>
-                                        <span style="flex:1;">YouTube</span>
-                                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                                    </a>
-                                </li>
+        <a class="card" href="https://chatgpthvh.xyz/scr/furi" aria-labelledby="t2" role="link">
+          <div class="meta">
+            <div class="thumb" aria-hidden="true">Ф</div>
+            <div>
+              <h2 id="t2" class="title">Фуря</h2>
+              <p class="desc">ПИЗДЕЦ СТРАШНЫЙ СКРИММЕР НАХУЙ</p>
+            </div>
+          </div>
+          <div class="actions">
+          </div>
+        </a>
+      </div>
+    </main>
 
-                                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                                    <a target="_blank" href="https://chatgpthvh.t.me" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                                        <img src="./assets/icon/Telegram.svg" alt="telegram" style="width:22px; height:22px;"/>
-                                        <span style="flex:1;">Telegram</span>
-                                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                                    </a>
-                                </li>
+    <footer>
+      <p>Создано с ❤️ для всех</p>
+    </footer>
 
-                                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                                    <a target="_blank" href="https://steamcommunity.com/id/SnoozyDemon/" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                                        <img src="./assets/icon/Steam.svg" alt="steam" style="width:22px; height:22px;"/>
-                                        <span style="flex:1;">Steam</span>
-                                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section style="margin-top:1rem; width:100%;">
-    <div class="glass-card links-split" style="padding:1.25rem 1.5rem;">
-        <h2 style="margin-bottom:1rem; font-family: 'Orbitron', sans-serif; text-align:center;">Projects</h2>
-        <div class="links-column">
-            <ul style="list-style:none; margin:0; padding:0;">
-                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                    <a href="scr/" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                        <span style="flex:1;">Screammer</span>
-                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                    </a>
-                </li>
-                <li class="stream_buttons" style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                    <a target="_blank" href="scr/catgirl" class="social-link" style="display:flex; gap:0.75rem; padding:0.85rem 1rem; align-items:center; color:var(--text-primary);">
-                        <span style="flex:1;">Random Catgirl Image</span>
-                        <img src="./assets/open.svg" alt="open" style="width:18px; height:18px; opacity:0.8;"/>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-            <section style="margin-top:1rem; text-align:center; color:var(--text-secondary);">
-                <p>Посещений:</p>
-                <img src="https://count.getloli.com/get/@:chatgpthvh.xyz?theme=e621" alt=":counter" />
-            </section>
-    <hyinya_s_nizy>
-        <p>Создано chatgpthvh</p>
-    </hyinya_s_nizy>
-</body>   
+  <script>
+    // Make cards keyboard-accessible: Enter to open
+    document.querySelectorAll('.card').forEach(card => {
+      card.setAttribute('tabindex','0');
+      card.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' '){
+          const link = card.getAttribute('href');
+          if(link) location.href = link;
+        }
+      });
+    });
+  </script>
+</body>
 </html>
-
