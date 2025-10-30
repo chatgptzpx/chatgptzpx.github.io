@@ -1,105 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Выбор скримера</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#ff4d6d;--muted:#97a0b3;--glass:rgba(255,255,255,0.04)}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background:linear-gradient(180deg,#081023 0%,#071226 60%);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px;
-    }
-    .wrap{max-width:980px;width:100%}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 - Разработчик и геймер</title>
+    <style>
+        @font-face {
+            font-family: 'Aqum';
+            src: url('./assets/Aqum.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-    .card{
-      background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
-      border-radius:12px;padding:22px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;
-      box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03);
-      transition:transform .22s ease,box-shadow .22s ease;border-left:4px solid transparent;cursor:pointer;text-decoration:none;color:inherit;
-    }
-    .card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(2,6,23,0.75);border-left-color:var(--accent)}
-    .card:focus{outline:none;box-shadow:0 18px 50px rgba(0,0,0,0.6),0 0 0 4px rgba(255,77,109,0.08)}
-    .thumb{width:72px;height:72px;border-radius:10px;flex:0 0 auto;background:var(--glass);display:grid;place-items:center;font-weight:700;color:var(--accent);font-size:28px}
-    .meta{display:flex;align-items:center;gap:14px;width:100%}
-    .title{font-size:18px;margin:0}
-    .desc{color:var(--muted);font-size:13px;margin:0}
-    .actions{margin-top:auto;display:flex;gap:10px;width:100%;justify-content:flex-end}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7a99);border:0;color:white}
-    footer{margin-top:26px;color:var(--muted);font-size:12px;text-align:center}
+        :root {
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            --purple-dark: #7c3aed;
+            --dark: #0f0f23;
+            --darker: #0a0a15;
+            --text: #e5e7eb;
+            --text-muted: #9ca3af;
+            --glass: rgba(139, 92, 246, 0.1);
+            --glass-border: rgba(139, 92, 246, 0.2);
+        }
 
-    @media (max-width:420px){body{padding:18px}header{flex-direction:column;align-items:flex-start} .actions{justify-content:flex-start}}
-  </style>
+        body {
+            font-family: 'Aqum', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background Video */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+            filter: brightness(0.4) saturate(0.9);
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,21,0.6) 0%, rgba(10,10,21,0.8) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 13px !important;
+            border: 3px solid var(--glass-border);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+        }
+
+        .profile-section h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--purple-light);
+        }
+
+        .flag-icon {
+            width: 28px;
+            height: auto;
+            vertical-align: middle;
+            margin-left: 8px;
+            border-radius: 4px;
+        }
+
+        .profile-section p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Card */
+        .card {
+            background: rgba(15, 15, 35, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 13px !important;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--purple-light);
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--glass-border);
+            border-radius: 13px !important;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(139, 92, 246, 0.25);
+            border-color: var(--purple);
+            transform: translateX(5px);
+        }
+
+        .social-icon {
+            width: 22px;
+            height: 22px;
+            filter: brightness(1.2);
+        }
+
+        .social-btn span {
+            flex: 1;
+        }
+
+        .arrow-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+        }
+
+        /* Projects */
+        .project-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid var(--glass-border);
+            border-radius: 13px !important;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-btn:hover {
+            background: rgba(139, 92, 246, 0.25);
+            border-color: var(--purple);
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .profile-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Кто сегодня будет кричать?)</h1>
-        <p class="lead">Выбери одну из карточек снизу</p>
-      </div>
-    </header>
+    <!-- Background Video -->
+    <video id="bg-video" muted loop autoplay playsinline>
+        <source src="./assets/video/CHZZKMoca_7thMoca.webm" type="video/webm">
+        <source src="./assets/video/CHZZKMoca_7thMoca.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
 
-    <main>
-      <div class="grid">
-        <a class="card" href="https://chatgpthvh.xyz/scr/skrim" aria-labelledby="t1" role="link">
-          <div class="meta">
-            <div class="thumb" aria-hidden="true">С</div>
-            <div>
-              <h2 id="t1" class="title">Страшное ебло</h2>
-              <p class="desc">Классический скриммер, ну страшно, да</p>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <img src="./assets/profile_picture.jpg" alt="Profile" class="profile-image">
+            <h1>𓆩 ᴄʜᴀᴛɢᴘᴛ | ʜᴠʜ 𓆪 <img src="./assets/latvia.png" alt="LV" class="flag-icon"></h1>
+            <p>Разработчик • Геймер</p>
+        </div>
+
+        <!-- Social Links Card -->
+        <div class="card">
+            <h2>Социальные сети</h2>
+            <div class="social-links">
+                <a href="https://github.com/chatgptzpx" target="_blank" class="social-btn">
+                    <img src="./assets/icon/GitHub.svg" alt="GitHub" class="social-icon">
+                    <span>GitHub</span>
+                    <img src="./assets/open.svg" alt="→" class="arrow-icon">
+                </a>
+                <a href="https://www.youtube.com/@chatgptzpx" target="_blank" class="social-btn">
+                    <img src="./assets/icon/YouTube.svg" alt="YouTube" class="social-icon">
+                    <span>YouTube</span>
+                    <img src="./assets/open.svg" alt="→" class="arrow-icon">
+                </a>
+                <a href="https://chatgpthvh.t.me" target="_blank" class="social-btn">
+                    <img src="./assets/icon/Telegram.svg" alt="Telegram" class="social-icon">
+                    <span>Telegram</span>
+                    <img src="./assets/open.svg" alt="→" class="arrow-icon">
+                </a>
+                <a href="https://steamcommunity.com/id/SnoozyDemon/" target="_blank" class="social-btn">
+                    <img src="./assets/icon/Steam.svg" alt="Steam" class="social-icon">
+                    <span>Steam</span>
+                    <img src="./assets/open.svg" alt="→" class="arrow-icon">
+                </a>
             </div>
-          </div>
-          <div class="actions">
-          </div>
-        </a>
+        </div>
 
-        <a class="card" href="https://chatgpthvh.xyz/scr/furi" aria-labelledby="t2" role="link">
-          <div class="meta">
-            <div class="thumb" aria-hidden="true">Ф</div>
-            <div>
-              <h2 id="t2" class="title">Фуря</h2>
-              <p class="desc">ПИЗДЕЦ СТРАШНЫЙ СКРИММЕР НАХУЙ</p>
-            </div>
-          </div>
-          <div class="actions">
-          </div>
-        </a>
-      </div>
-    </main>
+        <!-- Projects Card -->
+        <div class="card">
+            <h2>Проекты</h2>
+            <a href="scr/" class="project-btn">
+                <span>Screammer</span>
+                <img src="./assets/open.svg" alt="→" class="arrow-icon">
+            </a>
+            <a href="scr/catgirl" target="_blank" class="project-btn">
+                <span>Random Catgirl Image</span>
+                <img src="./assets/open.svg" alt="→" class="arrow-icon">
+            </a>
+        </div>
 
-    <footer>
-      <p>Создано с ❤️ для всех</p>
-    </footer>
-
-  <script>
-    // Make cards keyboard-accessible: Enter to open
-    document.querySelectorAll('.card').forEach(card => {
-      card.setAttribute('tabindex','0');
-      card.addEventListener('keydown', e => {
-        if(e.key === 'Enter' || e.key === ' '){
-          const link = card.getAttribute('href');
-          if(link) location.href = link;
-        }
-      });
-    });
-  </script>
+        <!-- Footer -->
+        <div class="footer">
+            <p>Посещений:</p>
+            <img src="https://count.getloli.com/get/@:chatgpthvh.xyz?theme=e621" alt="counter">
+            <p style="margin-top: 1.5rem;">Создано chatgpthvh</p>
+        </div>
+    </div>
 </body>
 </html>
